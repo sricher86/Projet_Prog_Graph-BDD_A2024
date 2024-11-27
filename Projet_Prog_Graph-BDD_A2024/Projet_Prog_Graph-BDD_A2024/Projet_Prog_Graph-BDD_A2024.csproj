@@ -13,6 +13,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="DialogAdminAjoutActivite.xaml" />
+    <None Remove="DialogAdminAjoutAdherent.xaml" />
+    <None Remove="DialogAdminAjoutSeance.xaml" />
     <None Remove="PageAdminActivites.xaml" />
     <None Remove="PageAdminAdherents.xaml" />
     <None Remove="PageAdminAjoutActivite.xaml" />
@@ -109,7 +112,23 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Dialogs\" />
     <Folder Include="Pages\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="DialogAdminAjoutSeance.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="DialogAdminAjoutAdherent.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="DialogAdminAjoutActivite.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 
   <!--

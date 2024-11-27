@@ -21,9 +21,9 @@ namespace Projet_Prog_Graph_BDD_A2024
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class PageAdminAjoutAdherent : Page
+    public sealed partial class DialogAdminAjoutAdherent : Page
     {
-        public PageAdminAjoutAdherent()
+        public DialogAdminAjoutAdherent()
         {
             this.InitializeComponent();
         }
