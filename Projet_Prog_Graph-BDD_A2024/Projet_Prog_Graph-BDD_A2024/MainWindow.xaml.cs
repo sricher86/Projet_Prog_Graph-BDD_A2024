@@ -28,9 +28,5 @@ namespace Projet_Prog_Graph_BDD_A2024
             this.InitializeComponent();
         }
 
-        private void myButton_Click(object sender, RoutedEventArgs e)
-        {
-            myButton.Content = "Clicked";
-        }
     }
 }
