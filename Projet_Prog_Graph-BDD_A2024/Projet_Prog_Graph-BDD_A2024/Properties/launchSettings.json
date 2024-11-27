@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Projet_Prog_Graph-BDD_A2024 (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "Projet_Prog_Graph-BDD_A2024 (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
