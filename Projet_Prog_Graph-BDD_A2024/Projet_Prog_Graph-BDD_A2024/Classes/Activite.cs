@@ -8,14 +8,16 @@ namespace Projet_Prog_Graph_BDD_A2024
 {
     internal class Activite
     {
+        int idActivite;
         string nom;
         double coutOrganisation;
         double prixVente;
         int idCategorie;
         string idAdmin;
 
-        public Activite(string nom, double coutOrganisation, double prixVente, int idCategorie, string idAdmin)
+        public Activite(int idActivite, string nom, double coutOrganisation, double prixVente, int idCategorie, string idAdmin)
         {
+            this.idActivite = idActivite;
             this.nom = nom;
             this.coutOrganisation = coutOrganisation;
             this.prixVente = prixVente;
@@ -53,8 +55,5 @@ namespace Projet_Prog_Graph_BDD_A2024
             set { idAdmin = value; }
         }
 
-        public string Image
-        {
-        }
     }
 }

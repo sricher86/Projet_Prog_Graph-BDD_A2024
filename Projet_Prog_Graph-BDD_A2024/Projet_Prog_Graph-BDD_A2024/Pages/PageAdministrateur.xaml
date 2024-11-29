@@ -31,7 +31,6 @@
                 <NavigationViewItem Content="Se déconnecter" x:Name="iDeconnexion" Icon="Switch"/>
             </NavigationView.FooterMenuItems>
 
-
             <Frame x:Name="adminFrame"/>
         </NavigationView>
     </Grid>

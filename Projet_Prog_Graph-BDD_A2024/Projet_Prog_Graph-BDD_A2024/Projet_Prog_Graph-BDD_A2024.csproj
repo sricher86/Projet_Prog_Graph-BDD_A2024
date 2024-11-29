@@ -27,6 +27,7 @@
     <None Remove="PageAjoutAdminSeance.xaml" />
     <None Remove="PageAuthentification.xaml" />
     <None Remove="PagePublique.xaml" />
+    <None Remove="Pages\PagePubliqueAccueil.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -113,7 +114,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Dialogs\" />
-    <Folder Include="Pages\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\PagePubliqueAccueil.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="DialogAdminAjoutSeance.xaml">

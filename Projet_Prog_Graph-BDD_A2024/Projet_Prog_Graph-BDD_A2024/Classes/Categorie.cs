@@ -11,12 +11,14 @@ namespace Projet_Prog_Graph_BDD_A2024
         int idCategorie;
         string type;
         string idAdmin;
+        string url;
 
-        public Categorie(int idCategorie, string type, string idAdmin)
+        public Categorie(int idCategorie, string type, string idAdmin, string url)
         {
             this.idCategorie = idCategorie;
             this.type = type;
             IdAdmin = idAdmin;
+            this.url = url;
         }
 
         public int IdCategorie
@@ -35,6 +37,11 @@ namespace Projet_Prog_Graph_BDD_A2024
         {
             get { return idAdmin; }
             set { idAdmin = value; }
+        }
+
+        public string Url { 
+            get { return url; } 
+            set { url = value; } 
         }
     }
 }

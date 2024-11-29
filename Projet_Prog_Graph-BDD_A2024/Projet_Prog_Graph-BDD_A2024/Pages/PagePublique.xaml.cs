@@ -5,6 +5,7 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
+using Projet_Prog_Graph_BDD_A2024.Pages;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -26,6 +27,30 @@ namespace Projet_Prog_Graph_BDD_A2024
         public PagePublique()
         {
             this.InitializeComponent();
+            PubliqueFrame.Navigate(typeof(PagePubliqueAccueil));
+        }
+
+        
+        private void navView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
+        {
+            if (args.SelectedItem != null)
+            {
+                var item = args.SelectedItem as NavigationViewItem;
+
+                switch (item.Name)
+                {
+                    case ("iActivites"):
+                        PubliqueFrame.Navigate(typeof (PagePubliqueAccueil));
+                        break;
+                    case ("iSeances"):
+                        PubliqueFrame.Navigate(typeof(PagePubliqueAccueil));
+                        break;
+                    case ("iInscription"):
+                        PubliqueFrame.Navigate(typeof(PagePubliqueAccueil));
+                        break;
+                }
+            }
+
         }
     }
 }

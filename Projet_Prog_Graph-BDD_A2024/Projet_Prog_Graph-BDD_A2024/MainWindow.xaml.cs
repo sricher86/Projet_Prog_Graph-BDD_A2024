@@ -27,9 +27,9 @@ namespace Projet_Prog_Graph_BDD_A2024
         {
             this.InitializeComponent();
 
-            //mainFrame.Navigate(typeof(PageAuthentification));
+            mainFrame.Navigate(typeof(PagePublique));
 
-            mainFrame.Navigate(typeof(PageAdministrateur));
+            //mainFrame.Navigate(typeof(PageAdministrateur));
 
         }
     }

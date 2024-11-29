@@ -75,5 +75,126 @@ namespace Projet_Prog_Graph_BDD_A2024
         {
             return listeStatistiques;
         }
+        public void getActivites()
+        {
+            listeActivites.Clear();
+
+            MySqlCommand commande = new MySqlCommand();
+            commande.Connection = con;
+            commande.CommandText = "Select * from Activites";
+
+            con.Open();
+
+            MySqlDataReader reader = commande.ExecuteReader();
+
+            //read values from SQL command and store in vars, in order to add values to Equipe list
+            while (reader.Read())
+            {
+                int idActivite= reader.GetInt32("idActivite");
+                String nom = reader.GetString("nom").ToString();
+                double coutOrganisation = reader.GetDouble("coutOrganisation");
+                double prixVente = reader.GetDouble("prixVente");
+                int idCategorie = reader.GetInt32("idCategorie");
+                string idAdmin= reader.GetString("idAdmin").ToString();
+
+
+                Activite activite = new Activite(idActivite, nom, coutOrganisation, prixVente, idCategorie, idAdmin);
+
+                listeActivites.Add(activite);
+            }
+
+            reader.Close();
+            con.Close();
+        }
+        public void getAdherents()
+        {
+            listeAdherents.Clear();
+
+            MySqlCommand commande = new MySqlCommand();
+            commande.Connection = con;
+            commande.CommandText = "Select * from Adherents";
+
+            con.Open();
+
+            MySqlDataReader reader = commande.ExecuteReader();
+
+            //read values from SQL command and store in vars, in order to add values to Equipe list
+            while (reader.Read())
+            {
+                string no_identification= reader.GetString("no_identification").ToString();
+                string nom = reader.GetString("nom").ToString();
+                string prenom = reader.GetString("prenom").ToString();
+                string adresse = reader.GetString("adresse").ToString();
+                DateTime dateDeNaissance = reader.GetDateTime("dateDeNaissance");
+                int age = reader.GetInt32("age");
+                string idAdmin = reader.GetString("idAdmin").ToString() ;
+
+                Adherents adherent = new Adherents(no_identification, nom, prenom, adresse, dateDeNaissance, age, idAdmin);
+
+                listeAdherents.Add(adherent);
+            }
+
+            reader.Close();
+            con.Close();
+        }
+
+        public void getAdherentsSeances()
+        {
+            listeAdherentsSeances.Clear();
+
+            MySqlCommand commande = new MySqlCommand();
+            commande.Connection = con;
+            commande.CommandText = "Select * from Adherents_Seances";
+
+            con.Open();
+
+            MySqlDataReader reader = commande.ExecuteReader();
+
+            //read values from SQL command and store in vars, in order to add values to Equipe list
+            while (reader.Read())
+            {
+                string no_identification = reader.GetString("no_identification").ToString();
+                int idSeance = reader.GetInt32("idSeance");
+                int idActivite = reader.GetInt32("idActivite");
+                int idCategorie = reader.GetInt32("idCategorie");
+                string idAdmin = reader.GetString("idAdmin").ToString();
+
+
+                Activite activite = new Activite(idActivite, nom, coutOrganisation, prixVente, idCategorie, idAdmin);
+
+                listeActivites.Add(activite);
+            }
+
+            reader.Close();
+            con.Close();
+        }
+
+        public void getCategories()
+        {
+            listeCategories.Clear();
+
+            MySqlCommand commande = new MySqlCommand();
+            commande.Connection = con;
+            commande.CommandText = "Select * from Categories";
+
+            con.Open();
+
+            MySqlDataReader reader = commande.ExecuteReader();
+
+            //read values from SQL command and store in vars, in order to add values to Equipe list
+            while (reader.Read())
+            {
+                int idCategorie = reader.GetInt32("idCategorie");
+                String type = reader.GetString("type").ToString();
+                String idAdmin= reader.GetString("idAdmin").ToString();
+                String url = reader.GetString("url").ToString();
+
+                Categorie cat= new Categorie(idCategorie,type, idAdmin,url);
+                listeCategories.Add(cat);
+            }
+
+            reader.Close();
+            con.Close();
+        }
     }
 }
