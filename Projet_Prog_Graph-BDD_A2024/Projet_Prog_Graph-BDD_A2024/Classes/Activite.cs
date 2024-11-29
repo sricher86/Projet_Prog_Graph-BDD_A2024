@@ -52,5 +52,9 @@ namespace Projet_Prog_Graph_BDD_A2024
             get { return idAdmin; }
             set { idAdmin = value; }
         }
+
+        public string Image
+        {
+        }
     }
 }
