@@ -8,7 +8,6 @@ namespace Projet_Prog_Graph_BDD_A2024
 {
     internal class Adherents
     {
-
         string no_identification;
         string nom;
         string prenom;

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="Projet_Prog_Graph_BDD_A2024.Pages.Connexion"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Projet_Prog_Graph_BDD_A2024.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" HorizontalAlignment="Center" FontSize="40" FontWeight="Medium" Margin="20">Connexion</TextBlock>
+        <Grid Grid.Row="1" Margin="50 20 200 20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="4*"/>
+            </Grid.ColumnDefinitions>
+            
+            <TextBlock Grid.Row="0" Grid.Column="0" FontWeight="Medium">Nom d'usager (id): </TextBlock>
+            <TextBox Grid.Row="0" Grid.Column="1" x:Name="username"></TextBox>
+
+            <TextBlock Grid.Row="1" Grid.Column="1" x:Name="errUser" FontWeight="Medium" Foreground="red"></TextBlock>
+
+        </Grid>
+        <Grid Grid.Row="2" Margin="50 20 200 20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="4*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0" FontWeight="Medium">Mot de passe:</TextBlock>
+            <TextBox Grid.Row="0" Grid.Column="1" x:Name="password"></TextBox>
+
+            <TextBlock Grid.Row="1" Grid.Column="1" x:Name="errPass" FontWeight="Medium" Foreground="red"></TextBlock>
+
+        </Grid>
+
+        <Button Grid.Row="3"  x:Name="submit" Content="Connexion" HorizontalAlignment="Center" Margin="20" Click="submit_Click"></Button>
+    </Grid>
+</Page>

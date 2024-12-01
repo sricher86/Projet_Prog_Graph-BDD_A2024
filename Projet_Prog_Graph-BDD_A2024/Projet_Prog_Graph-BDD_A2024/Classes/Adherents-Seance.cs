@@ -10,11 +10,12 @@ namespace Projet_Prog_Graph_BDD_A2024
     {
         string no_identification;
         int idSeance;
-
-        public Adherents_Seance(string no_identification, int idSeance)
+        int idActivite;
+        public Adherents_Seance(string no_identification, int idSeance, int idActivite)
         {
             this.no_identification = no_identification;
             this.idSeance = idSeance;
+            this.idActivite = idActivite;
         }
 
         public String No_identification { 
@@ -25,5 +26,11 @@ namespace Projet_Prog_Graph_BDD_A2024
             get {  return idSeance; } 
             set { idSeance = value; } 
         }
+        public int IdActivite
+        {
+            get { return idActivite; }
+            set { idActivite = value; }
+        }
+
     }
 }

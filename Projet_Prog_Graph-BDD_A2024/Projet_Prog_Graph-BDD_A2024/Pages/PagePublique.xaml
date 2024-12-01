@@ -12,7 +12,7 @@
         <Grid Background="LightGray">
         <NavigationView 
             PaneDisplayMode="Left" 
-            PaneTitle="Publique"
+            PaneTitle="Centre D'activités ProSport"
             x:Name="navView"
             IsSettingsVisible="False" 
             IsBackButtonVisible="Collapsed"
@@ -20,7 +20,6 @@
             SelectionChanged="navView_SelectionChanged">
             <NavigationView.MenuItems>
                     <NavigationViewItem Content="Activités" x:Name="iActivites" Icon="AllApps"/>
-                    <NavigationViewItem Content="Séances" x:Name="iSeances" Icon="Library"/>
                     <NavigationViewItem Content="Inscription" x:Name="iInscription" Icon="Library"/>
             </NavigationView.MenuItems>
 

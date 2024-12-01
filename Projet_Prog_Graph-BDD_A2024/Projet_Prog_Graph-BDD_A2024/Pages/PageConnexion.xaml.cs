@@ -7,7 +7,6 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -22,20 +21,12 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class PagePubliqueAccueil : Page
+    public sealed partial class PageConnexion : Page
     {
-        public PagePubliqueAccueil()
+        public PageConnexion()
         {
             this.InitializeComponent();
-            Singleton_BD.getInstance().getActivites();
-            Singleton_BD.getInstance().getCategories();
-            activites.ItemsSource = Singleton_BD.getInstance().getListeActivites();
+            connexionFrame.Navigate(typeof(Connexion));
         }
-
-        private void boutonSupprimer_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
     }
 }

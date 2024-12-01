@@ -31,6 +31,14 @@ namespace Projet_Prog_Graph_BDD_A2024
             listeCategories = new ObservableCollection<Categorie>();
             listeSeances = new ObservableCollection<Seance>();
             listeStatistiques = new ObservableCollection<Statistiques>();
+
+            getActivites();
+            getAdherents();
+            getAdherentsSeances();
+            getAdmins();
+            getCategories();
+            getSeances();
+            getStatistiques();
         }
 
         public static Singleton_BD getInstance()
@@ -79,32 +87,56 @@ namespace Projet_Prog_Graph_BDD_A2024
         {
             listeActivites.Clear();
 
+            int idActivite = 0;
+            string nom = "";
+            double coutOrganisation = 0.00;
+            double prixVente = 0.00;
+            int idCategorie = 0;
+            string idAdmin = "";
+            string url = "";
+
             MySqlCommand commande = new MySqlCommand();
-            commande.Connection = con;
-            commande.CommandText = "Select * from Activites";
+            MySqlDataReader reader;
 
             con.Open();
+            commande.Connection = con;
+            commande.CommandText = "Select * from Activites;";
+            reader = commande.ExecuteReader();
 
-            MySqlDataReader reader = commande.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        idActivite = reader.GetInt32("idActivite");
+                        nom = reader.GetString("nom").ToString();
+                        coutOrganisation = reader.GetDouble("coutOrganisation");
+                        prixVente = reader.GetDouble("prixVente");
+                        idCategorie = reader.GetInt32("idCategorie");
+                        idAdmin = reader.GetString("idAdmin").ToString();
 
-            //read values from SQL command and store in vars, in order to add values to Equipe list
-            while (reader.Read())
-            {
-                int idActivite= reader.GetInt32("idActivite");
-                String nom = reader.GetString("nom").ToString();
-                double coutOrganisation = reader.GetDouble("coutOrganisation");
-                double prixVente = reader.GetDouble("prixVente");
-                int idCategorie = reader.GetInt32("idCategorie");
-                string idAdmin= reader.GetString("idAdmin").ToString();
-
-
-                Activite activite = new Activite(idActivite, nom, coutOrganisation, prixVente, idCategorie, idAdmin);
-
-                listeActivites.Add(activite);
-            }
-
+                        Activite activite = new Activite(idActivite, nom, coutOrganisation, prixVente, idCategorie, idAdmin, url);
+                        listeActivites.Add(activite);
+                    }
+                
             reader.Close();
             con.Close();
+
+            foreach (Activite a in listeActivites)
+            {
+                con.Open();
+                commande.Connection = con;
+
+                commande.CommandText = "Select getUrl("+a.IdActivite+") as url;";
+
+                reader = commande.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    url = reader.GetString("url").ToString();
+                    a.Url = url;
+                }
+
+                con.Close();
+                reader.Close();
+            }
         }
         public void getAdherents()
         {
@@ -133,7 +165,6 @@ namespace Projet_Prog_Graph_BDD_A2024
 
                 listeAdherents.Add(adherent);
             }
-
             reader.Close();
             con.Close();
         }
@@ -156,13 +187,37 @@ namespace Projet_Prog_Graph_BDD_A2024
                 string no_identification = reader.GetString("no_identification").ToString();
                 int idSeance = reader.GetInt32("idSeance");
                 int idActivite = reader.GetInt32("idActivite");
-                int idCategorie = reader.GetInt32("idCategorie");
+
+                Adherents_Seance adherents_Seance = new Adherents_Seance(no_identification, idSeance, idActivite);
+
+                listeAdherentsSeances.Add(adherents_Seance);
+            }
+
+            reader.Close();
+            con.Close();
+        }
+
+        public void getAdmins()
+        {
+            listeAdministrateurs.Clear();
+
+            MySqlCommand commande = new MySqlCommand();
+            commande.Connection = con;
+            commande.CommandText = "Select * from Administrateurs";
+
+            con.Open();
+
+            MySqlDataReader reader = commande.ExecuteReader();
+
+            //read values from SQL command and store in vars, in order to add values to Equipe list
+            while (reader.Read())
+            {   
                 string idAdmin = reader.GetString("idAdmin").ToString();
+                string motDePasse = reader.GetString("motDePasse").ToString();
 
+                Administrateur administrateur = new Administrateur(idAdmin, motDePasse);
 
-                Activite activite = new Activite(idActivite, nom, coutOrganisation, prixVente, idCategorie, idAdmin);
-
-                listeActivites.Add(activite);
+                listeAdministrateurs.Add(administrateur);
             }
 
             reader.Close();
@@ -196,5 +251,68 @@ namespace Projet_Prog_Graph_BDD_A2024
             reader.Close();
             con.Close();
         }
+
+        public void getSeances()
+        {
+            listeSeances.Clear();
+
+            MySqlCommand commande = new MySqlCommand();
+            commande.Connection = con;
+            commande.CommandText = "Select * from Seances";
+
+            con.Open();
+
+            MySqlDataReader reader = commande.ExecuteReader();
+
+            //read values from SQL command and store in vars, in order to add values to Equipe list
+            while (reader.Read())
+            {
+                int idSeance = reader.GetInt32("idSeance");
+                DateTime dateOrganisation = reader.GetDateTime("dateOrganisation");
+                int heureOrganisation = reader.GetInt32("heureOrganisation");
+                int nbrPlaceDisponible = reader.GetInt32("nbrPlaceDisponible");
+                int noteAppreciation = reader.GetInt32("noteAppreciation");
+                string idAdmin = reader.GetString("idAdmin").ToString();
+                int idActivite = reader.GetInt32("idActivite");
+
+                Seance seance = new Seance(idSeance, dateOrganisation, heureOrganisation, nbrPlaceDisponible, noteAppreciation, idAdmin, idActivite);    
+
+                listeSeances.Add(seance);
+            }
+
+            reader.Close();
+            con.Close();
+        }
+
+        public void getStatistiques()
+        {
+            listeStatistiques.Clear();
+
+            MySqlCommand commande = new MySqlCommand();
+            commande.Connection = con;
+            commande.CommandText = "Select * from Statistiques";
+
+            con.Open();
+
+            MySqlDataReader reader = commande.ExecuteReader();
+
+            //read values from SQL command and store in vars, in order to add values to Equipe list
+            while (reader.Read())
+            {
+                int idStatistiques= reader.GetInt32("idStatistiques");
+                int nbrTotalParticipants = reader.GetInt32("nbrTotalParticipants");
+                string participantPlusActif = reader.GetString("participantPlusActif").ToString();
+                double moyenneNoteAppreciation = reader.GetDouble("moyenneNoteApp");
+                int idActivite = reader.GetInt32("idActivite");
+
+                Statistiques statistique = new Statistiques(idStatistiques, nbrTotalParticipants, participantPlusActif, moyenneNoteAppreciation, idActivite);
+
+                listeStatistiques.Add(statistique);
+            }
+
+            reader.Close();
+            con.Close();
+        }
+
     }
 }

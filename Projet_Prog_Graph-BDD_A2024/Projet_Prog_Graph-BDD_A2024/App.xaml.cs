@@ -45,6 +45,6 @@ namespace Projet_Prog_Graph_BDD_A2024
             m_window.Activate();
         }
 
-        private Window? m_window;
+        public static Window? m_window { get; private set; }
     }
 }

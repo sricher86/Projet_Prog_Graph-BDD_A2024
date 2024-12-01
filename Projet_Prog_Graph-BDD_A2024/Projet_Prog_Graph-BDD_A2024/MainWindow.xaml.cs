@@ -10,6 +10,7 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
+using Projet_Prog_Graph_BDD_A2024.Pages;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 
@@ -21,16 +22,21 @@ namespace Projet_Prog_Graph_BDD_A2024
     /// <summary>
     /// An empty window that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainWindow : Window
+    public partial class MainWindow : Window
     {
         public MainWindow()
         {
             this.InitializeComponent();
 
-            mainFrame.Navigate(typeof(PagePublique));
+            mainFrame.Navigate(typeof(PageConnexion));
 
             //mainFrame.Navigate(typeof(PageAdministrateur));
 
+        }
+
+        public Frame GetMainFrame {
+            get { return mainFrame; }
+            set { mainFrame = value; }
         }
     }
 }

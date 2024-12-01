@@ -14,8 +14,9 @@ namespace Projet_Prog_Graph_BDD_A2024
         int nbrPlaceDisponible;
         double noteAppreciation;
         string idAdmin;
+        int idActivite;
 
-        public Seance(int idSeance, DateTime dateOrganisation, int heureOrganisation, int nbrPlaceDisponible, double noteAppreciation, string idAdmin)
+        public Seance(int idSeance, DateTime dateOrganisation, int heureOrganisation, int nbrPlaceDisponible, double noteAppreciation, string idAdmin, int idActivite)
         {
             this.idSeance = idSeance;
             this.dateOrganisation = dateOrganisation;
@@ -23,6 +24,7 @@ namespace Projet_Prog_Graph_BDD_A2024
             this.nbrPlaceDisponible = nbrPlaceDisponible;
             this.noteAppreciation = noteAppreciation;
             this.idAdmin = idAdmin;
+            this.idActivite = idActivite;
         }
 
         public int IdSeance { 
