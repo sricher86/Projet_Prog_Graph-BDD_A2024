@@ -21,11 +21,114 @@ namespace Projet_Prog_Graph_BDD_A2024
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class DialogAdminAjoutActivite : Page
+    public sealed partial class DialogAdminAjoutActivite : ContentDialog
     {
+        Activite newActivite = new Activite();
+
+        Visibility visible = Visibility.Visible;
+        Visibility collapse = Visibility.Collapsed;
+
         public DialogAdminAjoutActivite()
         {
             this.InitializeComponent();
+            cbx_listeCategorie.ItemsSource = Singleton_BD.getInstance().getListeTypeCategories();
+        }
+
+        private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
+        {
+            if (tbx_nom.Text.Trim() != "")
+                newActivite.Nom = tbx_nom.Text;
+            else
+                tbx_erreur_nom.Text = "Le nom ne peut pas être vide";
+
+
+            if (Double.TryParse(tbx_cout.Text, out double cout))
+            {
+                if (tbx_cout.Text.Trim() != "")
+                    newActivite.CoutOrganisation = cout;
+                else
+                    tbx_erreur_cout.Text = "Le coût ne peut pas être vide";
+            }
+            else
+                tbx_erreur_cout.Text = "Le coût doit être en format décimal";
+
+
+            if (Double.TryParse(tbx_prix.Text, out double prix))
+            {
+                if (tbx_prix.Text.Trim() != "")
+                    newActivite.PrixVente = prix;
+                else
+                    tbx_erreur_prix.Text = "Le prix ne peut pas être vide";
+            }
+            else
+                tbx_erreur_prix.Text = "Le prix doit être en format décimal";
+
+
+            if (cbx_listeCategorie.Text.Trim() == "")
+            {
+                if (cbx_listeCategorie.SelectedIndex != -1)
+                    newActivite.IdCategorie = (cbx_listeCategorie.SelectedIndex + 1);
+                else
+                    tbx_erreur_categorie.Text = "Veuillez choisir une catégorie";
+            }
+
+            if (tbx_url.Visibility == visible)
+                if (tbx_url.Text.Trim() == "")
+                    tbx_erreur_url.Text = "Le url ne peut pas être vide";
+        }
+
+        private void ContentDialog_Closing(ContentDialog sender, ContentDialogClosingEventArgs args)
+        {
+            if (args.Result == ContentDialogResult.Primary)
+            {
+                if (string.IsNullOrWhiteSpace(tbx_erreur_nom.Text))
+                    args.Cancel = true;
+                if (string.IsNullOrWhiteSpace(tbx_erreur_cout.Text))
+                    args.Cancel = true;
+                if (string.IsNullOrWhiteSpace(tbx_erreur_prix.Text))
+                    args.Cancel = true;
+                if (string.IsNullOrWhiteSpace(tbx_erreur_categorie.Text))
+                    args.Cancel = true;
+                if (string.IsNullOrWhiteSpace(tbx_erreur_url.Text))
+                    args.Cancel = true;
+            }
+            else
+                args.Cancel = false;
+        }
+
+        private void tbx_listeCategorie_TextSubmitted(ComboBox sender, ComboBoxTextSubmittedEventArgs args)
+        {
+            tbx_url.Visibility = visible;
+
+            if (Singleton_BD.getInstance().getListeTypeCategories().Contains(cbx_listeCategorie.Text))
+            {
+                newActivite.IdCategorie = (Singleton_BD.getInstance().getListeTypeCategories().IndexOf(cbx_listeCategorie.Text) + 1);
+                tbx_url.Visibility = collapse;
+            }
+            else if (cbx_listeCategorie.SelectedIndex > 0)
+            {
+                tbx_url.Visibility = collapse;
+            }
+            else
+            {
+                newActivite.IdCategorie = (Singleton_BD.getInstance().getListeCategorie().Count() + 1);
+
+                Categorie newCategorie = new Categorie();
+
+                if (cbx_listeCategorie.Text.Trim() != "")
+                    newCategorie.Type = cbx_listeCategorie.Text;
+
+                if (tbx_url.Visibility == visible)
+                    if (tbx_url.Text.Trim() != "")
+                    {
+                        if (Uri.IsWellFormedUriString(tbx_url.Text, UriKind.Absolute))
+                            newCategorie.Url = tbx_url.Text;
+                        else
+                            tbx_erreur_url.Text = "Le prix doit être en format url";
+                    }
+            }
+
+            
         }
     }
 }

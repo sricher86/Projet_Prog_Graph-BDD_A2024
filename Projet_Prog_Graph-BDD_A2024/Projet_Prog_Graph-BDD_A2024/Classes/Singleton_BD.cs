@@ -18,6 +18,8 @@ namespace Projet_Prog_Graph_BDD_A2024
         ObservableCollection<Seance> listeSeances;
         ObservableCollection<Statistiques> listeStatistiques;
 
+        List<String> listeTypeCategories;
+
         static Singleton_BD instance = null;
         MySqlConnection con;
 
@@ -31,6 +33,8 @@ namespace Projet_Prog_Graph_BDD_A2024
             listeCategories = new ObservableCollection<Categorie>();
             listeSeances = new ObservableCollection<Seance>();
             listeStatistiques = new ObservableCollection<Statistiques>();
+
+            listeTypeCategories = new List<String>();
 
             getActivites();
             getAdherents();
@@ -83,6 +87,12 @@ namespace Projet_Prog_Graph_BDD_A2024
         {
             return listeStatistiques;
         }
+
+        public List<String> getListeTypeCategories()
+        {
+            return listeTypeCategories;
+        }
+
         public void getActivites()
         {
             listeActivites.Clear();
@@ -246,6 +256,8 @@ namespace Projet_Prog_Graph_BDD_A2024
 
                 Categorie cat= new Categorie(idCategorie,type, idAdmin,url);
                 listeCategories.Add(cat);
+
+                listeTypeCategories.Add(type);
             }
 
             reader.Close();

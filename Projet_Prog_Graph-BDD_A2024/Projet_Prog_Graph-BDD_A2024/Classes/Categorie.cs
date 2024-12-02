@@ -13,6 +13,13 @@ namespace Projet_Prog_Graph_BDD_A2024
         string idAdmin;
         string url;
 
+        public Categorie()
+        {
+            type = "";
+            idAdmin = "1000";
+            url = "";
+        }
+
         public Categorie(int idCategorie, string type, string idAdmin, string url)
         {
             this.idCategorie = idCategorie;

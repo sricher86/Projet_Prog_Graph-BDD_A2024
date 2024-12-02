@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Page
+<ContentDialog
     x:Class="Projet_Prog_Graph_BDD_A2024.DialogAdminAjoutActivite"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -7,9 +7,100 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
+    Closing="ContentDialog_Closing"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <StackPanel>
+        <TextBox 
+            x:Name="tbx_nom"
+            VerticalAlignment="Center"
+            Margin="5"
+            PlaceholderText="Nom de l'activité"
+            Header="Nom"
+            Width="auto"
+        />
 
-    </Grid>
-</Page>
+        <TextBlock 
+            x:Name="tbx_erreur_nom"
+            VerticalAlignment="Center"
+            Margin="5"
+            Width="auto"
+            Foreground="Red"
+        />
+
+        <TextBox 
+            x:Name="tbx_cout"
+            VerticalAlignment="Center"
+            Margin="5"
+            PlaceholderText="Coût de l'activité"
+            Header="Coût"
+            Width="auto"
+        />
+
+        <TextBlock 
+            x:Name="tbx_erreur_cout"
+            VerticalAlignment="Center"
+            Margin="5"
+            Width="auto"
+            Foreground="Red"
+        />
+
+        <TextBox 
+            x:Name="tbx_prix"
+            VerticalAlignment="Center"
+            Margin="5"
+            PlaceholderText="Prix de l'activité"
+            Header="Prix"
+            Width="auto"
+        />
+
+        <TextBlock 
+            x:Name="tbx_erreur_prix"
+            VerticalAlignment="Center"
+            Margin="5"
+            Width="auto"
+            Foreground="Red"
+        />
+
+        <ComboBox 
+            x:Name="cbx_listeCategorie"
+            VerticalAlignment="Center"
+            PlaceholderText="Nom de la catégorie"
+            Margin="5"
+            Width="auto"
+            Header="Catégorie"
+            IsEditable="True"
+            TextSubmitted="tbx_listeCategorie_TextSubmitted"
+            SelectedIndex="-1"
+        />
+
+        <TextBlock 
+            x:Name="tbx_erreur_categorie"
+            VerticalAlignment="Center"
+            Margin="5"
+            Width="auto"
+            Foreground="Red"
+        />
+
+        <TextBox 
+            x:Name="tbx_url"
+            VerticalAlignment="Center"
+            Margin="5"
+            PlaceholderText="Url de la catégorie"
+            Header="Url"
+            Width="auto"
+            Visibility="Collapsed"
+        />
+
+        <TextBlock 
+            x:Name="tbx_erreur_url"
+            VerticalAlignment="Center"
+            Margin="5"
+            Width="auto"
+            Foreground="Red"
+        />
+    </StackPanel>
+
+</ContentDialog>
+

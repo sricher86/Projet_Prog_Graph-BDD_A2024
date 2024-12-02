@@ -15,6 +15,16 @@ namespace Projet_Prog_Graph_BDD_A2024
         int idCategorie;
         string idAdmin;
         string url;
+
+        public Activite()
+        {
+            nom = "";
+            coutOrganisation = 0;
+            prixVente = 0;
+            idAdmin = "1000";
+            url = "";
+        }
+
         public Activite(int idActivite, string nom, double coutOrganisation, double prixVente, int idCategorie, string idAdmin, string url)
         {
             this.idActivite = idActivite;

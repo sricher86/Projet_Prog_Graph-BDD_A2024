@@ -13,6 +13,8 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Projet_Prog_Graph_BDD_A2024.Pages;
+
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -29,9 +31,16 @@ namespace Projet_Prog_Graph_BDD_A2024
             this.InitializeComponent();
         }
 
-        private void btn_ajouter_Click(object sender, RoutedEventArgs e)
+        private async void btn_ajouter_Click(object sender, RoutedEventArgs e)
         {
+            DialogAdminAjoutActivite dialog = new DialogAdminAjoutActivite();
+            dialog.XamlRoot = this.XamlRoot;
+            dialog.Title = "Ajout d'une activité";
+            dialog.PrimaryButtonText = "Ajouter";
+            dialog.CloseButtonText = "Annuler";
+            dialog.DefaultButton = ContentDialogButton.Close;
 
+            ContentDialogResult resultat = await dialog.ShowAsync();
         }
     }
 }
