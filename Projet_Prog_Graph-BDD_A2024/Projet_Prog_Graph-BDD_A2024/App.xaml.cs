@@ -46,5 +46,10 @@ namespace Projet_Prog_Graph_BDD_A2024
         }
 
         public static Window? m_window { get; private set; }
+
+        public void Navigate ()
+        {
+
+        }
     }
 }

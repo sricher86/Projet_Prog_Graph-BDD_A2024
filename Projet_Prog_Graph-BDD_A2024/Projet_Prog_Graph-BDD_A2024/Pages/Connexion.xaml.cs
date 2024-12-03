@@ -12,6 +12,10 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Runtime.Intrinsics.Arm;
+using System.Security.Cryptography;
+using System.Security.Policy;
+using System.Text;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 
@@ -26,34 +30,59 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
     public sealed partial class Connexion : Page
     {
         static ObservableCollection<Administrateur> adminList;
-        public event EventHandler Button;
+        Window m_window;
+
         public Connexion()
         {
             this.InitializeComponent();
             Singleton_BD.getInstance().getAdmins();
             adminList = new ObservableCollection<Administrateur>();
             adminList = Singleton_BD.getInstance().getListeAdministrateur();
+        
         }
 
         private void submit_Click(object sender, RoutedEventArgs e)
         {
             Boolean user = false;
             Boolean pass = false;
+            string passwordHashed = Hash(password.Password).ToLower();
 
             foreach (Administrateur a in adminList)
             {
-                if (username.Equals(a.IdAdmin)) user = true;
-                else errUser.Text = "Erreur de nom d'usager";
-
-                if (password.Equals(a.MotDePasse)) pass = true;
-                else errPass.Text = "Erreur de mot de passe";
+                if (username.Text.Equals(a.IdAdmin))
+                {
+                    user = true;
+                    
+                    if (passwordHashed.Equals(a.MotDePasse))
+                    {
+                        pass = true;
+                    }
+                }
             }
 
             if (user && pass)
             {
-                MainWindow newWindow = new MainWindow();
-                newWindow.GetMainFrame.Navigate(typeof(PageAdministrateur));
+                this.m_window = new Window();
+                Frame rootFrame = new Frame();
+                this.m_window.Content = rootFrame;
+                m_window.Activate();
+                rootFrame.Navigate(typeof(PageAdminActivites));
             }
+
+            if (!user) errUser.Text = "Erreur de nom d'usager";
+            if (!pass) errPass.Text = "Erreur de mot de passe";
+
+            //if (user && pass)
+            //{
+            //    MainWindow newWindow = new MainWindow();
+            //    newWindow.GetMainFrame.Navigate(typeof(PageAdministrateur));
+            //}
         }
+
+        static string Hash(string input)
+        {
+            return Convert.ToHexString(SHA1.HashData(Encoding.UTF8.GetBytes(input)));
+        }
+            
     }
 }

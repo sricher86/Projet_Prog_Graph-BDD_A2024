@@ -47,7 +47,8 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Grid.Row="0" Grid.Column="0" FontWeight="Medium">Mot de passe:</TextBlock>
-            <TextBox Grid.Row="0" Grid.Column="1" x:Name="password"></TextBox>
+            <PasswordBox Grid.Row="0" Grid.Column="1" x:Name="password" FontWeight="Medium"></PasswordBox>
+            <!--<TextBox Grid.Row="0" Grid.Column="1" x:Name="password"></TextBox>-->
 
             <TextBlock Grid.Row="1" Grid.Column="1" x:Name="errPass" FontWeight="Medium" Foreground="red"></TextBlock>
 
