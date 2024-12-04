@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySqlX.XDevAPI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Projet_Prog_Graph_BDD_A2024
 {
-    internal class Seance
+    internal class Seance: IEquatable<Seance>, IComparable<Seance>
     {
         int idSeance;
         DateTime dateOrganisation;
@@ -57,5 +58,30 @@ namespace Projet_Prog_Graph_BDD_A2024
             get { return idAdmin; } 
             set { idAdmin = value; } 
         }
+        public int IdActivite
+        {
+            get { return idActivite; }
+            set { idActivite = value; }
+        }
+
+        public int CompareTo(Seance other)
+        {
+            if (this.idActivite > other.idActivite)
+                return 1;
+            else if (this.idActivite < other.idActivite)
+                return -1;
+            else
+                return 0;
+        }
+
+        public bool Equals(Seance other)
+        {
+            if (this.idSeance.Equals(other.idSeance) && this.idActivite == other.idActivite)
+                return true;
+            else
+                return false;
+        }
+
+
     }
 }

@@ -18,6 +18,7 @@ using System.Security.Policy;
 using System.Text;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using WinRT;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -31,14 +32,13 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
     {
         static ObservableCollection<Administrateur> adminList;
         Window m_window;
-
+        Frame mainFrame;
         public Connexion()
         {
             this.InitializeComponent();
             Singleton_BD.getInstance().getAdmins();
             adminList = new ObservableCollection<Administrateur>();
             adminList = Singleton_BD.getInstance().getListeAdministrateur();
-        
         }
 
         private void submit_Click(object sender, RoutedEventArgs e)
@@ -52,33 +52,26 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
                 if (username.Text.Equals(a.IdAdmin))
                 {
                     user = true;
-                    
-                    if (passwordHashed.Equals(a.MotDePasse))
-                    {
-                        pass = true;
-                    }
+
+                    if (passwordHashed.Equals(a.MotDePasse)) pass = true;
                 }
-            }
-
-            if (user && pass)
-            {
-
             }
 
             if (!user) errUser.Text = "Erreur de nom d'usager";
             if (!pass) errPass.Text = "Erreur de mot de passe";
 
-            //if (user && pass)
-            //{
-            //    MainWindow newWindow = new MainWindow();
-            //    newWindow.GetMainFrame.Navigate(typeof(PageAdministrateur));
-            //}
+            if (user && pass) mainFrame.Navigate(typeof(PagePublique));
         }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            if (e.Parameter is not null) mainFrame = e.Parameter.As<Frame>();
+        }
+
 
         static string Hash(string input)
         {
             return Convert.ToHexString(SHA1.HashData(Encoding.UTF8.GetBytes(input)));
         }
-            
     }
 }

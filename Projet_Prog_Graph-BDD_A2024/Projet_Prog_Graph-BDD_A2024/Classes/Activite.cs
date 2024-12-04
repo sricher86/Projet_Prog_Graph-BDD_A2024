@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Projet_Prog_Graph_BDD_A2024
 {
-    internal class Activite
+    internal class Activite : IEquatable<Activite>, IComparable<Activite>
     {
         int idActivite;
         string nom;
@@ -84,6 +85,25 @@ namespace Projet_Prog_Graph_BDD_A2024
             get { return description; }
             set { description = value; }
         }
+
+        public int CompareTo(Activite other)
+        {
+            if (this.idActivite > other.idActivite)
+                return 1;
+            else if (this.idActivite < other.idActivite)
+                return -1;
+            else
+                return 0;
+        }
+
+        public bool Equals(Activite other)
+        {
+            if (this.idActivite.Equals(other.idActivite) && this.nom == other.nom)
+                return true;
+            else
+                return false;
+        }
+
 
     }
 }
