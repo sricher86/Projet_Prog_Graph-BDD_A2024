@@ -60,7 +60,7 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
             if (!user) errUser.Text = "Erreur de nom d'usager";
             if (!pass) errPass.Text = "Erreur de mot de passe";
 
-            if (user && pass) mainFrame.Navigate(typeof(PagePublique));
+            if (user && pass) mainFrame.Navigate(typeof(PageAdministrateur), mainFrame);
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
