@@ -328,5 +328,17 @@ namespace Projet_Prog_Graph_BDD_A2024
             con.Close();
         }
 
+        public ObservableCollection<Seance> getSeanceActivites(int idActivite)
+        {
+            ObservableCollection<Seance> seanceActivite = new ObservableCollection<Seance>();
+            foreach (Seance s in listeSeances)
+            {
+                if (s.IdActivite == idActivite)
+                {
+                    seanceActivite.Add(s);
+                }
+            }
+            return seanceActivite;
+        }
     }
 }
