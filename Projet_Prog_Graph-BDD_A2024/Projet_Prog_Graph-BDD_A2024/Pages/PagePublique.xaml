@@ -3,13 +3,43 @@
     x:Class="Projet_Prog_Graph_BDD_A2024.PagePublique"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Projet_Prog_Graph_BDD_A2024"
+    xmlns:local="using:Projet_Prog_Graph_BDD_A2024.Pages"
+    xmlns:local1="using:Projet_Prog_Graph_BDD_A2024"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-        <Grid Background="LightGray">
+    <Grid Background="LightGray">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" x:Name="titreAccueil" FontSize="36" FontWeight="Medium" Foreground="Black" HorizontalAlignment="Center" Margin="20">Activités</TextBlock>
+        <TextBlock Grid.Row="1" x:Name="err" FontSize="36" FontWeight="Medium" Foreground="Red  " HorizontalAlignment="Center" Margin="20"></TextBlock>
+
+        <GridView Grid.Row="2" SelectionMode="Single" x:Name="activites" HorizontalAlignment="Center" Background="White" Width="800" Padding="10 20" SelectionChanged="activites_SelectionChanged">
+            <GridView.ItemTemplate>
+                <DataTemplate x:DataType="local1:Activite">
+                    <Grid Margin="10 5 20 15">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Image Grid.Row="0" Width="100px" Height="100px" Source="{x:Bind Url }"/>
+                        <TextBlock Grid.Row="1" x:Name="nomActivite" Text="{x:Bind Nom}" Margin="12,6,0,0"/>
+                    </Grid>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+        </GridView>
+    </Grid>
+    <!--<Grid Background="LightGray">
         <NavigationView 
             PaneDisplayMode="Left" 
             PaneTitle="Centre D'activités ProSport"
@@ -30,5 +60,5 @@
 
                 <Frame x:Name="PubliqueFrame"/>
             </NavigationView>
-        </Grid>
+        </Grid>-->
 </Page>

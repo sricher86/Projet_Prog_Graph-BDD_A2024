@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="Projet_Prog_Graph_BDD_A2024.Pages.PageDetail"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Projet_Prog_Graph_BDD_A2024.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid Background="LightGray">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" x:Name="nomActivite" FontSize="36" FontWeight="Medium" Foreground="Black" HorizontalAlignment="Center" Margin="20">Activités</TextBlock>
+        <Grid Grid.Row="1" Margin="10 5 20 15">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <!--<TextBlock Grid.Row="0" x:Name="nomActivite" Margin="12 6 0 0"/>-->
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Image Grid.Column="0" x:Name="imgActivite" Width="300px" Height="300px" Source="{x:Bind activite.Url}" HorizontalAlignment="Left" Margin="0 6 0 0"/>
+                <TextBlock Grid.Column="1" x:Name="descriptionActivite" Text="{ x:Bind activite.Description}" Margin="12 6 0 0"/>
+            </Grid>
+
+            <!--<TextBlock Grid.Row="2" x:Name="err" Margin="12 6 0 0"/>-->
+        </Grid>
+    </Grid>
+</Page>

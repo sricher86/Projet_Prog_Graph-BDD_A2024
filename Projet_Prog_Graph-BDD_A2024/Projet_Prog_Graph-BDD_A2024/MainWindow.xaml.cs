@@ -27,16 +27,34 @@ namespace Projet_Prog_Graph_BDD_A2024
         public MainWindow()
         {
             this.InitializeComponent();
+            mainFrame.Navigate(typeof(PagePublique), mainFrame);
 
-            mainFrame.Navigate(typeof(PageConnexion));
-
-            //mainFrame.Navigate(typeof(PageAdministrateur));
-
+            //mainFrame.Navigate(typeof(PageConnexion));
         }
 
         public Frame GetMainFrame {
             get { return mainFrame; }
             set { mainFrame = value; }
         }
+
+        private void navView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
+        {
+            var item = args.SelectedItem as NavigationViewItem;
+
+            if (item != null)
+            {
+                switch (item.Name)
+                {
+                    case "iActivites":
+                        mainFrame.Navigate(typeof(PagePublique), mainFrame);
+                        break;
+                    case "iConnexion":
+                        mainFrame.Navigate(typeof(Connexion), mainFrame);
+                        break;
+
+                }
+            }
+        }
+
     }
 }

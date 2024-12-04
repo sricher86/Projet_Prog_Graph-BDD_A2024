@@ -15,6 +15,7 @@ namespace Projet_Prog_Graph_BDD_A2024
         int idCategorie;
         string idAdmin;
         string url;
+        string description;
 
         public Activite()
         {
@@ -23,9 +24,10 @@ namespace Projet_Prog_Graph_BDD_A2024
             prixVente = 0;
             idAdmin = "1000";
             url = "";
+            description = "";
         }
 
-        public Activite(int idActivite, string nom, double coutOrganisation, double prixVente, int idCategorie, string idAdmin, string url)
+        public Activite(int idActivite, string nom, double coutOrganisation, double prixVente, int idCategorie, string idAdmin, string url, string description)
         {
             this.idActivite = idActivite;
             this.nom = nom;
@@ -34,6 +36,7 @@ namespace Projet_Prog_Graph_BDD_A2024
             this.idCategorie = idCategorie;
             this.idAdmin = idAdmin;
             this.url = url;
+            this.description = description;
         }
 
         public int IdActivite
@@ -75,6 +78,11 @@ namespace Projet_Prog_Graph_BDD_A2024
         {
             get { return url; }
             set { url = value; }
+        }
+        public string Description
+        {
+            get { return description; }
+            set { description = value; }
         }
 
     }

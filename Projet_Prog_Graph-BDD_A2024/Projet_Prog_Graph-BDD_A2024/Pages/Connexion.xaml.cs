@@ -62,11 +62,7 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
 
             if (user && pass)
             {
-                this.m_window = new Window();
-                Frame rootFrame = new Frame();
-                this.m_window.Content = rootFrame;
-                m_window.Activate();
-                rootFrame.Navigate(typeof(PageAdminActivites));
+
             }
 
             if (!user) errUser.Text = "Erreur de nom d'usager";

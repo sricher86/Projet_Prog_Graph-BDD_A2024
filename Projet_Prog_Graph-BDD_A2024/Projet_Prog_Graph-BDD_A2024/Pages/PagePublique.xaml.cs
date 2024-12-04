@@ -13,6 +13,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using WinRT;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -24,33 +25,56 @@ namespace Projet_Prog_Graph_BDD_A2024
     /// </summary>
     public sealed partial class PagePublique : Page
     {
+        Frame mainFrame;
+        Activite activiteChoisi;
+
         public PagePublique()
         {
             this.InitializeComponent();
-            PubliqueFrame.Navigate(typeof(PagePubliqueAccueil));
+            Singleton_BD.getInstance().getActivites();
+            Singleton_BD.getInstance().getCategories();
+            activites.ItemsSource = Singleton_BD.getInstance().getListeActivites();
         }
 
-        
-        private void navView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
+        private void activites_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (args.SelectedItem != null)
+            if (activites.SelectedItem != null)
             {
-                var item = args.SelectedItem as NavigationViewItem;
-
-                switch (item.Name)
-                {
-                    case ("iActivites"):
-                        PubliqueFrame.Navigate(typeof (PagePubliqueAccueil));
-                        break;
-                    case ("iSeances"):
-                        PubliqueFrame.Navigate(typeof(PagePubliqueAccueil));
-                        break;
-                    case ("iInscription"):
-                        PubliqueFrame.Navigate(typeof(PagePubliqueAccueil));
-                        break;
-                }
+                activiteChoisi = (Activite)activites.SelectedItem;
+                List<Object> listeParams = new List<Object>();
+                listeParams.Add(activiteChoisi);
+                listeParams.Add(mainFrame);
+                mainFrame.Navigate(typeof(PageDetail), listeParams);
             }
-
         }
+
+
+        //private void navView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
+        //{
+        //    if (args.SelectedItem != null)
+        //    {
+        //        var item = args.SelectedItem as NavigationViewItem;
+
+        //        switch (item.Name)
+        //        {
+        //            case ("iActivites"):
+        //                PubliqueFrame.Navigate(typeof (PagePubliqueAccueil));
+        //                break;
+        //            case ("iSeances"):
+        //                PubliqueFrame.Navigate(typeof(PagePubliqueAccueil));
+        //                break;
+        //            case ("iInscription"):
+        //                PubliqueFrame.Navigate(typeof(PagePubliqueAccueil));
+        //                break;
+        //        }
+        //    }
+
+        //}
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            if (e.Parameter is not null) mainFrame = e.Parameter.As<Frame>();
+        }
+
     }
 }

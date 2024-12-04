@@ -104,6 +104,7 @@ namespace Projet_Prog_Graph_BDD_A2024
             int idCategorie = 0;
             string idAdmin = "";
             string url = "";
+            string description = "";
 
             MySqlCommand commande = new MySqlCommand();
             MySqlDataReader reader;
@@ -121,8 +122,9 @@ namespace Projet_Prog_Graph_BDD_A2024
                         prixVente = reader.GetDouble("prixVente");
                         idCategorie = reader.GetInt32("idCategorie");
                         idAdmin = reader.GetString("idAdmin").ToString();
+                        description = reader.GetString("description").ToString();
 
-                        Activite activite = new Activite(idActivite, nom, coutOrganisation, prixVente, idCategorie, idAdmin, url);
+                        Activite activite = new Activite(idActivite, nom, coutOrganisation, prixVente, idCategorie, idAdmin, url, description);
                         listeActivites.Add(activite);
                     }
                 
