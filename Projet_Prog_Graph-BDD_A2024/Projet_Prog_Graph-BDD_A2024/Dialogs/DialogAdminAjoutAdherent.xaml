@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Page
+<ContentDialog
     x:Class="Projet_Prog_Graph_BDD_A2024.DialogAdminAjoutAdherent"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -7,9 +7,76 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
+    Closing="ContentDialog_Closing"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    
+    <StackPanel>
+        <TextBox 
+            x:Name="tbx_nom"
+            VerticalAlignment="Center"
+            Margin="5"
+            PlaceholderText="Nom de l'adhérent"
+            Header="Nom"
+            Width="auto"
+        />
 
-    <Grid>
+        <TextBlock 
+            x:Name="tbx_erreur_nom"
+            VerticalAlignment="Center"
+            Margin="5"
+            Width="auto"
+            Foreground="Red"
+        />
 
-    </Grid>
-</Page>
+        <TextBox 
+            x:Name="tbx_prenom"
+            VerticalAlignment="Center"
+            Margin="5"
+            PlaceholderText="Prénom de l'adhérent"
+            Header="Prénom"
+            Width="auto"
+        />
+
+        <TextBlock 
+            x:Name="tbx_erreur_prenom"
+            VerticalAlignment="Center"
+            Margin="5"
+            Width="auto"
+            Foreground="Red"
+        />
+
+        <TextBox 
+            x:Name="tbx_adresse"
+            VerticalAlignment="Center"
+            Margin="5"
+            PlaceholderText="Adresse de l'adhérent"
+            Header="Adresse"
+            Width="auto"
+        />
+
+        <TextBlock 
+            x:Name="tbx_erreur_adresse"
+            VerticalAlignment="Center"
+            Margin="5"
+            Width="auto"
+            Foreground="Red"
+        />
+
+        <DatePicker 
+            x:Name="tbx_date"
+            VerticalAlignment="Center"
+            Margin="5"
+            Header="Date de naissance"
+            Width="auto"
+        />
+
+        <TextBlock 
+            x:Name="tbx_erreur_date"
+            VerticalAlignment="Center"
+            Margin="5"
+            Width="auto"
+            Foreground="Red"
+        />
+    </StackPanel>
+</ContentDialog>

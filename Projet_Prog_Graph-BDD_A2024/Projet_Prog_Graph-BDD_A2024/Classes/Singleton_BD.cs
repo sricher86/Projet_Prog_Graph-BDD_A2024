@@ -169,7 +169,7 @@ namespace Projet_Prog_Graph_BDD_A2024
                 string nom = reader.GetString("nom").ToString();
                 string prenom = reader.GetString("prenom").ToString();
                 string adresse = reader.GetString("adresse").ToString();
-                DateTime dateDeNaissance = reader.GetDateTime("dateDeNaissance");
+                DateTime dateDeNaissance = reader.GetDateTime("dateDeNaissance").Date;
                 int age = reader.GetInt32("age");
                 string idAdmin = reader.GetString("idAdmin").ToString() ;
 

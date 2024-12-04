@@ -18,14 +18,53 @@ using Windows.Foundation.Collections;
 
 namespace Projet_Prog_Graph_BDD_A2024
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
-    public sealed partial class DialogAdminAjoutAdherent : Page
+    public sealed partial class DialogAdminAjoutAdherent : ContentDialog
     {
         public DialogAdminAjoutAdherent()
         {
             this.InitializeComponent();
+        }
+
+        Adherents newAdherent = new Adherents();
+
+        private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
+        {
+            if (tbx_nom.Text.Trim() != "")
+                newAdherent.Nom = tbx_nom.Text;
+            else
+                tbx_erreur_nom.Text = "Le nom ne peut pas être vide";
+
+            if (tbx_prenom.Text.Trim() != "")
+                newAdherent.Prenom = tbx_prenom.Text;
+            else
+                tbx_erreur_prenom.Text = "Le prénom ne peut pas être vide";
+
+            if (tbx_adresse.Text.Trim() != "")
+                newAdherent.Adresse = tbx_adresse.Text;
+            else
+                tbx_erreur_adresse.Text = "L'adresse ne peut pas être vide";
+
+            if (tbx_date.Date.ToString().Trim() != "")
+                newAdherent.DateDeNaissance = new DateTime(tbx_date.Date.Year, tbx_date.Date.Month, tbx_date.Date.Day);
+            else
+                tbx_erreur_date.Text = "La date de naissance ne peut pas être vide";
+        }
+
+        private void ContentDialog_Closing(ContentDialog sender, ContentDialogClosingEventArgs args)
+        {
+            if (args.Result == ContentDialogResult.Primary)
+            {
+                if (string.IsNullOrWhiteSpace(tbx_erreur_nom.Text))
+                    args.Cancel = true;
+                if (string.IsNullOrWhiteSpace(tbx_erreur_prenom.Text))
+                    args.Cancel = true;
+                if (string.IsNullOrWhiteSpace(tbx_erreur_adresse.Text))
+                    args.Cancel = true;
+                if (string.IsNullOrWhiteSpace(tbx_erreur_date.Text))
+                    args.Cancel = true;
+            }
+            else
+                args.Cancel = false;
         }
     }
 }

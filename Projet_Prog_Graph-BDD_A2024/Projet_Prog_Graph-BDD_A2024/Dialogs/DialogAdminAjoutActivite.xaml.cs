@@ -18,9 +18,6 @@ using Windows.Foundation.Collections;
 
 namespace Projet_Prog_Graph_BDD_A2024
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class DialogAdminAjoutActivite : ContentDialog
     {
         Activite newActivite = new Activite();
@@ -127,8 +124,6 @@ namespace Projet_Prog_Graph_BDD_A2024
                             tbx_erreur_url.Text = "Le prix doit être en format url";
                     }
             }
-
-            
         }
     }
 }
