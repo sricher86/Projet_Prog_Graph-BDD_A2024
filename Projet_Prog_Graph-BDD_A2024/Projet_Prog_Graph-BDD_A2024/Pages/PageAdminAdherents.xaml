@@ -9,7 +9,20 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
-        <TextBlock Text="PAGE ADMIN ADHERENTS"/>
-    </Grid>
+    <ScrollViewer>
+        <StackPanel Padding="20">
+
+            <TextBlock Text="PAGE ADMIN ADHERENTS"/>
+
+            <Button
+                x:Name="btn_ajouter"
+                Click="btn_ajouter_Click"
+                Content="Ajouter"
+                Margin="20"
+                FontSize="15"
+                HorizontalAlignment="Right"
+            />
+
+        </StackPanel>
+    </ScrollViewer>
 </Page>

@@ -38,7 +38,7 @@ namespace Projet_Prog_Graph_BDD_A2024
             dialog.Title = "Ajout d'une activité";
             dialog.PrimaryButtonText = "Ajouter";
             dialog.CloseButtonText = "Annuler";
-            dialog.DefaultButton = ContentDialogButton.Close;
+            dialog.DefaultButton = ContentDialogButton.Primary;
 
             ContentDialogResult resultat = await dialog.ShowAsync();
         }

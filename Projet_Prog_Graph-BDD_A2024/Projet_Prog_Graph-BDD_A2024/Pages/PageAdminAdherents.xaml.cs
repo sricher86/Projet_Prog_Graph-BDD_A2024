@@ -20,14 +20,23 @@ using Projet_Prog_Graph_BDD_A2024.Pages;
 
 namespace Projet_Prog_Graph_BDD_A2024
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class PageAdminAdherents : Page
     {
         public PageAdminAdherents()
         {
             this.InitializeComponent();
+        }
+
+        private async void btn_ajouter_Click(object sender, RoutedEventArgs e)
+        {
+            DialogAdminAjoutAdherent dialog = new DialogAdminAjoutAdherent();
+            dialog.XamlRoot = this.XamlRoot;
+            dialog.Title = "Ajout d'un adhérent";
+            dialog.PrimaryButtonText = "Ajouter";
+            dialog.CloseButtonText = "Annuler";
+            dialog.DefaultButton = ContentDialogButton.Primary;
+
+            ContentDialogResult resultat = await dialog.ShowAsync();
         }
     }
 }
