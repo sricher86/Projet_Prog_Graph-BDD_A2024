@@ -84,9 +84,18 @@ namespace Projet_Prog_Graph_BDD_A2024.Dialogs
                 }
             }
 
+            if ((tbx_id.Text.Trim() != "") && (pbx_motDePasse.Password.Trim() != ""))
+            {
+                if (!pass)
+                {
+                    tbx_erreur_authentification.Visibility = Visibility.Visible;
+                }
+            }
+
             if (user && pass)
             {
                 valide = true;
+                tbx_erreur_authentification.Visibility = Visibility.Collapsed;
             }
         }
 

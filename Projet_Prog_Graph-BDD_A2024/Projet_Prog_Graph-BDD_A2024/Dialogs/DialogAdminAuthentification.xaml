@@ -11,7 +11,7 @@
     Closing="ContentDialog_Closing"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <StackPanel HorizontalAlignment="Center" Width="300">
+    <StackPanel HorizontalAlignment="Center" MinWidth="300">
         <TextBlock 
             Text="Se connecter"
             VerticalAlignment="Center"
@@ -56,6 +56,17 @@
             Margin="5"
             Width="auto"
             Foreground="Red"
+        />
+
+        <TextBlock 
+            x:Name="tbx_erreur_authentification"
+            VerticalAlignment="Center"
+            Margin="15 30 15 30"
+            Width="auto"
+            Foreground="Red"
+            FontWeight="Bold"
+            Text="LES INFORMATIONS ENTRÉES NE CORRESPONDENT PAS"
+            Visibility="Collapsed"
         />
     </StackPanel>
 </ContentDialog>
