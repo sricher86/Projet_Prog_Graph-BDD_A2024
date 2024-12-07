@@ -16,13 +16,12 @@ using Windows.Foundation.Collections;
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
-namespace Projet_Prog_Graph_BDD_A2024
+namespace Projet_Prog_Graph_BDD_A2024.Dialogs
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class DialogAdminAjoutActivite : ContentDialog
     {
+        bool valide = true;
+
         Activite newActivite = new Activite();
 
         Visibility visible = Visibility.Visible;
@@ -36,60 +35,74 @@ namespace Projet_Prog_Graph_BDD_A2024
 
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
+            resetErreurs();
+
             if (tbx_nom.Text.Trim() != "")
                 newActivite.Nom = tbx_nom.Text;
             else
-                tbx_erreur_nom.Text = "Le nom ne peut pas être vide";
-
-
-            if (Double.TryParse(tbx_cout.Text, out double cout))
             {
-                if (tbx_cout.Text.Trim() != "")
+                tbx_erreur_nom.Text = "Le nom ne peut pas être vide";
+                valide = false;
+            }
+
+            if (tbx_cout.Text.Trim() != "")
+            {
+                if (Double.TryParse(tbx_cout.Text, out double cout))
                     newActivite.CoutOrganisation = cout;
                 else
-                    tbx_erreur_cout.Text = "Le coût ne peut pas être vide";
+                {
+                    tbx_erreur_cout.Text = "Le coût doit être en format décimal";
+                    valide = false;
+                }
             }
             else
-                tbx_erreur_cout.Text = "Le coût doit être en format décimal";
-
-
-            if (Double.TryParse(tbx_prix.Text, out double prix))
             {
-                if (tbx_prix.Text.Trim() != "")
+                tbx_erreur_cout.Text = "Le coût ne peut pas être vide";
+                valide = false;
+            }
+
+            if (tbx_prix.Text.Trim() != "")
+            {
+                if (Double.TryParse(tbx_prix.Text, out double prix))
                     newActivite.PrixVente = prix;
                 else
-                    tbx_erreur_prix.Text = "Le prix ne peut pas être vide";
+                {
+                    tbx_erreur_prix.Text = "Le prix doit être en format décimal";
+                    valide = false;
+                }
             }
             else
-                tbx_erreur_prix.Text = "Le prix doit être en format décimal";
-
+            {
+                tbx_erreur_prix.Text = "Le prix ne peut pas être vide";
+                valide = false;
+            }
 
             if (cbx_listeCategorie.Text.Trim() == "")
             {
                 if (cbx_listeCategorie.SelectedIndex != -1)
                     newActivite.IdCategorie = (cbx_listeCategorie.SelectedIndex + 1);
                 else
+                {
                     tbx_erreur_categorie.Text = "Veuillez choisir une catégorie";
+                    valide = false;
+                }
             }
 
             if (tbx_url.Visibility == visible)
+            {
                 if (tbx_url.Text.Trim() == "")
+                {
                     tbx_erreur_url.Text = "Le url ne peut pas être vide";
+                    valide = false;
+                }
+            }
         }
 
         private void ContentDialog_Closing(ContentDialog sender, ContentDialogClosingEventArgs args)
         {
             if (args.Result == ContentDialogResult.Primary)
             {
-                if (string.IsNullOrWhiteSpace(tbx_erreur_nom.Text))
-                    args.Cancel = true;
-                if (string.IsNullOrWhiteSpace(tbx_erreur_cout.Text))
-                    args.Cancel = true;
-                if (string.IsNullOrWhiteSpace(tbx_erreur_prix.Text))
-                    args.Cancel = true;
-                if (string.IsNullOrWhiteSpace(tbx_erreur_categorie.Text))
-                    args.Cancel = true;
-                if (string.IsNullOrWhiteSpace(tbx_erreur_url.Text))
+                if (valide == false)
                     args.Cancel = true;
             }
             else
@@ -119,16 +132,28 @@ namespace Projet_Prog_Graph_BDD_A2024
                     newCategorie.Type = cbx_listeCategorie.Text;
 
                 if (tbx_url.Visibility == visible)
+                {
                     if (tbx_url.Text.Trim() != "")
                     {
                         if (Uri.IsWellFormedUriString(tbx_url.Text, UriKind.Absolute))
                             newCategorie.Url = tbx_url.Text;
                         else
+                        {
                             tbx_erreur_url.Text = "Le prix doit être en format url";
+                            valide = false;
+                        }
                     }
+                }
             }
+        }
 
-            
+        private void resetErreurs()
+        {
+            tbx_erreur_nom.Text = String.Empty;
+            tbx_erreur_cout.Text = String.Empty;
+            tbx_erreur_prix.Text = String.Empty;
+            tbx_erreur_categorie.Text = String.Empty;
+            tbx_erreur_url.Text = String.Empty;
         }
     }
 }

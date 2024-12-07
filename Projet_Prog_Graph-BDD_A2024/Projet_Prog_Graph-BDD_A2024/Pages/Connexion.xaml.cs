@@ -25,53 +25,55 @@ using WinRT;
 
 namespace Projet_Prog_Graph_BDD_A2024.Pages
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
-    public sealed partial class Connexion : Page
-    {
-        static ObservableCollection<Administrateur> adminList;
-        Window m_window;
-        Frame mainFrame;
-        public Connexion()
-        {
-            this.InitializeComponent();
-            Singleton_BD.getInstance().getAdmins();
-            adminList = new ObservableCollection<Administrateur>();
-            adminList = Singleton_BD.getInstance().getListeAdministrateur();
-        }
+    //public sealed partial class Connexion : Page
+    //{
+    //    static ObservableCollection<Administrateur> adminList;
+    //    Frame mainFrame;
 
-        private void submit_Click(object sender, RoutedEventArgs e)
-        {
-            Boolean user = false;
-            Boolean pass = false;
-            string passwordHashed = Hash(password.Password).ToLower();
+    //    public Connexion()
+    //    {
+    //        this.InitializeComponent();
+    //        Singleton_BD.getInstance().getAdmins();
+    //        adminList = new ObservableCollection<Administrateur>();
+    //        adminList = Singleton_BD.getInstance().getListeAdministrateur();
+    //    }
 
-            foreach (Administrateur a in adminList)
-            {
-                if (username.Text.Equals(a.IdAdmin))
-                {
-                    user = true;
+    //    private void submit_Click(object sender, RoutedEventArgs e)
+    //    {
+    //        Boolean user = false;
+    //        Boolean pass = false;
+    //        string passwordHashed = Hash(password.Password).ToLower();
 
-                    if (passwordHashed.Equals(a.MotDePasse)) pass = true;
-                }
-            }
+    //        foreach (Administrateur a in adminList)
+    //        {
+    //            if (username.Text.Equals(a.IdAdmin))
+    //            {
+    //                user = true;
 
-            if (!user) errUser.Text = "Erreur de nom d'usager";
-            if (!pass) errPass.Text = "Erreur de mot de passe";
+    //                if (passwordHashed.Equals(a.MotDePasse)) pass = true;
+    //            }
+    //        }
 
-            if (user && pass) mainFrame.Navigate(typeof(PageAdministrateur), mainFrame);
-        }
+    //        if (!user) errUser.Text = "Erreur de nom d'usager";
+    //        if (!pass) errPass.Text = "Erreur de mot de passe";
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            if (e.Parameter is not null) mainFrame = e.Parameter.As<Frame>();
-        }
+    //        if (user && pass)
+    //        {
+    //            mainFrame.Navigate(typeof(PageAdministrateur), mainFrame);
+    //        }
+    //    }
 
+    //    protected override void OnNavigatedTo(NavigationEventArgs e)
+    //    {
+    //        if (e.Parameter is not null)
+    //        {
+    //            mainFrame = e.Parameter.As<Frame>();
+    //        }
+    //    }
 
-        static string Hash(string input)
-        {
-            return Convert.ToHexString(SHA1.HashData(Encoding.UTF8.GetBytes(input)));
-        }
-    }
+    //    static string Hash(string input)
+    //    {
+    //        return Convert.ToHexString(SHA1.HashData(Encoding.UTF8.GetBytes(input)));
+    //    }
+    //}
 }

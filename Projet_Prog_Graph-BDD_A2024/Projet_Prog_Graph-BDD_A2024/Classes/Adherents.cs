@@ -16,6 +16,15 @@ namespace Projet_Prog_Graph_BDD_A2024
         int age;
         string idAdmin;
 
+        public Adherents()
+        {
+            nom = "";
+            prenom = "";
+            adresse = "";
+            dateDeNaissance = new DateTime();
+            IdAdmin = "1000";
+        }
+
         public Adherents(string no_identification, string nom, string prenom, string adresse, DateTime dateDeNaissance, int age, string idAdmin)
         {
             this.no_identification = no_identification;

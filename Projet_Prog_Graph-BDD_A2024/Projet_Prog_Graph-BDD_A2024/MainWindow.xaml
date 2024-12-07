@@ -9,21 +9,9 @@
     mc:Ignorable="d"
     Title="Projet_Prog_Graph-BDD_A2024">
 
-    <ScrollViewer>
-        <NavigationView PaneDisplayMode="Left" PaneTitle="Centre SportsPlus" IsPaneOpen="False" x:Name="navView" SelectionChanged="navView_SelectionChanged">
-            <NavigationView.MenuItems>
-                <NavigationViewItem Content="Activites" x:Name="iActivites" Icon="Calendar"/>
-                <!--<NavigationViewItem Content="Agenda" x:Name="iAgenda" Icon="Calendar"/>-->
-            </NavigationView.MenuItems>
-
-            <NavigationView.FooterMenuItems>
-                <NavigationViewItem Content="Connexion" x:Name="iConnexion" Icon="Switch" />
-            </NavigationView.FooterMenuItems>
-
-            <Frame x:Name="mainFrame" Grid.Row="1" />
-        </NavigationView>
-    </ScrollViewer>
-    <!--<Grid>
-        <Frame x:Name="mainFrame"/>
-    </Grid>-->
+    <Grid Background="LightGray">
+        <ScrollViewer>
+            <Frame x:Name="mainFrame"/>
+        </ScrollViewer>
+    </Grid>
 </Window>

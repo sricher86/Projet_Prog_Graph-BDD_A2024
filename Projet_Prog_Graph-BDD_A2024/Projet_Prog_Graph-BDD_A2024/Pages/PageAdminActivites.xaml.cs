@@ -13,17 +13,15 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
-using Projet_Prog_Graph_BDD_A2024.Pages;
+using WinRT;
+using Projet_Prog_Graph_BDD_A2024.Dialogs;
 
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
-namespace Projet_Prog_Graph_BDD_A2024
+namespace Projet_Prog_Graph_BDD_A2024.Pages
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class PageAdminActivites : Page
     {
         public PageAdminActivites()
@@ -38,7 +36,7 @@ namespace Projet_Prog_Graph_BDD_A2024
             dialog.Title = "Ajout d'une activité";
             dialog.PrimaryButtonText = "Ajouter";
             dialog.CloseButtonText = "Annuler";
-            dialog.DefaultButton = ContentDialogButton.Close;
+            dialog.DefaultButton = ContentDialogButton.Primary;
 
             ContentDialogResult resultat = await dialog.ShowAsync();
         }

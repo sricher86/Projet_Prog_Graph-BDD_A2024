@@ -19,9 +19,6 @@ using Windows.Foundation.Collections;
 
 namespace Projet_Prog_Graph_BDD_A2024.Pages
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class PagePubliqueAccueil : Page
     {
         public PagePubliqueAccueil()

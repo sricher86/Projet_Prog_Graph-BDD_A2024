@@ -19,6 +19,7 @@ namespace Projet_Prog_Graph_BDD_A2024
         ObservableCollection<Statistiques> listeStatistiques;
 
         List<String> listeTypeCategories;
+        List<String> listeNomsActivites;
 
         static Singleton_BD instance = null;
         MySqlConnection con;
@@ -35,6 +36,7 @@ namespace Projet_Prog_Graph_BDD_A2024
             listeStatistiques = new ObservableCollection<Statistiques>();
 
             listeTypeCategories = new List<String>();
+            listeNomsActivites = new List<String>();
 
             getActivites();
             getAdherents();
@@ -93,6 +95,11 @@ namespace Projet_Prog_Graph_BDD_A2024
             return listeTypeCategories;
         }
 
+        public List<String> getListeNomsActivites()
+        {
+            return listeNomsActivites;
+        }
+
         public void getActivites()
         {
             listeActivites.Clear();
@@ -126,6 +133,8 @@ namespace Projet_Prog_Graph_BDD_A2024
 
                         Activite activite = new Activite(idActivite, nom, coutOrganisation, prixVente, idCategorie, idAdmin, url, description);
                         listeActivites.Add(activite);
+
+                        listeNomsActivites.Add(nom);
                     }
                 
             reader.Close();
@@ -169,7 +178,7 @@ namespace Projet_Prog_Graph_BDD_A2024
                 string nom = reader.GetString("nom").ToString();
                 string prenom = reader.GetString("prenom").ToString();
                 string adresse = reader.GetString("adresse").ToString();
-                DateTime dateDeNaissance = reader.GetDateTime("dateDeNaissance");
+                DateTime dateDeNaissance = reader.GetDateTime("dateDeNaissance").Date;
                 int age = reader.GetInt32("age");
                 string idAdmin = reader.GetString("idAdmin").ToString() ;
 
