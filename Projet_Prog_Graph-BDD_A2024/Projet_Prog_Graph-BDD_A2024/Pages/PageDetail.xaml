@@ -37,21 +37,6 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
-            </Grid.RowDefinitions>
-
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto"/>
-            </Grid.ColumnDefinitions>
-
-            <!--<Image Grid.Column="0" x:Name="imgActivite" Width="300px" Height="300px" Source="{x:Bind activite.Url}" HorizontalAlignment="Left" Margin="0 6 0 0" VerticalAlignment="Center" />
-            <TextBlock Grid.Column="1" x:Name="descriptionActivite" Text="{ x:Bind activite.Description}" Margin="12 6 0 0" VerticalAlignment="Center"/>-->
-        </Grid>
-
-        <Grid Grid.Row="3" Margin="10 5 20 15">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
@@ -62,7 +47,10 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Grid.Row="0" Grid.Column="0" x:Name="seanceTitre" Margin="12 6 0 0" VerticalAlignment="Center">Séances disponible</TextBlock>
-            <!--<ComboBox Grid.Row="0" Grid.Column="1" x:Name="dateDebut" Text="{ x:Bind seancesActivite.Date}" Margin="12 6 0 0" VerticalAlignment="Center"/>-->
+            <DatePicker>
+                
+            </DatePicker>
+            <ComboBox Grid.Row="0" Grid.Column="1" x:Name="dateDebut" Margin="12 6 0 0" VerticalAlignment="Center"/>
         </Grid>
 
         <!--<TextBlock Grid.Row="2" x:Name="err" Margin="12 6 0 0"/>-->
