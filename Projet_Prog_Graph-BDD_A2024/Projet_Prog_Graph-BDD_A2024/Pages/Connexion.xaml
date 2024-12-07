@@ -9,7 +9,7 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <!--<Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
@@ -48,12 +48,12 @@
 
             <TextBlock Grid.Row="0" Grid.Column="0" FontWeight="Medium">Mot de passe:</TextBlock>
             <PasswordBox Grid.Row="0" Grid.Column="1" x:Name="password" FontWeight="Medium"></PasswordBox>
-            <!--<TextBox Grid.Row="0" Grid.Column="1" x:Name="password"></TextBox>-->
+            --><!--<TextBox Grid.Row="0" Grid.Column="1" x:Name="password"></TextBox>--><!--
 
             <TextBlock Grid.Row="1" Grid.Column="1" x:Name="errPass" FontWeight="Medium" Foreground="red"></TextBlock>
 
         </Grid>
 
         <Button Grid.Row="3"  x:Name="submit" Content="Connexion" HorizontalAlignment="Center" Margin="20" Click="submit_Click"></Button>
-    </Grid>
+    </Grid>-->
 </Page>

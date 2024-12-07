@@ -25,55 +25,55 @@ using WinRT;
 
 namespace Projet_Prog_Graph_BDD_A2024.Pages
 {
-    public sealed partial class Connexion : Page
-    {
-        static ObservableCollection<Administrateur> adminList;
-        Frame mainFrame;
+    //public sealed partial class Connexion : Page
+    //{
+    //    static ObservableCollection<Administrateur> adminList;
+    //    Frame mainFrame;
 
-        public Connexion()
-        {
-            this.InitializeComponent();
-            Singleton_BD.getInstance().getAdmins();
-            adminList = new ObservableCollection<Administrateur>();
-            adminList = Singleton_BD.getInstance().getListeAdministrateur();
-        }
+    //    public Connexion()
+    //    {
+    //        this.InitializeComponent();
+    //        Singleton_BD.getInstance().getAdmins();
+    //        adminList = new ObservableCollection<Administrateur>();
+    //        adminList = Singleton_BD.getInstance().getListeAdministrateur();
+    //    }
 
-        private void submit_Click(object sender, RoutedEventArgs e)
-        {
-            Boolean user = false;
-            Boolean pass = false;
-            string passwordHashed = Hash(password.Password).ToLower();
+    //    private void submit_Click(object sender, RoutedEventArgs e)
+    //    {
+    //        Boolean user = false;
+    //        Boolean pass = false;
+    //        string passwordHashed = Hash(password.Password).ToLower();
 
-            foreach (Administrateur a in adminList)
-            {
-                if (username.Text.Equals(a.IdAdmin))
-                {
-                    user = true;
+    //        foreach (Administrateur a in adminList)
+    //        {
+    //            if (username.Text.Equals(a.IdAdmin))
+    //            {
+    //                user = true;
 
-                    if (passwordHashed.Equals(a.MotDePasse)) pass = true;
-                }
-            }
+    //                if (passwordHashed.Equals(a.MotDePasse)) pass = true;
+    //            }
+    //        }
 
-            if (!user) errUser.Text = "Erreur de nom d'usager";
-            if (!pass) errPass.Text = "Erreur de mot de passe";
+    //        if (!user) errUser.Text = "Erreur de nom d'usager";
+    //        if (!pass) errPass.Text = "Erreur de mot de passe";
 
-            if (user && pass)
-            {
-                mainFrame.Navigate(typeof(PageAdministrateur), mainFrame);
-            }
-        }
+    //        if (user && pass)
+    //        {
+    //            mainFrame.Navigate(typeof(PageAdministrateur), mainFrame);
+    //        }
+    //    }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            if (e.Parameter is not null)
-            {
-                mainFrame = e.Parameter.As<Frame>();
-            }
-        }
+    //    protected override void OnNavigatedTo(NavigationEventArgs e)
+    //    {
+    //        if (e.Parameter is not null)
+    //        {
+    //            mainFrame = e.Parameter.As<Frame>();
+    //        }
+    //    }
 
-        static string Hash(string input)
-        {
-            return Convert.ToHexString(SHA1.HashData(Encoding.UTF8.GetBytes(input)));
-        }
-    }
+    //    static string Hash(string input)
+    //    {
+    //        return Convert.ToHexString(SHA1.HashData(Encoding.UTF8.GetBytes(input)));
+    //    }
+    //}
 }

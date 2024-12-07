@@ -20,6 +20,7 @@
                 IsBackButtonVisible="Collapsed"
                 IsPaneOpen="False"
                 SelectionChanged="navView_SelectionChanged"
+                CompactModeThresholdWidth="100" 
             >
                 <NavigationView.MenuItems>
                     <NavigationViewItem Content="Activites" x:Name="iActivites" Icon="Calendar"/>
@@ -27,7 +28,29 @@
                 </NavigationView.MenuItems>
 
                 <NavigationView.FooterMenuItems>
-                    <NavigationViewItem Content="Connexion" x:Name="iConnexion" Icon="Switch"/>
+                    <Button 
+                        x:Name="btnConnexion" 
+                        Click="btnConnexion_Click" 
+                        Width="auto" 
+                        Padding="0"
+                        Background="AliceBlue"
+                        BorderThickness="0"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        HorizontalContentAlignment="Left"
+                        VerticalContentAlignment="Center"
+                    >
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <SymbolIcon Symbol="Switch" Grid.Column="0" Margin="0 0 15 0"/>
+                            <TextBlock Text="Connexion" x:Name="iConnexion" Grid.Column="1"/>
+                        </Grid>
+                    </Button>
+                    <!--<NavigationViewItem Content="Connexion" x:Name="iConnexion" Icon="Switch"/>-->
                 </NavigationView.FooterMenuItems>
 
                 <Frame x:Name="connexionFrame"/>

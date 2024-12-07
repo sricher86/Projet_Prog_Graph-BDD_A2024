@@ -1,3 +1,4 @@
+using Google.Protobuf.Reflection;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -5,6 +6,7 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
+using Projet_Prog_Graph_BDD_A2024.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -47,8 +49,8 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
                     case "iActivites":
                         connexionFrame.Navigate(typeof(PagePublique), mainFrame);
                         break;
-                    case "iConnexion":
-                        connexionFrame.Navigate(typeof(Connexion), mainFrame);
+                    //case "iConnexion":
+                    //    connexionFrame.Navigate(typeof(Connexion), mainFrame);
                         break;
                 }
             }
@@ -59,6 +61,22 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
             if (e.Parameter is not null)
             {
                 mainFrame = e.Parameter.As<Frame>();
+            }
+        }
+
+        private async void btnConnexion_Click(object sender, RoutedEventArgs e)
+        {
+            DialogAdminAuthentification dialog = new DialogAdminAuthentification();
+            dialog.XamlRoot = this.XamlRoot;
+            dialog.PrimaryButtonText = "Connexion";
+            dialog.CloseButtonText = "Annuler";
+            dialog.DefaultButton = ContentDialogButton.Primary;
+
+            ContentDialogResult resultat = await dialog.ShowAsync();
+
+            if (resultat == ContentDialogResult.Primary)
+            {
+                mainFrame.Navigate(typeof(PageAdministrateur), mainFrame);
             }
         }
     }

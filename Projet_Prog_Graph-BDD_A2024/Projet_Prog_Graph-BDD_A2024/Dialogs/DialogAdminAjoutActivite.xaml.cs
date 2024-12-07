@@ -16,7 +16,7 @@ using Windows.Foundation.Collections;
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
-namespace Projet_Prog_Graph_BDD_A2024
+namespace Projet_Prog_Graph_BDD_A2024.Dialogs
 {
     public sealed partial class DialogAdminAjoutActivite : ContentDialog
     {
