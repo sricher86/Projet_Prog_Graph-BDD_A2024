@@ -17,6 +17,14 @@ namespace Projet_Prog_Graph_BDD_A2024
         string idAdmin;
         int idActivite;
 
+        public Seance()
+        {
+            dateOrganisation = new DateTime();
+            heureOrganisation = 0;
+            nbrPlaceDisponible = 0;
+            idAdmin = "1000";
+        }
+
         public Seance(int idSeance, DateTime dateOrganisation, int heureOrganisation, int nbrPlaceDisponible, double noteAppreciation, string idAdmin, int idActivite)
         {
             this.idSeance = idSeance;

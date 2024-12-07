@@ -15,7 +15,7 @@
   <ItemGroup>
     <None Remove="DialogAdminAjoutActivite.xaml" />
     <None Remove="DialogAdminAjoutAdherent.xaml" />
-    <None Remove="DialogAdminAjoutSeance.xaml" />
+    <None Remove="Dialogs\DialogAdminAjoutActivite.xaml" />
     <None Remove="PageAdminActivites.xaml" />
     <None Remove="PageAdminAdherents.xaml" />
     <None Remove="PageAdminAjoutActivite.xaml" />
@@ -59,6 +59,11 @@
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.756" />
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.5.240802000" />
     <PackageReference Include="MySql.Data" Version="9.1.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="DialogAdminAjoutSeance.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="PageAjoutAdminSeance.xaml">
@@ -116,7 +121,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Dialogs\" />
+    <Page Update="Dialogs\DialogAdminAjoutActivite.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Pages\PageDetail.xaml">

@@ -20,9 +20,6 @@ using Projet_Prog_Graph_BDD_A2024.Pages;
 
 namespace Projet_Prog_Graph_BDD_A2024
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class PageAdminCompte : Page
     {
         public PageAdminCompte()

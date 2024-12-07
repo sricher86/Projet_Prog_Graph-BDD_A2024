@@ -27,28 +27,5 @@ namespace Projet_Prog_Graph_BDD_A2024
 
             mainFrame.Navigate(typeof(PageConnexion), mainFrame);
         }
-
-        //public Frame GetMainFrame {
-        //    get { return mainFrame; }
-        //    set { mainFrame = value; }
-        //}
-
-        //private void navView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
-        //{
-        //    var item = args.SelectedItem as NavigationViewItem;
-
-        //    if (item != null)
-        //    {
-        //        switch (item.Name)
-        //        {
-        //            case "iActivites":
-        //                mainFrame.Navigate(typeof(PagePublique), mainFrame);
-        //                break;
-        //            case "iConnexion":
-        //                mainFrame.Navigate(typeof(Connexion));
-        //                break;
-        //        }
-        //    }
-        //}
     }
 }

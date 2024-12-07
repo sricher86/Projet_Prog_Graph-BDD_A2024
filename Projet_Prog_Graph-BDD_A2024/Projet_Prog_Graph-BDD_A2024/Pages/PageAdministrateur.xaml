@@ -20,8 +20,8 @@
             SelectionChanged="navViewAdmin_SelectionChanged"
         >
             <NavigationView.MenuItems>
-                <NavigationViewItem Content="Adhérents" x:Name="iAdherents" Icon="People"/>
                 <NavigationViewItem Content="Activités" x:Name="iActivites" Icon="AllApps"/>
+                <NavigationViewItem Content="Adhérents" x:Name="iAdherents" Icon="People"/>
                 <NavigationViewItem Content="Séances" x:Name="iSeances" Icon="Library"/>
                 <NavigationViewItem Content="Statistiques" x:Name="iStat" Icon="Calculator"/>
             </NavigationView.MenuItems>

@@ -1,15 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Page
-    x:Class="Projet_Prog_Graph_BDD_A2024.DialogAdminAjoutSeance"
+<ContentDialog
+    x:Class="Projet_Prog_Graph_BDD_A2024.Dialogs.DialogAdminAjoutSeance"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Projet_Prog_Graph_BDD_A2024"
+    xmlns:local="using:Projet_Prog_Graph_BDD_A2024.Dialogs"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
+    Closing="ContentDialog_Closing"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <StackPanel>
+        <DatePicker 
+            x:Name="tbx_date"
+            VerticalAlignment="Center"
+            Margin="5"
+            Header="Date d'organisation"
+            Width="auto"
+        />
 
-    </Grid>
-</Page>
+        <TextBlock 
+            x:Name="tbx_erreur_date"
+            VerticalAlignment="Center"
+            Margin="5"
+            Width="auto"
+            Foreground="Red"
+        />
+
+        <TextBox 
+            x:Name="tbx_heure"
+            VerticalAlignment="Center"
+            Margin="5"
+            PlaceholderText="Heure d'organisation"
+            Header="Heure"
+            Width="auto"
+        />
+
+        <TextBlock 
+            x:Name="tbx_erreur_heure"
+            VerticalAlignment="Center"
+            Margin="5"
+            Width="auto"
+            Foreground="Red"
+        />
+
+        <TextBox 
+            x:Name="tbx_places"
+            VerticalAlignment="Center"
+            Margin="5"
+            PlaceholderText="Nombre de places disponible"
+            Header="Nombre de places disponible"
+            Width="auto"
+        />
+
+        <TextBlock 
+            x:Name="tbx_erreur_places"
+            VerticalAlignment="Center"
+            Margin="5"
+            Width="auto"
+            Foreground="Red"
+        />
+
+        <!--<TextBox 
+            x:Name="tbx_note"
+            VerticalAlignment="Center"
+            Margin="5"
+            PlaceholderText="Note d'appréciation (entre 1 et 5)"
+            Header="Note d'appréciation"
+            Width="auto"
+        />
+
+        <TextBlock 
+            x:Name="tbx_erreur_note"
+            VerticalAlignment="Center"
+            Margin="5"
+            Width="auto"
+            Foreground="Red"
+        />-->
+
+        <ComboBox 
+            x:Name="cbx_listeActivites"
+            VerticalAlignment="Center"
+            Margin="5"
+            Width="auto"
+            Header="Activités"
+            IsEditable="False"
+            SelectedIndex="-1"
+        />
+
+        <TextBlock 
+            x:Name="tbx_erreur_activite"
+            VerticalAlignment="Center"
+            Margin="5"
+            Width="auto"
+            Foreground="Red"
+        />
+    </StackPanel>
+</ContentDialog>
