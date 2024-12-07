@@ -25,14 +25,11 @@ using WinRT;
 
 namespace Projet_Prog_Graph_BDD_A2024.Pages
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class Connexion : Page
     {
         static ObservableCollection<Administrateur> adminList;
-        Window m_window;
         Frame mainFrame;
+
         public Connexion()
         {
             this.InitializeComponent();
@@ -60,14 +57,19 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
             if (!user) errUser.Text = "Erreur de nom d'usager";
             if (!pass) errPass.Text = "Erreur de mot de passe";
 
-            if (user && pass) mainFrame.Navigate(typeof(PageAdministrateur), mainFrame);
+            if (user && pass)
+            {
+                mainFrame.Navigate(typeof(PageAdministrateur), mainFrame);
+            }
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (e.Parameter is not null) mainFrame = e.Parameter.As<Frame>();
+            if (e.Parameter is not null)
+            {
+                mainFrame = e.Parameter.As<Frame>();
+            }
         }
-
 
         static string Hash(string input)
         {

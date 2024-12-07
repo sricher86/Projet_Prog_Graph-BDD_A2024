@@ -9,16 +9,16 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid Background="LightGray">
+    <Grid Background="AliceBlue">
         <NavigationView 
+            x:Name="navViewAdmin"
             PaneDisplayMode="Left" 
-            PaneTitle="ADMINISTRATEUR"
-            x:Name="navView"
+            PaneTitle="Centre SportsPlus"
             IsSettingsVisible="False" 
             IsBackButtonVisible="Collapsed"
             IsPaneOpen="False"
-            SelectionChanged="navView_SelectionChanged"
->
+            SelectionChanged="navViewAdmin_SelectionChanged"
+        >
             <NavigationView.MenuItems>
                 <NavigationViewItem Content="Adhérents" x:Name="iAdherents" Icon="People"/>
                 <NavigationViewItem Content="Activités" x:Name="iActivites" Icon="AllApps"/>

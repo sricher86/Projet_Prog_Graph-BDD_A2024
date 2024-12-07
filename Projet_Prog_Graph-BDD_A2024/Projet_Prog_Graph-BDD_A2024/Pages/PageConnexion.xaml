@@ -10,16 +10,28 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid Background="LightGray">
-        <NavigationView 
-            PaneDisplayMode="Left" 
-            PaneTitle="Centre D'activités ProSport"
-            x:Name="navView"
-            IsSettingsVisible="False" 
-            IsBackButtonVisible="Collapsed"
-            IsPaneOpen="False">
+    <Grid Background="AliceBlue">
+        <ScrollViewer>
+            <NavigationView 
+                x:Name="navView" 
+                PaneDisplayMode="Left" 
+                PaneTitle="Centre SportsPlus" 
+                IsSettingsVisible="False" 
+                IsBackButtonVisible="Collapsed"
+                IsPaneOpen="False"
+                SelectionChanged="navView_SelectionChanged"
+            >
+                <NavigationView.MenuItems>
+                    <NavigationViewItem Content="Activites" x:Name="iActivites" Icon="Calendar"/>
+                    <!--<NavigationViewItem Content="Agenda" x:Name="iAgenda" Icon="Calendar"/>-->
+                </NavigationView.MenuItems>
 
-            <Frame x:Name="connexionFrame"/>
-        </NavigationView>
+                <NavigationView.FooterMenuItems>
+                    <NavigationViewItem Content="Connexion" x:Name="iConnexion" Icon="Switch"/>
+                </NavigationView.FooterMenuItems>
+
+                <Frame x:Name="connexionFrame"/>
+            </NavigationView>
+        </ScrollViewer>
     </Grid>
 </Page>

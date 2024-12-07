@@ -14,6 +14,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Projet_Prog_Graph_BDD_A2024.Pages;
+using WinRT;
 
 
 // To learn more about WinUI, the WinUI project structure,
@@ -21,9 +22,6 @@ using Projet_Prog_Graph_BDD_A2024.Pages;
 
 namespace Projet_Prog_Graph_BDD_A2024
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class PageAdminActivites : Page
     {
         public PageAdminActivites()
