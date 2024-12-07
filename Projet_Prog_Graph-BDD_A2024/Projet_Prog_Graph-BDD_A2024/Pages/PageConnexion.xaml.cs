@@ -29,7 +29,6 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
         {
             this.InitializeComponent();
 
-            connexionFrame.Navigate(typeof(PagePublique), mainFrame);
         }
 
         public Frame GetConnexionFrame
@@ -61,6 +60,7 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
             if (e.Parameter is not null)
             {
                 mainFrame = e.Parameter.As<Frame>();
+                connexionFrame.Navigate(typeof(PagePublique), mainFrame);
             }
         }
 
