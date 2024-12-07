@@ -42,9 +42,9 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
                 err.Text = activiteChoisi.Nom;
                 liste.Add(activiteChoisi);
                 liste.Add(mainFrame);
-                err.Text = liste[1].GetType().ToString();
+                //err.Text = liste[1].GetType().ToString();
 
-                //mainFrame.Navigate(typeof(PageDetail), liste);
+                mainFrame.Navigate(typeof(PageDetail), liste);
             }
         }
 
