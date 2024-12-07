@@ -43,6 +43,13 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
                 mainFrame = (Frame)listeParams[1];
                 nomActivite.Text = activite.Nom;
                 seancesActivite = Singleton_BD.getInstance().getSeanceActivites(activite.IdActivite);
+                ObservableCollection<DateTime> dates = new ObservableCollection<DateTime>();
+                foreach (Seance s in seancesActivite)
+                {
+                    dates.Add(s.DateOrganisation);
+                }
+                
+                dateDebut.ItemsSource = dates;
             }
         }
     }
