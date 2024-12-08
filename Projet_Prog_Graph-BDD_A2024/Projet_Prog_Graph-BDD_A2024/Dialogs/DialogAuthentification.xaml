@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentDialog
+    x:Class="Projet_Prog_Graph_BDD_A2024.Dialogs.DialogAuthentification"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Projet_Prog_Graph_BDD_A2024.Dialogs"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
+    Closing="ContentDialog_Closing"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <StackPanel HorizontalAlignment="Center" MinWidth="300">
+        <TextBlock 
+            Text="Se connecter"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            Margin="15"
+            Width="auto"
+            FontSize="20"
+            FontWeight="Bold"
+        />
+
+        <RadioButtons 
+            x:Name="utilisateur"
+            SelectedIndex="0"
+            MaxColumns="3"
+            Margin="15 15 15 20"
+            SelectionChanged="utilisateur_SelectionChanged"
+        >
+            <x:String>Adhérent</x:String>
+            <x:String>Administrateur</x:String>
+        </RadioButtons>
+
+        <StackPanel x:Name="stkpnl_adherent" Visibility="Visible">
+            <TextBox 
+                x:Name="tbx_id_adherent"
+                VerticalAlignment="Center"
+                Margin="5"
+                PlaceholderText="No. d'identification de l'adhérent"
+                Header="No. d'identification"
+                Width="auto"
+                FontSize="16"
+            />
+
+            <TextBlock 
+                x:Name="tbx_erreur_id_adherent"
+                VerticalAlignment="Center"
+                Margin="5"
+                Width="auto"
+                Foreground="Red"
+            />
+        </StackPanel>
+
+        <StackPanel x:Name="stkpnl_admin" Visibility="Collapsed">
+            <TextBox 
+                x:Name="tbx_id_admin"
+                VerticalAlignment="Center"
+                Margin="5"
+                PlaceholderText="No. d'identification de l'administrateur"
+                Header="No. d'identification"
+                Width="auto"
+                FontSize="16"
+            />
+
+            <TextBlock 
+                x:Name="tbx_erreur_id_admin"
+                VerticalAlignment="Center"
+                Margin="5"
+                Width="auto"
+                Foreground="Red"
+            />
+
+            <PasswordBox 
+                x:Name="pbx_motDePasse"
+                VerticalAlignment="Center"
+                Margin="5"
+                PlaceholderText="Mot de passe de l'administrateur"
+                Header="Mot de passe"
+                Width="auto"
+                FontSize="16"
+            />
+
+            <TextBlock 
+                x:Name="tbx_erreur_motDePasse"
+                VerticalAlignment="Center"
+                Margin="5"
+                Width="auto"
+                Foreground="Red"
+            />
+
+            <TextBlock 
+                x:Name="tbx_erreur_authentification"
+                VerticalAlignment="Center"
+                Margin="15 30 15 30"
+                Width="auto"
+                Foreground="Red"
+                FontWeight="Bold"
+                Text="LES INFORMATIONS ENTRÉES NE CORRESPONDENT PAS"
+                Visibility="Collapsed"
+            />
+        </StackPanel>
+    </StackPanel>
+</ContentDialog>

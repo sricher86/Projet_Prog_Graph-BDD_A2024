@@ -66,7 +66,7 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
 
         private async void btnConnexion_Click(object sender, RoutedEventArgs e)
         {
-            DialogAdminAuthentification dialog = new DialogAdminAuthentification();
+            DialogAuthentification dialog = new DialogAuthentification();
             dialog.XamlRoot = this.XamlRoot;
             dialog.PrimaryButtonText = "Connexion";
             dialog.CloseButtonText = "Annuler";
