@@ -11,6 +11,8 @@
 
     <Grid Background="LightGray">
         <ScrollViewer>
+            <!--<Frame x:Name="mainFrame" />-->
+
             <Frame x:Name="mainFrame" Loaded="mainFrame_Loaded"/>
         </ScrollViewer>
     </Grid>

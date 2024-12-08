@@ -60,13 +60,13 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
             }
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            if (e.Parameter is not null)
-            {
-                mainFrame = e.Parameter.As<Frame>();
-            }
-        }
+        //protected override void OnNavigatedTo(NavigationEventArgs e)
+        //{
+        //    if (e.Parameter is not null)
+        //    {
+        //        mainFrame = e.Parameter.As<Frame>();
+        //    }
+        //}
 
         private async void btnConnexion_Click(object sender, RoutedEventArgs e)
         {
@@ -81,10 +81,12 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
             if (resultat == ContentDialogResult.Primary)
             {
                 if (dialog.Result == SignInResult.SignInAdherent)
-                    mainFrame.Navigate(typeof(PageConnexion), mainFrame);
+                {
+                    MainWindow.getInstance().MainFrame.Navigate(typeof(PageConnexion));
+                }
 
                 if (dialog.Result == SignInResult.SignInAdmin)
-                    mainFrame.Navigate(typeof(PageAdministrateur), mainFrame);
+                    adminFrame.Navigate(typeof(PageAdminActivites));
             }
         }
     }

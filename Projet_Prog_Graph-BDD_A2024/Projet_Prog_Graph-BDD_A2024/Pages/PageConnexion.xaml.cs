@@ -9,12 +9,14 @@ using Microsoft.UI.Xaml.Navigation;
 using Projet_Prog_Graph_BDD_A2024.Dialogs;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using WinRT;
+using static Google.Protobuf.Reflection.FeatureSet.Types;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -23,12 +25,14 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
 {
     public sealed partial class PageConnexion : Page
     {
+        List<Object> listeParams;
+        string user;
         Frame mainFrame;
 
         public PageConnexion()
         {
             this.InitializeComponent();
-
+            connexionFrame.Navigate(typeof(PagePublique));
         }
 
         public Frame GetConnexionFrame
@@ -46,7 +50,7 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
                 switch (item.Name)
                 {
                     case "iActivites":
-                        connexionFrame.Navigate(typeof(PagePublique), mainFrame);
+                        connexionFrame.Navigate(typeof(PagePublique));
                         break;
                     //case "iConnexion":
                     //    connexionFrame.Navigate(typeof(Connexion), mainFrame);
@@ -59,8 +63,12 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
         {
             if (e.Parameter is not null)
             {
-                mainFrame = e.Parameter.As<Frame>();
-                connexionFrame.Navigate(typeof(PagePublique), mainFrame);
+                listeParams = (List<Object>)e.Parameter;
+                mainFrame = (Frame)listeParams[0];
+                user = (string)listeParams[1];
+                listeParams.Add(mainFrame);
+                listeParams.Add(user);
+                connexionFrame.Navigate(typeof(PagePublique), listeParams);
             }
         }
 
@@ -77,10 +85,10 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
             if (resultat == ContentDialogResult.Primary)
             {
                 if (dialog.Result == SignInResult.SignInAdherent)
-                    mainFrame.Navigate(typeof(PageConnexion), mainFrame);
+                    MainWindow.getInstance().MainFrame.Navigate(typeof(PageConnexion));
 
                 if (dialog.Result == SignInResult.SignInAdmin)
-                    mainFrame.Navigate(typeof(PageAdministrateur), mainFrame);
+                    MainWindow.getInstance().MainFrame.Navigate(typeof(PageAdministrateur));
             }
         }
     }

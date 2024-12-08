@@ -23,7 +23,9 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
     public sealed partial class PagePublique : Page
     {
         Frame mainFrame;
+        string userType;
         Activite activiteChoisi;
+        List<Object> listeParams;
 
         public PagePublique()
         {
@@ -72,7 +74,12 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (e.Parameter is not null) mainFrame = e.Parameter.As<Frame>();
+            if (e.Parameter is not null)
+            {
+                listeParams = (List<Object>)e.Parameter;
+                mainFrame = (Frame)listeParams[0];
+                userType = (string)listeParams[1];
+            }
         }
 
     }

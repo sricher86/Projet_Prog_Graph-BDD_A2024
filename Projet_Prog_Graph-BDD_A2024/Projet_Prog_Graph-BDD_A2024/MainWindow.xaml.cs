@@ -22,9 +22,22 @@ namespace Projet_Prog_Graph_BDD_A2024
 {
     public partial class MainWindow : Window
     {
+        string userType = "";
+        static MainWindow instance = null;
+        List<Object> paras = new List<Object>();
+        DialogAuthentification dialog;
+
         public MainWindow()
         {
             this.InitializeComponent();
+            mainFrame.Navigate(typeof(PageConnexion));
+        }
+        public static MainWindow getInstance()
+        {
+            if (instance == null)
+                instance = new MainWindow();
+
+            return instance;
         }
 
         private async void mainFrame_Loaded(object sender, RoutedEventArgs e)
@@ -38,12 +51,40 @@ namespace Projet_Prog_Graph_BDD_A2024
 
             if (resultat == ContentDialogResult.Primary)
             {
+                paras.Add(mainFrame);
                 if (dialog.Result == SignInResult.SignInAdherent)
-                    mainFrame.Navigate(typeof(PageConnexion), mainFrame);
+                {
+                    userType = "adherent";
+                    paras.Add(userType);
+                    mainFrame.Navigate(typeof(PageConnexion), paras);
+                }
 
                 if (dialog.Result == SignInResult.SignInAdmin)
-                    mainFrame.Navigate(typeof(PageAdministrateur), mainFrame);
+                {
+                    userType = "admin";
+                    paras.Add(userType);
+                    mainFrame.Navigate(typeof(PageAdministrateur), paras);
+                }
+
             }
         }
+
+        public Frame MainFrame
+        {
+            get { return mainFrame; }
+            set { this.mainFrame = value; }
+        }
+
+        public Frame getMainFrame()
+        {
+            return this.mainFrame;
+        }
+
+        public string UserType
+        {
+            get { return userType; }
+            set { this.userType = value; }
+        }
+
     }
 }
