@@ -50,7 +50,7 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
                         break;
                     //case "iConnexion":
                     //    connexionFrame.Navigate(typeof(Connexion), mainFrame);
-                        break;
+                    //    break;
                 }
             }
         }
@@ -67,16 +67,20 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
         private async void btnConnexion_Click(object sender, RoutedEventArgs e)
         {
             DialogAuthentification dialog = new DialogAuthentification();
-            dialog.XamlRoot = this.XamlRoot;
+            dialog.XamlRoot = this.Content.XamlRoot;
             dialog.PrimaryButtonText = "Connexion";
-            dialog.CloseButtonText = "Annuler";
+            dialog.SecondaryButtonText = "Annuler";
             dialog.DefaultButton = ContentDialogButton.Primary;
 
             ContentDialogResult resultat = await dialog.ShowAsync();
 
             if (resultat == ContentDialogResult.Primary)
             {
-                mainFrame.Navigate(typeof(PageAdministrateur), mainFrame);
+                if (dialog.Result == SignInResult.SignInAdherent)
+                    mainFrame.Navigate(typeof(PageConnexion), mainFrame);
+
+                if (dialog.Result == SignInResult.SignInAdmin)
+                    mainFrame.Navigate(typeof(PageAdministrateur), mainFrame);
             }
         }
     }
