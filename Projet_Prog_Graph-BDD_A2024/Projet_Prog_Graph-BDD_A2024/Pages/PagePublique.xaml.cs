@@ -7,6 +7,7 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
+using Projet_Prog_Graph_BDD_A2024;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -36,11 +37,14 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
         {
             if (activites.SelectedItem != null)
             {
-                activiteChoisi = (Activite)activites.SelectedItem;
-                List<Object> listeParams = new List<Object>();
-                listeParams.Add(activiteChoisi);
-                listeParams.Add(mainFrame);
-                mainFrame.Navigate(typeof(PageDetail), listeParams);
+                activiteChoisi = (Activite) activites.SelectedItem;
+                List<Object> liste = new List<Object>();
+                err.Text = activiteChoisi.Nom;
+                liste.Add(activiteChoisi);
+                liste.Add(mainFrame);
+                //err.Text = liste[1].GetType().ToString();
+
+                mainFrame.Navigate(typeof(PageDetail), liste);
             }
         }
 
