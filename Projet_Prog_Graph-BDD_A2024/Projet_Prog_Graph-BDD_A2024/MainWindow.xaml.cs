@@ -10,6 +10,7 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
+using Projet_Prog_Graph_BDD_A2024.Dialogs;
 using Projet_Prog_Graph_BDD_A2024.Pages;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -24,8 +25,25 @@ namespace Projet_Prog_Graph_BDD_A2024
         public MainWindow()
         {
             this.InitializeComponent();
+        }
 
-            mainFrame.Navigate(typeof(PageConnexion), mainFrame);
+        private async void mainFrame_Loaded(object sender, RoutedEventArgs e)
+        {
+            DialogAuthentification dialog = new DialogAuthentification();
+            dialog.XamlRoot = this.Content.XamlRoot;
+            dialog.PrimaryButtonText = "Connexion";
+            dialog.DefaultButton = ContentDialogButton.Primary;
+
+            ContentDialogResult resultat = await dialog.ShowAsync();
+
+            if (resultat == ContentDialogResult.Primary)
+            {
+                if (dialog.Result == SignInResult.SignInAdherent)
+                    mainFrame.Navigate(typeof(PageConnexion), mainFrame);
+
+                if (dialog.Result == SignInResult.SignInAdmin)
+                    mainFrame.Navigate(typeof(PageAdministrateur), mainFrame);
+            }
         }
     }
 }

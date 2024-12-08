@@ -28,7 +28,29 @@
 
             <NavigationView.FooterMenuItems>
                 <NavigationViewItem Content="Compte" x:Name="iCompte" Icon="Contact"/>
-                <NavigationViewItem Content="Se déconnecter" x:Name="iDeconnexion" Icon="Switch"/>
+                <Button 
+                    x:Name="btnConnexion" 
+                    Click="btnConnexion_Click" 
+                    Width="auto" 
+                    Padding="0"
+                    Background="AliceBlue"
+                    BorderThickness="0"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    HorizontalContentAlignment="Left"
+                    VerticalContentAlignment="Center"
+                >
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <SymbolIcon Symbol="Switch" Grid.Column="0" Margin="0 0 15 0"/>
+                        <TextBlock Text="Deconnexion" x:Name="iDeconnexion" Grid.Column="1"/>
+                    </Grid>
+                </Button>
+                <!--<NavigationViewItem Content="Se déconnecter" x:Name="iDeconnexion" Icon="Switch"/>-->
             </NavigationView.FooterMenuItems>
 
             <Frame x:Name="adminFrame"/>

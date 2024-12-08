@@ -5,6 +5,7 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
+using Projet_Prog_Graph_BDD_A2024.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -35,28 +36,27 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
         {
             var item = args.SelectedItem as NavigationViewItem;
 
-            switch (item.Name)
-            {
-                case "iActivites":
-                    adminFrame.Navigate(typeof(PageAdminActivites));
-                    break;
-                case "iAdherents":
-                    adminFrame.Navigate(typeof(PageAdminAdherents));
-                    break;
-                case "iSeances":
-                    adminFrame.Navigate(typeof(PageAdminSeances));
-                    break;
-                case "iStat":
-                    adminFrame.Navigate(typeof(PageAdminStat));
-                    break;
-                case "iCompte":
-                    adminFrame.Navigate(typeof(PageAdminCompte));
-                    break;
-                case "iDeconnexion":
-                    mainFrame.Navigate(typeof(PageConnexion), mainFrame);
-                    break;
-                default:
-                    break;
+            if (item != null) {
+                switch (item.Name)
+                {
+                    case "iActivites":
+                        adminFrame.Navigate(typeof(PageAdminActivites));
+                        break;
+                    case "iAdherents":
+                        adminFrame.Navigate(typeof(PageAdminAdherents));
+                        break;
+                    case "iSeances":
+                        adminFrame.Navigate(typeof(PageAdminSeances));
+                        break;
+                    case "iStat":
+                        adminFrame.Navigate(typeof(PageAdminStat));
+                        break;
+                    case "iCompte":
+                        adminFrame.Navigate(typeof(PageAdminCompte));
+                        break;
+                    default:
+                        break;
+                }
             }
         }
 
@@ -65,6 +65,26 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
             if (e.Parameter is not null)
             {
                 mainFrame = e.Parameter.As<Frame>();
+            }
+        }
+
+        private async void btnConnexion_Click(object sender, RoutedEventArgs e)
+        {
+            DialogAuthentification dialog = new DialogAuthentification();
+            dialog.XamlRoot = this.Content.XamlRoot;
+            dialog.PrimaryButtonText = "Connexion";
+            dialog.SecondaryButtonText = "Annuler";
+            dialog.DefaultButton = ContentDialogButton.Primary;
+
+            ContentDialogResult resultat = await dialog.ShowAsync();
+
+            if (resultat == ContentDialogResult.Primary)
+            {
+                if (dialog.Result == SignInResult.SignInAdherent)
+                    mainFrame.Navigate(typeof(PageConnexion), mainFrame);
+
+                if (dialog.Result == SignInResult.SignInAdmin)
+                    mainFrame.Navigate(typeof(PageAdministrateur), mainFrame);
             }
         }
     }

@@ -16,7 +16,6 @@
     <None Remove="DialogAdminAjoutActivite.xaml" />
     <None Remove="DialogAdminAjoutAdherent.xaml" />
     <None Remove="Dialogs\DialogAdminAjoutActivite.xaml" />
-    <None Remove="Dialogs\DialogAdminAuthentification.xaml" />
     <None Remove="PageAdminActivites.xaml" />
     <None Remove="PageAdminAdherents.xaml" />
     <None Remove="PageAdminAjoutActivite.xaml" />
@@ -62,7 +61,7 @@
     <PackageReference Include="MySql.Data" Version="9.1.0" />
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Dialogs\DialogAdminAuthentification.xaml">
+    <Page Update="Dialogs\DialogAuthentification.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
