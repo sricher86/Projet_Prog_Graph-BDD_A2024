@@ -20,6 +20,7 @@ namespace Projet_Prog_Graph_BDD_A2024
 
         List<String> listeTypeCategories;
         List<String> listeNomsActivites;
+        List<DateTime> listeDateSeances;
 
         static Singleton_BD instance = null;
         MySqlConnection con;
@@ -37,6 +38,8 @@ namespace Projet_Prog_Graph_BDD_A2024
 
             listeTypeCategories = new List<String>();
             listeNomsActivites = new List<String>();
+            listeDateSeances = new List<DateTime>();
+
 
             getActivites();
             getAdherents();
@@ -98,6 +101,11 @@ namespace Projet_Prog_Graph_BDD_A2024
         public List<String> getListeNomsActivites()
         {
             return listeNomsActivites;
+        }
+
+        public List<DateTime> getListeDateSeances()
+        {
+            return listeDateSeances;
         }
 
         public void getActivites()
@@ -301,6 +309,7 @@ namespace Projet_Prog_Graph_BDD_A2024
                 Seance seance = new Seance(idSeance, dateOrganisation, heureOrganisation, nbrPlaceDisponible, noteAppreciation, idAdmin, idActivite);    
 
                 listeSeances.Add(seance);
+                listeDateSeances.Add(seance.DateOrganisation);
             }
 
             reader.Close();

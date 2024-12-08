@@ -32,6 +32,7 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
             this.InitializeComponent();
             Singleton_BD.getInstance().getActivites();
             Singleton_BD.getInstance().getSeances();
+            calDates.ItemsSource = Singleton_BD.getInstance().getListeSeance();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -49,7 +50,7 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
                     dates.Add(s.DateOrganisation);
                 }
                 
-                dateDebut.ItemsSource = dates;
+                //dateDebut.ItemsSource = dates;
             }
         }
     }
