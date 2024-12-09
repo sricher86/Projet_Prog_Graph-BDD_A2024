@@ -163,7 +163,7 @@ namespace Projet_Prog_Graph_BDD_A2024.Dialogs
             else if (args.Result == ContentDialogResult.Secondary)
                 args.Cancel = false;
             else
-                args.Cancel = true;
+                args.Cancel = false;
         }
 
         private void resetErreurs()

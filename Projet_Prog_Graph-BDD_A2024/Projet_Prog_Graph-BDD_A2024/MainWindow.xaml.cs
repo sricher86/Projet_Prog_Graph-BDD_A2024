@@ -28,6 +28,8 @@ namespace Projet_Prog_Graph_BDD_A2024
         public MainWindow()
         {
             this.InitializeComponent();
+
+            mainFrame.Navigate(typeof(PagePubliqueAccueil));
         }
 
         private async void mainFrame_Loaded(object sender, RoutedEventArgs e)
@@ -35,6 +37,7 @@ namespace Projet_Prog_Graph_BDD_A2024
             DialogAuthentification dialog = new DialogAuthentification();
             dialog.XamlRoot = this.Content.XamlRoot;
             dialog.PrimaryButtonText = "Connexion";
+            dialog.CloseButtonText = "Annuler";
             dialog.DefaultButton = ContentDialogButton.Primary;
 
             ContentDialogResult resultat = await dialog.ShowAsync();
@@ -42,14 +45,10 @@ namespace Projet_Prog_Graph_BDD_A2024
             if (resultat == ContentDialogResult.Primary)
             {
                 if (dialog.Result == SignInResult.SignInAdherent)
-                {
                     mainFrame.Navigate(typeof(PageConnexion));
-                }
 
                 if (dialog.Result == SignInResult.SignInAdmin)
-                {
                     mainFrame.Navigate(typeof(PageAdministrateur));
-                }
             }
         }
     }

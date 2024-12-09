@@ -6,6 +6,7 @@ using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using Projet_Prog_Graph_BDD_A2024.Classes;
+using Projet_Prog_Graph_BDD_A2024.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -35,5 +36,26 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
 
         }
 
+        private async void btnConnexion_Click(object sender, RoutedEventArgs e)
+        {
+            DialogAuthentification dialog = new DialogAuthentification();
+            dialog.XamlRoot = this.Content.XamlRoot;
+            dialog.PrimaryButtonText = "Connexion";
+            dialog.SecondaryButtonText = "Annuler";
+            dialog.DefaultButton = ContentDialogButton.Primary;
+
+            ContentDialogResult resultat = await dialog.ShowAsync();
+
+            if (resultat == ContentDialogResult.Primary)
+            {
+                if (dialog.Result == SignInResult.SignInAdherent)
+                    Frame.Navigate(typeof(PageConnexion));
+
+                if (dialog.Result == SignInResult.SignInAdmin)
+                    Frame.Navigate(typeof(PageAdministrateur));
+            }
+            if (resultat == ContentDialogResult.Secondary)
+                Frame.Navigate(typeof(PagePubliqueAccueil));
+        }
     }
 }

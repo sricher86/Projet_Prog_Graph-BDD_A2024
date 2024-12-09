@@ -246,6 +246,36 @@ namespace Projet_Prog_Graph_BDD_A2024.Classes
                 reader.Close();
             }
         }
+
+        public void addActivite(Activite activite)
+        {
+            try
+            {
+                MySqlCommand commande = new MySqlCommand();
+
+                commande.Connection = con;
+                commande.CommandText = "INSERT INTO activites VALUES(null, @nom, @coutOrganisation, @prixVente, @idCategorie, @idAdmin, @description);";
+                commande.Parameters.AddWithValue("@nom", activite.Nom);
+                commande.Parameters.AddWithValue("@coutOrganisation", activite.CoutOrganisation);
+                commande.Parameters.AddWithValue("@prixVente", activite.PrixVente);
+                commande.Parameters.AddWithValue("@idCategorie", activite.IdCategorie);
+                commande.Parameters.AddWithValue("@idAdmin", activite.IdAdmin);
+                commande.Parameters.AddWithValue("@description", activite.Description);
+
+                con.Open();
+                commande.Prepare();
+                commande.ExecuteNonQuery();
+
+                con.Close();
+
+                getActivites();
+            }
+            catch (Exception ex)
+            {
+                if (con.State == System.Data.ConnectionState.Open)
+                    con.Close();
+            }
+        }
         public void getAdherents()
         {
             listeAdherents.Clear();
@@ -360,6 +390,33 @@ namespace Projet_Prog_Graph_BDD_A2024.Classes
 
             reader.Close();
             con.Close();
+        }
+
+        public void addCategorie(Categorie categorie)
+        {
+            try
+            {
+                MySqlCommand commande = new MySqlCommand();
+
+                commande.Connection = con;
+                commande.CommandText = "INSERT INTO categories VALUES(null, @type, @idAdmin, @url);";
+                commande.Parameters.AddWithValue("@type", categorie.Type);
+                commande.Parameters.AddWithValue("@idAdmin", categorie.IdAdmin);
+                commande.Parameters.AddWithValue("@url", categorie.Url);
+
+                con.Open();
+                commande.Prepare();
+                commande.ExecuteNonQuery();
+
+                con.Close();
+
+                getCategories();
+            }
+            catch (Exception ex)
+            {
+                if (con.State == System.Data.ConnectionState.Open)
+                    con.Close();
+            }
         }
 
         public void getSeances()
