@@ -171,8 +171,6 @@ namespace Projet_Prog_Graph_BDD_A2024.Dialogs
             {
                 idCategorie = (Singleton_BD.getInstance().getListeCategorie().Count() + 1);
 
-                Categorie newCategorie = new Categorie();
-
                 if (cbx_listeCategorie.Text.Trim() != "")
                 {
                     type = cbx_listeCategorie.Text;
@@ -190,7 +188,7 @@ namespace Projet_Prog_Graph_BDD_A2024.Dialogs
                         }
                         else
                         {
-                            tbx_erreur_url.Text = "Le prix doit être en format url";
+                            tbx_erreur_url.Text = "Le lien doit être en format url";
                             valide = false;
                         }
                     }
