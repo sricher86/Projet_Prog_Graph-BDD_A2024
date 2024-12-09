@@ -30,12 +30,13 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
         ObservableCollection<Seance> seancesActivite;
         ObservableCollection<Seance> seances;
         ObservableCollection<Adherents_Seance> adherents_Seances;
-        List<Seance> seancesDisponible;
-        int nbrPlaces;
+        ObservableCollection<Seance> seancesDisponible;
 
+        int nbrPlaces;
+        string seanceDisponible;
         public int NbrPlaces
         {
-            get {return nbrPlaces; }
+            get { return nbrPlaces; }
             set { this.nbrPlaces = value; }
         }
 
@@ -46,30 +47,9 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
             Singleton_BD.getInstance().getActivites();
             Singleton_BD.getInstance().getSeances();
             Singleton_BD.getInstance().getAdherentsSeances();
+            seancesDisponible = new ObservableCollection<Seance>();
             seances = Singleton_BD.getInstance().getListeSeance();
             adherents_Seances = Singleton_BD.getInstance().getListeAdherentsSeance();
-            seancesDisponible = new List<Seance>();
-            int ctrS = 1;
-            int ctrAS = 1;
-
-            foreach (Seance s in seances)
-            {
-                foreach (Adherents_Seance ads in adherents_Seances)
-                {
-                    if (s.IdSeance != ads.IdSeance && ads.No_identification != adherent.No_identification && s.NbrPlaceDisponible > 0)
-                    {
-                        seancesDisponible.Add(s);
-                    }
-                    else 
-                    {
-                        erreur.Text = "ctrS: " + ctrS + "ctrAS: " + ctrAS + "s.Id seance: " + s.IdSeance + "ads.Id seance: " + ads.IdSeance + "ads.no_identification: " + ads.No_identification + "adherent.no_identification: " + adherent.No_identification; 
-                    }
-                }
-                ctrS++;
-                ctrAS++;    
-            }
-
-            calDates.ItemsSource = seancesDisponible;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -77,9 +57,9 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
             if (e.Parameter is not null)
             {
                 activite = (Activite)e.Parameter;
-                //seancesActivite = Singleton_BD.getInstance().getSeanceActivites(activite.IdActivite);
-                //ObservableCollection<DateTime> dates = new ObservableCollection<DateTime>();
-                //foreach (Seance s in seancesActivite) dates.Add(s.DateOrganisation);
+                seancesDisponible = Singleton_BD.getInstance().getListeSeancesDispo(activite.IdActivite);
+                if (seancesDisponible.Count > 0) calDates.ItemsSource = Singleton_BD.getInstance().getListeSeancesDispo(activite.IdActivite);
+                else seanceDisponible = "Aucune séances disponible pour l'instant";
             }
         }
 
@@ -91,14 +71,19 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
 
             if (seance != null)
             {
-                    DialogInscription dialog = new DialogInscription(nbrPlaces);
-                    dialog.XamlRoot = this.XamlRoot;
-                    dialog.Title = "Inscription";
-                    dialog.PrimaryButtonText = "Envoyer l'inscription";
-                    dialog.CloseButtonText = "Annuler";
-                    dialog.DefaultButton = ContentDialogButton.Close;
-                    ContentDialogResult resultat = await dialog.ShowAsync();
+                DialogInscription dialog = new DialogInscription(nbrPlaces);
+                dialog.XamlRoot = this.XamlRoot;
+                dialog.Title = "Inscription";
+                dialog.PrimaryButtonText = "Envoyer l'inscription";
+                dialog.CloseButtonText = "Annuler";
+                dialog.DefaultButton = ContentDialogButton.Close;
+                ContentDialogResult resultat = await dialog.ShowAsync();
             }
+        }
+
+        private void buttonRetourner_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(PagePublique));
         }
     }
 }
