@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
@@ -24,6 +25,8 @@ namespace Projet_Prog_Graph_BDD_A2024.Classes
 
         static Singleton_BD instance = null;
         Adherents adherentConnecte;
+        Adherents adherentInscription;
+        Seance nouvelleInscription;
         MySqlConnection con;
 
         public Singleton_BD()
@@ -65,6 +68,75 @@ namespace Projet_Prog_Graph_BDD_A2024.Classes
             set { this.adherentConnecte = value; } 
         }
 
+        public Seance NouvelleInscription
+        {
+            get { return nouvelleInscription; }
+            set { this.nouvelleInscription = value; }
+        }
+
+        public int nombrePlacesRestantes (Seance seance)
+        {
+            int noIdSeance = seance.IdSeance;
+            int nbrPlaces = 0;
+
+            if (seance != null)
+            {
+                try
+                {
+                    MySqlCommand commande = new MySqlCommand();
+                    MySqlDataReader reader;
+
+                    con.Open();
+                    commande.Connection = con;
+                    commande.CommandText = "Select nbrPlaceDisponible from Seances where idSeance = @noIdSeance;";
+                    commande.Parameters.AddWithValue("@noIdSeance", noIdSeance);
+                    reader = commande.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        nbrPlaces = reader.GetInt32("idSeance");
+                    }
+                  
+                    reader.Close();
+                    con.Close();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+            return nbrPlaces;
+        }
+
+        public void inscriptionAdherent ()
+        {
+            if(adherentConnecte != null && nouvelleInscription != null)
+            {
+                try
+                {
+                    string no_identification = adherentConnecte.No_identification;
+                    int idSeance = nouvelleInscription.IdSeance;
+                    int idActivite = nouvelleInscription.IdActivite;
+
+                    MySqlCommand commande = new MySqlCommand();
+                    commande.Connection = con;
+                    commande.CommandText = "Insert into Adherents_Seances values (@no_identification, @idSeance, @idActivite);";
+                    commande.Parameters.AddWithValue("@no_identification", no_identification);
+                    commande.Parameters.AddWithValue("@idSeance", idSeance);
+                    commande.Parameters.AddWithValue("@idActivite", idActivite);
+
+                    con.Open();
+                    commande.Prepare();
+                    commande.ExecuteNonQuery();
+                    con.Close();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+        }
+        
         public ObservableCollection<Activite> getListeActivites()
         {
             return listeActivites;

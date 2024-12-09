@@ -8,23 +8,34 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
-    Closing="ContentDialog_Closing">
-
+    Closing="ContentDialog_Closing"
+    Title="Inscription" >
+    <ScrollViewer>
     <Grid>
         <StackPanel>
-            <TextBlock x:Name="nbrBilletsTxt"></TextBlock>
-            <ComboBox x:Name="nbrBillets" SelectedIndex="0">
-                <ComboBoxItem>1</ComboBoxItem>
-                <ComboBoxItem>2</ComboBoxItem>
-                <ComboBoxItem>3</ComboBoxItem>
-                <ComboBoxItem>4</ComboBoxItem>
-                <ComboBoxItem>5</ComboBoxItem>
-                <ComboBoxItem>6</ComboBoxItem>
-            </ComboBox>
-            <TextBox x:Name="noID" PlaceholderText="Numéro d'identification" Margin="5"/>
-            <TextBox x:Name="prenom" PlaceholderText="Prénom" Margin="5"/>
-            <TextBox x:Name="nom" PlaceholderText="Nom" Margin="5"/>
-            <TextBox x:Name="adresse" PlaceholderText="Adresse" Margin="5"/>
+                <TextBlock x:Name="erreur"></TextBlock>
+                <TextBlock x:Name="note" FontSize="11" Width="300" TextWrapping="WrapWholeWords" Margin="5 5 5 10">
+                Les informations associées avec le compte actif sont entrées par défaut, vous ne pouvez pas faire de modifications à ces données (contactez l'admin pour tout modifications ou suppresion relié à votre compte</TextBlock>
+
+            <TextBlock x:Name="noIdentTxt" Margin="0 15 10 5">Votre numéro d'identification:</TextBlock>
+            <TextBlock x:Name="noIDTxtBox" Margin="5 5 5 10"/>
+
+            <TextBlock x:Name="prenomTxt" Margin="0 10 10 5">Votre prénom:</TextBlock>
+            <TextBlock x:Name="prenomTxtBox" Margin="5 5 5 10"/>
+
+            <TextBlock x:Name="nomTxt" Margin="0 10 10 5">Votre nom:</TextBlock>
+            <TextBlock x:Name="nomTxtBox" Margin="5 5 5 10"/>
+
+            <TextBlock x:Name="adresseTxt" Margin="0 10 10 5">Votre Adresse:</TextBlock>
+            <TextBlock x:Name="adresseTxtBox" Margin="5 5 5 10"/>
+            
+            <TextBlock x:Name="ddnTxt" Margin="0 10 10 5">DDN:</TextBlock>
+            <TextBlock x:Name="ddnTxtBox" Margin="5 5 5 10"/>
+
+            <TextBlock x:Name="ageTxt" Margin="0 10 10 5">Age:</TextBlock>
+            <TextBlock x:Name="ageTxtBox" Margin="5 5 5 10"/>
+
         </StackPanel>
     </Grid>
+    </ScrollViewer>
 </ContentDialog>

@@ -28,13 +28,48 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
         Activite activite;
         Adherents adherent;
         ObservableCollection<Seance> seancesActivite;
+        ObservableCollection<Seance> seances;
+        ObservableCollection<Adherents_Seance> adherents_Seances;
+        List<Seance> seancesDisponible;
+        int nbrPlaces;
+
+        public int NbrPlaces
+        {
+            get {return nbrPlaces; }
+            set { this.nbrPlaces = value; }
+        }
 
         public PageDetail()
         {
             this.InitializeComponent();
+            adherent = Singleton_BD.getInstance().AdherentConnecte;
             Singleton_BD.getInstance().getActivites();
             Singleton_BD.getInstance().getSeances();
-            calDates.ItemsSource = Singleton_BD.getInstance().getListeSeance();
+            Singleton_BD.getInstance().getAdherentsSeances();
+            seances = Singleton_BD.getInstance().getListeSeance();
+            adherents_Seances = Singleton_BD.getInstance().getListeAdherentsSeance();
+            seancesDisponible = new List<Seance>();
+            int ctrS = 1;
+            int ctrAS = 1;
+
+            foreach (Seance s in seances)
+            {
+                foreach (Adherents_Seance ads in adherents_Seances)
+                {
+                    if (s.IdSeance != ads.IdSeance && ads.No_identification != adherent.No_identification && s.NbrPlaceDisponible > 0)
+                    {
+                        seancesDisponible.Add(s);
+                    }
+                    else 
+                    {
+                        erreur.Text = "ctrS: " + ctrS + "ctrAS: " + ctrAS + "s.Id seance: " + s.IdSeance + "ads.Id seance: " + ads.IdSeance + "ads.no_identification: " + ads.No_identification + "adherent.no_identification: " + adherent.No_identification; 
+                    }
+                }
+                ctrS++;
+                ctrAS++;    
+            }
+
+            calDates.ItemsSource = seancesDisponible;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -42,26 +77,27 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
             if (e.Parameter is not null)
             {
                 activite = (Activite)e.Parameter;
-                seancesActivite = Singleton_BD.getInstance().getSeanceActivites(activite.IdActivite);
-                ObservableCollection<DateTime> dates = new ObservableCollection<DateTime>();
-                foreach (Seance s in seancesActivite) dates.Add(s.DateOrganisation);
+                //seancesActivite = Singleton_BD.getInstance().getSeanceActivites(activite.IdActivite);
+                //ObservableCollection<DateTime> dates = new ObservableCollection<DateTime>();
+                //foreach (Seance s in seancesActivite) dates.Add(s.DateOrganisation);
             }
         }
 
         private async void calDates_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Seance seance = calDates.SelectedItem as Seance;
+            Singleton_BD.getInstance().NouvelleInscription = seance;
+            nbrPlaces = seance.NbrPlaceDisponible;
 
             if (seance != null)
             {
-                DialogInscription dialog = new DialogInscription();
-                dialog.XamlRoot = this.XamlRoot;
-                dialog.Title = "Inscription";
-                dialog.PrimaryButtonText = "Envoyer l'inscription";
-                dialog.CloseButtonText = "Annuler";
-                dialog.DefaultButton = ContentDialogButton.Close;
-
-                ContentDialogResult resultat = await dialog.ShowAsync();
+                    DialogInscription dialog = new DialogInscription(nbrPlaces);
+                    dialog.XamlRoot = this.XamlRoot;
+                    dialog.Title = "Inscription";
+                    dialog.PrimaryButtonText = "Envoyer l'inscription";
+                    dialog.CloseButtonText = "Annuler";
+                    dialog.DefaultButton = ContentDialogButton.Close;
+                    ContentDialogResult resultat = await dialog.ShowAsync();
             }
         }
     }
