@@ -124,15 +124,6 @@ namespace Projet_Prog_Graph_BDD_A2024.Dialogs
                 }
             }
 
-            if (tbx_url.Visibility == visible)
-            {
-                if (tbx_url.Text.Trim() == "")
-                {
-                    tbx_erreur_url.Text = "Le url ne peut pas être vide";
-                    valide = false;
-                }
-            }
-
             if(valide == true)
             {
                 Singleton_BD.getInstance().addActivite(
@@ -191,6 +182,11 @@ namespace Projet_Prog_Graph_BDD_A2024.Dialogs
                             tbx_erreur_url.Text = "Le lien doit être en format url";
                             valide = false;
                         }
+                    }
+                    else
+                    {
+                        tbx_erreur_url.Text = "Le url ne peut pas être vide";
+                        valide = false;
                     }
                 }
 

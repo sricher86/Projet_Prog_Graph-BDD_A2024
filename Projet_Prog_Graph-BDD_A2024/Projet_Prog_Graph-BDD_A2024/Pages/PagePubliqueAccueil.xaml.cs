@@ -41,7 +41,7 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
             DialogAuthentification dialog = new DialogAuthentification();
             dialog.XamlRoot = this.Content.XamlRoot;
             dialog.PrimaryButtonText = "Connexion";
-            dialog.SecondaryButtonText = "Annuler";
+            dialog.CloseButtonText = "Annuler";
             dialog.DefaultButton = ContentDialogButton.Primary;
 
             ContentDialogResult resultat = await dialog.ShowAsync();
@@ -54,8 +54,6 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
                 if (dialog.Result == SignInResult.SignInAdmin)
                     Frame.Navigate(typeof(PageAdministrateur));
             }
-            if (resultat == ContentDialogResult.Secondary)
-                Frame.Navigate(typeof(PagePubliqueAccueil));
         }
     }
 }

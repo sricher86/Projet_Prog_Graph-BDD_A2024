@@ -15,6 +15,7 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using WinRT;
 using Projet_Prog_Graph_BDD_A2024.Dialogs;
+using Projet_Prog_Graph_BDD_A2024.Classes;
 
 
 // To learn more about WinUI, the WinUI project structure,
@@ -27,6 +28,9 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
         public PageAdminActivites()
         {
             this.InitializeComponent();
+            Singleton_BD.getInstance().getActivites();
+            Singleton_BD.getInstance().getCategories();
+            activites.ItemsSource = Singleton_BD.getInstance().getListeActivites();
         }
 
         private async void btn_ajouter_Click(object sender, RoutedEventArgs e)
@@ -39,6 +43,25 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
             dialog.DefaultButton = ContentDialogButton.Primary;
 
             ContentDialogResult resultat = await dialog.ShowAsync();
+        }
+
+        private async void btn_exporter_Click(object sender, RoutedEventArgs e)
+        {
+            var picker = new Windows.Storage.Pickers.FileSavePicker();
+
+            var window = (Application.Current as App)?.Window as MainWindow;
+            var hWnd = WinRT.Interop.WindowNative.GetWindowHandle(window);
+            WinRT.Interop.InitializeWithWindow.Initialize(picker, hWnd);
+
+            picker.SuggestedFileName = "ListeActivites";
+            picker.FileTypeChoices.Add("Fichier texte", new List<string>() { ".csv" });
+
+            Windows.Storage.StorageFile monFichier = await picker.PickSaveFileAsync();
+
+            List<Activite> liste = new List<Activite> (Singleton_BD.getInstance().getListeActivites());
+
+            if (monFichier != null)
+                await Windows.Storage.FileIO.WriteLinesAsync(monFichier, liste.ConvertAll(x => x.StringCSV), Windows.Storage.Streams.UnicodeEncoding.Utf8);
         }
     }
 }
