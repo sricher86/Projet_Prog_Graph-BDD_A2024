@@ -12,8 +12,10 @@
 
     <Grid>
         <StackPanel>
-            <TextBox x:Name="tbx_user" Margin="5"/>
-            <PasswordBox x:Name="pwd_user" Margin="5" />
+            <TextBox x:Name="noID" PlaceholderText="Numéro d'identification" Margin="5"/>
+            <TextBox x:Name="prenom" PlaceholderText="Prénom" Margin="5"/>
+            <TextBox x:Name="nom" PlaceholderText="Nom" Margin="5"/>
+            <TextBox x:Name="adresse" PlaceholderText="Adresse" Margin="5"/>
         </StackPanel>
     </Grid>
 </ContentDialog>

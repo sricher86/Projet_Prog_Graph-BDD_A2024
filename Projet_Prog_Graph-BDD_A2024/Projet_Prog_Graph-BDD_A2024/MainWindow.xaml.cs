@@ -12,6 +12,7 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using Projet_Prog_Graph_BDD_A2024.Dialogs;
 using Projet_Prog_Graph_BDD_A2024.Pages;
+using Projet_Prog_Graph_BDD_A2024.Classes;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 
@@ -22,22 +23,11 @@ namespace Projet_Prog_Graph_BDD_A2024
 {
     public partial class MainWindow : Window
     {
-        string userType = "";
-        static MainWindow instance = null;
-        List<Object> paras = new List<Object>();
         DialogAuthentification dialog;
 
         public MainWindow()
         {
             this.InitializeComponent();
-            mainFrame.Navigate(typeof(PageConnexion));
-        }
-        public static MainWindow getInstance()
-        {
-            if (instance == null)
-                instance = new MainWindow();
-
-            return instance;
         }
 
         private async void mainFrame_Loaded(object sender, RoutedEventArgs e)
@@ -51,40 +41,16 @@ namespace Projet_Prog_Graph_BDD_A2024
 
             if (resultat == ContentDialogResult.Primary)
             {
-                paras.Add(mainFrame);
                 if (dialog.Result == SignInResult.SignInAdherent)
                 {
-                    userType = "adherent";
-                    paras.Add(userType);
-                    mainFrame.Navigate(typeof(PageConnexion), paras);
+                    mainFrame.Navigate(typeof(PageConnexion));
                 }
 
                 if (dialog.Result == SignInResult.SignInAdmin)
                 {
-                    userType = "admin";
-                    paras.Add(userType);
-                    mainFrame.Navigate(typeof(PageAdministrateur), paras);
+                    mainFrame.Navigate(typeof(PageAdministrateur));
                 }
-
             }
         }
-
-        public Frame MainFrame
-        {
-            get { return mainFrame; }
-            set { this.mainFrame = value; }
-        }
-
-        public Frame getMainFrame()
-        {
-            return this.mainFrame;
-        }
-
-        public string UserType
-        {
-            get { return userType; }
-            set { this.userType = value; }
-        }
-
     }
 }

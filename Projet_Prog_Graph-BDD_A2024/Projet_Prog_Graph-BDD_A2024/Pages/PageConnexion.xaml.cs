@@ -7,6 +7,7 @@ using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using Projet_Prog_Graph_BDD_A2024.Dialogs;
+using Projet_Prog_Graph_BDD_A2024.Classes;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -25,10 +26,6 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
 {
     public sealed partial class PageConnexion : Page
     {
-        List<Object> listeParams;
-        string user;
-        Frame mainFrame;
-
         public PageConnexion()
         {
             this.InitializeComponent();
@@ -63,12 +60,7 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
         {
             if (e.Parameter is not null)
             {
-                listeParams = (List<Object>)e.Parameter;
-                mainFrame = (Frame)listeParams[0];
-                user = (string)listeParams[1];
-                listeParams.Add(mainFrame);
-                listeParams.Add(user);
-                connexionFrame.Navigate(typeof(PagePublique), listeParams);
+                connexionFrame.Navigate(typeof(PagePublique));
             }
         }
 
@@ -85,10 +77,10 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
             if (resultat == ContentDialogResult.Primary)
             {
                 if (dialog.Result == SignInResult.SignInAdherent)
-                    MainWindow.getInstance().MainFrame.Navigate(typeof(PageConnexion));
+                    Frame.Navigate(typeof(PageConnexion));
 
                 if (dialog.Result == SignInResult.SignInAdmin)
-                    MainWindow.getInstance().MainFrame.Navigate(typeof(PageAdministrateur));
+                    Frame.Navigate(typeof(PageAdministrateur));
             }
         }
     }

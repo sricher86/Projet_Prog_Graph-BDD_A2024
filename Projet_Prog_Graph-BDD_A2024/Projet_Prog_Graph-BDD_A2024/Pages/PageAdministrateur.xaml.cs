@@ -6,6 +6,7 @@ using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using Projet_Prog_Graph_BDD_A2024.Dialogs;
+using Projet_Prog_Graph_BDD_A2024.Classes;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -82,7 +83,7 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
             {
                 if (dialog.Result == SignInResult.SignInAdherent)
                 {
-                    MainWindow.getInstance().MainFrame.Navigate(typeof(PageConnexion));
+                    Frame.Navigate(typeof(PageConnexion));
                 }
 
                 if (dialog.Result == SignInResult.SignInAdmin)

@@ -32,26 +32,19 @@ namespace Projet_Prog_Graph_BDD_A2024.Dialogs
 
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-            Nom = tbx_user.Text;
-            Mdp = pwd_user.Password;
+            //Nom = tbx_user.Text;
+            //Mdp = pwd_user.Password;
         }
-
-        //private async void btPage1_Click(object sender, RoutedEventArgs e)
-        //{
-        //}
 
         private void ContentDialog_Closing(ContentDialog sender, ContentDialogClosingEventArgs args)
         {
             if (args.Result == ContentDialogResult.Primary)
             {
-                if (string.IsNullOrWhiteSpace(Nom))
-                    args.Cancel = true;
+                //if (string.IsNullOrWhiteSpace(Nom))
+                //    args.Cancel = true;
             }
             else
                 args.Cancel = false;
         }
-
-
-
     }
 }

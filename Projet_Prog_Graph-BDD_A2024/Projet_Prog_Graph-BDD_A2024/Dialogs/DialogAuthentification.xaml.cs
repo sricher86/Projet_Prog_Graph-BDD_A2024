@@ -6,6 +6,7 @@ using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using Projet_Prog_Graph_BDD_A2024.Pages;
+using Projet_Prog_Graph_BDD_A2024.Classes;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -29,13 +30,13 @@ namespace Projet_Prog_Graph_BDD_A2024.Dialogs
         SignInAdmin
     }
 
-    public sealed partial class DialogAuthentification : ContentDialog
+    public partial class DialogAuthentification : ContentDialog
     {
         public SignInResult Result { get; private set; }
 
         static ObservableCollection<Administrateur> adminList;
         static ObservableCollection<Adherents> adherentList;
-        Frame mainFrame;
+        Adherents adherent;
         bool valide = true;
 
         public DialogAuthentification()
@@ -47,6 +48,7 @@ namespace Projet_Prog_Graph_BDD_A2024.Dialogs
             adherentList = new ObservableCollection<Adherents>();
             adminList = Singleton_BD.getInstance().getListeAdministrateur();
             adherentList = Singleton_BD.getInstance().getListeAdherents();
+            adherent = new Adherents();
         }
 
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
@@ -62,6 +64,7 @@ namespace Projet_Prog_Graph_BDD_A2024.Dialogs
                     if (tbx_id_adherent.Text.Equals(adh.No_identification))
                     {
                         user = true;
+                        Singleton_BD.getInstance().AdherentConnecte = adh;
                     }
                 }
 
@@ -187,6 +190,11 @@ namespace Projet_Prog_Graph_BDD_A2024.Dialogs
                 stkpnl_adherent.Visibility = Visibility.Collapsed;
                 stkpnl_admin.Visibility = Visibility.Visible;
             }
+        }
+
+        public Object getAdherent ()
+        {
+            return adherent;
         }
     }
 }

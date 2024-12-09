@@ -8,6 +8,7 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using MySqlX.XDevAPI;
 using Projet_Prog_Graph_BDD_A2024.Dialogs;
+using Projet_Prog_Graph_BDD_A2024.Classes;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -24,9 +25,8 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
 {
     public sealed partial class PageDetail : Page
     {
-        List<Object> listeParams;
-        Frame mainFrame;
         Activite activite;
+        Adherents adherent;
         ObservableCollection<Seance> seancesActivite;
 
         public PageDetail()
@@ -41,18 +41,10 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
         {
             if (e.Parameter is not null)
             {
-                listeParams = (List<Object>)e.Parameter;
-                mainFrame = (Frame)listeParams[1];
-                activite = (Activite)listeParams[0];
-                nomActivite.Text = activite.Nom;
+                activite = (Activite)e.Parameter;
                 seancesActivite = Singleton_BD.getInstance().getSeanceActivites(activite.IdActivite);
                 ObservableCollection<DateTime> dates = new ObservableCollection<DateTime>();
-                foreach (Seance s in seancesActivite)
-                {
-                    dates.Add(s.DateOrganisation);
-                }
-
-                //dateDebut.ItemsSource = dates;
+                foreach (Seance s in seancesActivite) dates.Add(s.DateOrganisation);
             }
         }
 
@@ -64,12 +56,14 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
             {
                 DialogInscription dialog = new DialogInscription();
                 dialog.XamlRoot = this.XamlRoot;
-                dialog.Title = "Authentification";
-                dialog.PrimaryButtonText = "Se connecter";
+                dialog.Title = "Inscription";
+                dialog.PrimaryButtonText = "Envoyer l'inscription";
                 dialog.CloseButtonText = "Annuler";
                 dialog.DefaultButton = ContentDialogButton.Close;
 
                 ContentDialogResult resultat = await dialog.ShowAsync();
+
+                adherent = ;
             }
         }
     }

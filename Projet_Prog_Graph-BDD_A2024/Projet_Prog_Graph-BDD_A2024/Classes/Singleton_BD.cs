@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 
-namespace Projet_Prog_Graph_BDD_A2024
+namespace Projet_Prog_Graph_BDD_A2024.Classes
 {
     internal class Singleton_BD
     {
@@ -23,6 +23,7 @@ namespace Projet_Prog_Graph_BDD_A2024
         List<DateTime> listeDateSeances;
 
         static Singleton_BD instance = null;
+        Adherents adherentConnecte;
         MySqlConnection con;
 
         public Singleton_BD()
@@ -40,6 +41,7 @@ namespace Projet_Prog_Graph_BDD_A2024
             listeNomsActivites = new List<String>();
             listeDateSeances = new List<DateTime>();
 
+            AdherentConnecte = new Adherents();
 
             getActivites();
             getAdherents();
@@ -56,6 +58,11 @@ namespace Projet_Prog_Graph_BDD_A2024
                 instance = new Singleton_BD();
 
             return instance;
+        }
+
+        public Adherents AdherentConnecte {
+            get { return adherentConnecte; }
+            set { this.adherentConnecte = value; } 
         }
 
         public ObservableCollection<Activite> getListeActivites()

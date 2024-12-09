@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Projet_Prog_Graph_BDD_A2024
+namespace Projet_Prog_Graph_BDD_A2024.Classes
 {
-    internal class Adherents
+    public class Adherents
     {
         string no_identification;
         string nom;

@@ -8,6 +8,7 @@ using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
 using Projet_Prog_Graph_BDD_A2024;
+using Projet_Prog_Graph_BDD_A2024.Classes;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -22,10 +23,7 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
 {
     public sealed partial class PagePublique : Page
     {
-        Frame mainFrame;
-        string userType;
         Activite activiteChoisi;
-        List<Object> listeParams;
 
         public PagePublique()
         {
@@ -40,12 +38,8 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
             if (activites.SelectedItem != null)
             {
                 activiteChoisi = (Activite) activites.SelectedItem;
-                List<Object> liste = new List<Object>();
-                err.Text = activiteChoisi.Nom;
-                liste.Add(activiteChoisi);
-                liste.Add(mainFrame);
-
-                mainFrame.Navigate(typeof(PageDetail), liste);
+                //err.Text = activiteChoisi.Nom;
+                Frame.Navigate(typeof(PageDetail), activiteChoisi);
             }
         }
 
@@ -74,13 +68,7 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (e.Parameter is not null)
-            {
-                listeParams = (List<Object>)e.Parameter;
-                mainFrame = (Frame)listeParams[0];
-                userType = (string)listeParams[1];
-            }
+            if (e.Parameter is not null) userType = (string)e.Parameter;
         }
-
     }
 }
