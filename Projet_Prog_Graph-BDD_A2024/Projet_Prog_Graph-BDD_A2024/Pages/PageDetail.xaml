@@ -33,7 +33,7 @@
             <TextBlock Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" x:Name="descriptionActivite" Text="{ x:Bind activite.Description}" HorizontalAlignment="Stretch" Margin="12 6 0 12" VerticalAlignment="Center" Width="auto" TextWrapping="WrapWholeWords" TextAlignment="Justify"/>
             <TextBlock Grid.Row="1" Grid.Column="1" x:Name="erreur" HorizontalAlignment="Stretch" Margin="12 6 0 12" VerticalAlignment="Center" Width="auto" TextWrapping="WrapWholeWords" TextAlignment="Justify"/>
         </Grid>
-        
+
         <Grid Grid.Row="2" Margin="10 5 20 15">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
@@ -45,10 +45,14 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
 
             <TextBlock Grid.Row="0" Grid.Column="0" x:Name="seanceTitre" Margin="12 6 0 0" VerticalAlignment="Center" FontSize="30">Séances disponible</TextBlock>
-            <ListView Grid.Row="1" x:Name="calDates" SelectionChanged="calDates_SelectionChanged">
+
+            <TextBlock Grid.Row="1" x:Name="errSeances" Text="{x:Bind seanceDisponible}" Foreground="red" FontSize="14" Margin="20 12 0 0"></TextBlock>
+
+            <ListView Grid.Row="2" x:Name="calDates" SelectionChanged="calDates_SelectionChanged">
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="local:Seance">
                         <Grid>
@@ -63,22 +67,13 @@
                                 <ColumnDefinition Width="auto"/>
                             </Grid.ColumnDefinitions>
 
-                            <TextBlock Grid.Row="0" >
-                                
-                            </TextBlock>
                             <TextBlock Grid.Row="1" Grid.Column="0" Text="{x:Bind sys:String.Format('{0:d MMMM yyyy }', DateOrganisation)}" Margin="5,5,5,10"/>
                             <TextBlock Grid.Row="1" Grid.Column="1" Text="{x:Bind sys:String.Format('{0}h',HeureOrganisation) }" Margin="5,5,5,10"/>
-                            <TextBlock Grid.Row="2" Grid.Column="0" Text="{x:Bind IdSeance}" Margin="5,5,5,10"/>
-                            <TextBlock Grid.Row="3" Grid.Column="0" Text="{x:Bind IdActivite}" Margin="5,5,5,10"/>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
-
             </ListView>
-        <TextBlock Grid.Row="2" Grid.Column="0" x:Name="err"/>
-            <!--<ComboBox Grid.Row="0" Grid.Column="1" x:Name="dateDebut" Margin="12 6 0 0" VerticalAlignment="Center"/>-->
         </Grid>
-
-        <!--<TextBlock Grid.Row="2" x:Name="err" Margin="12 6 0 0"/>-->
+        <Button Grid.Row="3" x:Name="buttonRetourner" HorizontalAlignment="Center" Margin="20,60,5,10" Click="buttonRetourner_Click">Retourner</Button>
     </Grid>
 </Page>
