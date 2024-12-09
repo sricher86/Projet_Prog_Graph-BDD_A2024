@@ -63,6 +63,23 @@
             Foreground="Red"
         />
 
+        <TextBox 
+            x:Name="tbx_description"
+            VerticalAlignment="Center"
+            Margin="5"
+            PlaceholderText="Description de l'activité"
+            Header="Description"
+            Width="auto"
+        />
+
+        <TextBlock 
+            x:Name="tbx_erreur_description"
+            VerticalAlignment="Center"
+            Margin="5"
+            Width="auto"
+            Foreground="Red"
+        />
+
         <ComboBox 
             x:Name="cbx_listeCategorie"
             VerticalAlignment="Center"

@@ -23,14 +23,24 @@ namespace Projet_Prog_Graph_BDD_A2024.Dialogs
     {
         bool valide = true;
 
-        Activite newActivite = new Activite();
-
         Visibility visible = Visibility.Visible;
         Visibility collapse = Visibility.Collapsed;
+
+        int idActivite;
+        string nom;
+        double coutOrganisation;
+        double prixVente;
+        int idCategorie;
+        string idAdmin = "1000";
+        string url = "";
+        string description;
+        string type;
+
 
         public DialogAdminAjoutActivite()
         {
             this.InitializeComponent();
+
             cbx_listeCategorie.ItemsSource = Singleton_BD.getInstance().getListeTypeCategories();
         }
 
@@ -38,8 +48,13 @@ namespace Projet_Prog_Graph_BDD_A2024.Dialogs
         {
             resetErreurs();
 
+            idActivite = (Singleton_BD.getInstance().getListeActivites().Count() + 1);
+
             if (tbx_nom.Text.Trim() != "")
-                newActivite.Nom = tbx_nom.Text;
+            {
+                nom = tbx_nom.Text;
+                valide = true;
+            }
             else
             {
                 tbx_erreur_nom.Text = "Le nom ne peut pas être vide";
@@ -49,7 +64,10 @@ namespace Projet_Prog_Graph_BDD_A2024.Dialogs
             if (tbx_cout.Text.Trim() != "")
             {
                 if (Double.TryParse(tbx_cout.Text, out double cout))
-                    newActivite.CoutOrganisation = cout;
+                {
+                    coutOrganisation = cout;
+                    valide = true;
+                }
                 else
                 {
                     tbx_erreur_cout.Text = "Le coût doit être en format décimal";
@@ -65,7 +83,10 @@ namespace Projet_Prog_Graph_BDD_A2024.Dialogs
             if (tbx_prix.Text.Trim() != "")
             {
                 if (Double.TryParse(tbx_prix.Text, out double prix))
-                    newActivite.PrixVente = prix;
+                {
+                    prixVente = prix;
+                    valide = true;
+                }
                 else
                 {
                     tbx_erreur_prix.Text = "Le prix doit être en format décimal";
@@ -78,10 +99,24 @@ namespace Projet_Prog_Graph_BDD_A2024.Dialogs
                 valide = false;
             }
 
+            if (tbx_description.Text.Trim() != "")
+            {
+                description = tbx_description.Text;
+                valide = true;
+            }
+            else
+            {
+                tbx_erreur_description.Text = "La description ne peut pas être vide";
+                valide = false;
+            }
+
             if (cbx_listeCategorie.Text.Trim() == "")
             {
                 if (cbx_listeCategorie.SelectedIndex != -1)
-                    newActivite.IdCategorie = (cbx_listeCategorie.SelectedIndex + 1);
+                {
+                    idCategorie = (cbx_listeCategorie.SelectedIndex + 1);
+                    valide = true;
+                }
                 else
                 {
                     tbx_erreur_categorie.Text = "Veuillez choisir une catégorie";
@@ -96,6 +131,15 @@ namespace Projet_Prog_Graph_BDD_A2024.Dialogs
                     tbx_erreur_url.Text = "Le url ne peut pas être vide";
                     valide = false;
                 }
+            }
+
+            if(valide == true)
+            {
+                Singleton_BD.getInstance().addActivite(
+                    new Activite(
+                        idActivite, nom, coutOrganisation, prixVente, idCategorie, idAdmin, url, description
+                    )
+                );
             }
         }
 
@@ -116,7 +160,7 @@ namespace Projet_Prog_Graph_BDD_A2024.Dialogs
 
             if (Singleton_BD.getInstance().getListeTypeCategories().Contains(cbx_listeCategorie.Text))
             {
-                newActivite.IdCategorie = (Singleton_BD.getInstance().getListeTypeCategories().IndexOf(cbx_listeCategorie.Text) + 1);
+                idCategorie = (Singleton_BD.getInstance().getListeTypeCategories().IndexOf(cbx_listeCategorie.Text) + 1);
                 tbx_url.Visibility = collapse;
             }
             else if (cbx_listeCategorie.SelectedIndex > 0)
@@ -125,25 +169,40 @@ namespace Projet_Prog_Graph_BDD_A2024.Dialogs
             }
             else
             {
-                newActivite.IdCategorie = (Singleton_BD.getInstance().getListeCategorie().Count() + 1);
+                idCategorie = (Singleton_BD.getInstance().getListeCategorie().Count() + 1);
 
                 Categorie newCategorie = new Categorie();
 
                 if (cbx_listeCategorie.Text.Trim() != "")
-                    newCategorie.Type = cbx_listeCategorie.Text;
+                {
+                    type = cbx_listeCategorie.Text;
+                    valide = true;
+                }
 
                 if (tbx_url.Visibility == visible)
                 {
                     if (tbx_url.Text.Trim() != "")
                     {
                         if (Uri.IsWellFormedUriString(tbx_url.Text, UriKind.Absolute))
-                            newCategorie.Url = tbx_url.Text;
+                        {
+                            url = tbx_url.Text;
+                            valide = true;
+                        }
                         else
                         {
                             tbx_erreur_url.Text = "Le prix doit être en format url";
                             valide = false;
                         }
                     }
+                }
+
+                if(valide == true)
+                {
+                    Singleton_BD.getInstance().addCategorie(
+                        new Categorie(
+                            idCategorie, type, idAdmin, url
+                        )
+                    );
                 }
             }
         }
@@ -153,6 +212,7 @@ namespace Projet_Prog_Graph_BDD_A2024.Dialogs
             tbx_erreur_nom.Text = String.Empty;
             tbx_erreur_cout.Text = String.Empty;
             tbx_erreur_prix.Text = String.Empty;
+            tbx_erreur_description.Text = String.Empty;
             tbx_erreur_categorie.Text = String.Empty;
             tbx_erreur_url.Text = String.Empty;
         }
