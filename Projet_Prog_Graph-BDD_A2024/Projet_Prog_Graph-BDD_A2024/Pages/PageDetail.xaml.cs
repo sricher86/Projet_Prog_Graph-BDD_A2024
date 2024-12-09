@@ -62,8 +62,6 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
                 dialog.DefaultButton = ContentDialogButton.Close;
 
                 ContentDialogResult resultat = await dialog.ShowAsync();
-
-                adherent = ;
             }
         }
     }

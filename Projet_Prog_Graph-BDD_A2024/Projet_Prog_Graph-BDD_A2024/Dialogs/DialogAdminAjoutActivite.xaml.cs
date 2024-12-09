@@ -5,6 +5,7 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
+using Projet_Prog_Graph_BDD_A2024.Classes;
 using System;
 using System.Collections.Generic;
 using System.IO;

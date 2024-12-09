@@ -68,7 +68,7 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (e.Parameter is not null) userType = (string)e.Parameter;
+            //if (e.Parameter is not null) userType = (string)e.Parameter;
         }
     }
 }

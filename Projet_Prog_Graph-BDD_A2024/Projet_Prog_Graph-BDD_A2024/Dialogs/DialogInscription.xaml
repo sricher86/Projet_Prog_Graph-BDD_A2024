@@ -12,6 +12,15 @@
 
     <Grid>
         <StackPanel>
+            <TextBlock x:Name="nbrBilletsTxt"></TextBlock>
+            <ComboBox x:Name="nbrBillets" SelectedIndex="0">
+                <ComboBoxItem>1</ComboBoxItem>
+                <ComboBoxItem>2</ComboBoxItem>
+                <ComboBoxItem>3</ComboBoxItem>
+                <ComboBoxItem>4</ComboBoxItem>
+                <ComboBoxItem>5</ComboBoxItem>
+                <ComboBoxItem>6</ComboBoxItem>
+            </ComboBox>
             <TextBox x:Name="noID" PlaceholderText="Numéro d'identification" Margin="5"/>
             <TextBox x:Name="prenom" PlaceholderText="Prénom" Margin="5"/>
             <TextBox x:Name="nom" PlaceholderText="Nom" Margin="5"/>
