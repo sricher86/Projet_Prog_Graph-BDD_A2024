@@ -31,27 +31,7 @@ namespace Projet_Prog_Graph_BDD_A2024.Dialogs
         int age;
         bool fermer = false;
 
-
         public DialogInscription()
-        {
-            this.InitializeComponent();
-
-            no_identification = adherentConnecte.No_identification;
-            prenom = adherentConnecte.Prenom;
-            nom = adherentConnecte.Nom;
-            adresse = adherentConnecte.Adresse;
-            ddn = adherentConnecte.DateDeNaissance;
-            age = adherentConnecte.Age;
-
-            noIDTxtBox.Text = no_identification;
-            prenomTxtBox.Text = prenom;
-            nomTxtBox.Text = nom;
-            adresseTxtBox.Text = adresse;
-            ddnTxtBox.Text = ddn.ToString();
-            ageTxtBox.Text = age.ToString();
-        }
-
-        public DialogInscription(int nbrPlaces)
         {
             this.InitializeComponent();
 

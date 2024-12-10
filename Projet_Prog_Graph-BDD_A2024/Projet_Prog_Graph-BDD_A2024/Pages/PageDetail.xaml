@@ -34,16 +34,14 @@
             <Image Grid.Row="0" Grid.Column="0" x:Name="imgActivite" Width="300px" Height="300px" Source="{x:Bind activite.Url}" HorizontalAlignment="Left" Margin="0 6 0 0" VerticalAlignment="Top" />
             <StackPanel Grid.Row="0" Grid.Column="1">
                 <TextBlock x:Name="descriptionActivite" Text="{ x:Bind activite.Description}" HorizontalAlignment="Stretch" Margin="12 6 0 12" VerticalAlignment="Top" Width="auto" TextWrapping="WrapWholeWords" TextAlignment="Justify"/>
-                <TextBlock Grid.Column="1" x:Name="noteMoyenne" FontWeight="Bold" Margin="12 6 0 12" ></TextBlock>
-                <TextBlock Grid.Row="1" Grid.Column="0" x:Name="noteLabel" HorizontalAlignment="Left" Margin="12 20 0 12" Width="auto" TextWrapping="WrapWholeWords" TextAlignment="Justify" Visibility="Collapsed" FontWeight="Bold">Note d'évaluation:</TextBlock>
-                <ComboBox Grid.Row="1" Grid.Column="1" x:Name="note" Visibility="Collapsed" Margin="12 6 0 12" SelectedIndex="0" SelectionChanged="note_SelectionChanged">
-                <x:String>0</x:String>
-                <x:String>1</x:String>
-                <x:String>2</x:String>
-                <x:String>3</x:String>
-                <x:String>4</x:String>
-                <x:String>5</x:String>
-            </ComboBox>
+                <Grid Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" x:Name="noteMoyenne" FontWeight="Bold" Margin="12 6 12 12" >Evaluation: </TextBlock>
+                    <RatingControl Grid.Column="1" x:Name="noteEval" ValueChanged="noteEval_ValueChanged" />
+                </Grid>
             </StackPanel>
         </Grid>
 

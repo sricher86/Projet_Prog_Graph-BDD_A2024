@@ -626,5 +626,36 @@ namespace Projet_Prog_Graph_BDD_A2024.Classes
             }
             return moyenne;
         }
+
+        public double modifierNotes(int idAct)
+        {
+            double moyenne = 0;
+            try
+            {
+                MySqlCommand commande = new MySqlCommand();
+                commande.Connection = con;
+                commande.CommandText = "select getMoyenne(" + idAct + ") as moyenne";
+
+                con.Open();
+
+                MySqlDataReader reader = commande.ExecuteReader();
+
+                //read values from SQL command and store in vars, in order to add values to Equipe list
+                while (reader.Read())
+                {
+                    moyenne = reader.GetDouble("moyenne");
+                }
+                reader.Close();
+                con.Close();
+
+                return moyenne;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                con.Close();
+            }
+            return moyenne;
+        }
     }
 }
