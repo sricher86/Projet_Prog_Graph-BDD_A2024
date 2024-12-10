@@ -50,6 +50,7 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
             var picker = new Windows.Storage.Pickers.FileSavePicker();
 
             var window = (Application.Current as App)?.Window as MainWindow;
+
             var hWnd = WinRT.Interop.WindowNative.GetWindowHandle(window);
             WinRT.Interop.InitializeWithWindow.Initialize(picker, hWnd);
 

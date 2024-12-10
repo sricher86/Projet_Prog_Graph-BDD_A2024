@@ -13,6 +13,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Projet_Prog_Graph_BDD_A2024.Dialogs;
+using Projet_Prog_Graph_BDD_A2024.Classes;
 
 
 // To learn more about WinUI, the WinUI project structure,
@@ -25,6 +26,8 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
         public PageAdminAdherents()
         {
             this.InitializeComponent();
+            Singleton_BD.getInstance().getAdherents();
+            adherents.ItemsSource = Singleton_BD.getInstance().getListeAdherents();
         }
 
         private async void btn_ajouter_Click(object sender, RoutedEventArgs e)
@@ -37,6 +40,26 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
             dialog.DefaultButton = ContentDialogButton.Primary;
 
             ContentDialogResult resultat = await dialog.ShowAsync();
+        }
+
+        private async void btn_exporter_Click(object sender, RoutedEventArgs e)
+        {
+            var picker = new Windows.Storage.Pickers.FileSavePicker();
+
+            var window = (Application.Current as App)?.Window as MainWindow;
+
+            var hWnd = WinRT.Interop.WindowNative.GetWindowHandle(window);
+            WinRT.Interop.InitializeWithWindow.Initialize(picker, hWnd);
+
+            picker.SuggestedFileName = "ListeAdherents";
+            picker.FileTypeChoices.Add("Fichier texte", new List<string>() { ".csv" });
+
+            Windows.Storage.StorageFile monFichier = await picker.PickSaveFileAsync();
+
+            List<Adherents> liste = new List<Adherents> (Singleton_BD.getInstance().getListeAdherents());
+
+            if (monFichier != null)
+                await Windows.Storage.FileIO.WriteLinesAsync(monFichier, liste.ConvertAll(x => x.StringCSV), Windows.Storage.Streams.UnicodeEncoding.Utf8);
         }
     }
 }
