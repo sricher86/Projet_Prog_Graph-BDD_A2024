@@ -449,7 +449,8 @@ namespace Projet_Prog_Graph_BDD_A2024.Classes
                 MySqlCommand commande = new MySqlCommand();
 
                 commande.Connection = con;
-                commande.CommandText = "INSERT INTO activites VALUES(null, @nom, @coutOrganisation, @prixVente, @idCategorie, @idAdmin, @description);";
+                commande.CommandText = "INSERT INTO activites(idActivite, nom, coutOrganisation, prixVente, idCategorie, idAdmin, description) VALUES(@idActivite, @nom, @coutOrganisation, @prixVente, @idCategorie, @idAdmin, @description)";
+                commande.Parameters.AddWithValue("@idActivite", activite.IdActivite);
                 commande.Parameters.AddWithValue("@nom", activite.Nom);
                 commande.Parameters.AddWithValue("@coutOrganisation", activite.CoutOrganisation);
                 commande.Parameters.AddWithValue("@prixVente", activite.PrixVente);
@@ -479,7 +480,8 @@ namespace Projet_Prog_Graph_BDD_A2024.Classes
                 MySqlCommand commande = new MySqlCommand();
 
                 commande.Connection = con;
-                commande.CommandText = "INSERT INTO categories VALUES(null, @type, @idAdmin, @url);";
+                commande.CommandText = "INSERT INTO categories (idCategorie, type, idAdmin, url) VALUES(@idCategorie, @type, @idAdmin, @url)";
+                commande.Parameters.AddWithValue("@idCategorie", categorie.IdCategorie);
                 commande.Parameters.AddWithValue("@type", categorie.Type);
                 commande.Parameters.AddWithValue("@idAdmin", categorie.IdAdmin);
                 commande.Parameters.AddWithValue("@url", categorie.Url);

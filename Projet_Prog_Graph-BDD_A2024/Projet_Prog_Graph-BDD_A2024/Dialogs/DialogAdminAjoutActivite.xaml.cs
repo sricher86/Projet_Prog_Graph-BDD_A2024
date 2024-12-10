@@ -124,15 +124,6 @@ namespace Projet_Prog_Graph_BDD_A2024.Dialogs
                 }
             }
 
-            if (tbx_url.Visibility == visible)
-            {
-                if (tbx_url.Text.Trim() == "")
-                {
-                    tbx_erreur_url.Text = "Le url ne peut pas être vide";
-                    valide = false;
-                }
-            }
-
             if(valide == true)
             {
                 Singleton_BD.getInstance().addActivite(
@@ -171,8 +162,6 @@ namespace Projet_Prog_Graph_BDD_A2024.Dialogs
             {
                 idCategorie = (Singleton_BD.getInstance().getListeCategorie().Count() + 1);
 
-                Categorie newCategorie = new Categorie();
-
                 if (cbx_listeCategorie.Text.Trim() != "")
                 {
                     type = cbx_listeCategorie.Text;
@@ -190,9 +179,14 @@ namespace Projet_Prog_Graph_BDD_A2024.Dialogs
                         }
                         else
                         {
-                            tbx_erreur_url.Text = "Le prix doit être en format url";
+                            tbx_erreur_url.Text = "Le lien doit être en format url";
                             valide = false;
                         }
+                    }
+                    else
+                    {
+                        tbx_erreur_url.Text = "Le url ne peut pas être vide";
+                        valide = false;
                     }
                 }
 

@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Projet_Prog_Graph_BDD_A2024.Classes
 {
@@ -76,6 +79,22 @@ namespace Projet_Prog_Graph_BDD_A2024.Classes
         {
             get { return idAdmin; }
             set { idAdmin = value; }
+        }
+
+        public string StringCSV
+        {
+            get
+            {
+                return $"{No_identification};{Nom};{Prenom};{Adresse};{DateDeNaissance};{Age}";
+            }
+        }
+
+        public string StringDDN
+        {
+            get
+            {
+                return dateDeNaissance.ToString("yyyy-MM-dd", CultureInfo.CreateSpecificCulture("fr-FR"));
+            }
         }
     }
 }

@@ -104,8 +104,8 @@
             x:Name="tbx_url"
             VerticalAlignment="Center"
             Margin="5"
-            PlaceholderText="Url de la catégorie"
-            Header="Url"
+            PlaceholderText="Lien de l'image de la catégorie"
+            Header="Lien de l'image"
             Width="auto"
             Visibility="Collapsed"
         />

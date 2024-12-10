@@ -104,6 +104,12 @@ namespace Projet_Prog_Graph_BDD_A2024.Classes
                 return false;
         }
 
-
+        public string StringCSV
+        {
+            get
+            {
+                return $"{IdActivite};{Nom};{CoutOrganisation};{PrixVente};{IdCategorie};{IdAdmin};{Url};{Description}";
+            }
+        }
     }
 }
