@@ -70,7 +70,6 @@ namespace Projet_Prog_Graph_BDD_A2024.Dialogs
             ageTxtBox.Text = age.ToString();
         }
 
-
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
             Singleton_BD.getInstance().inscriptionAdherent();
@@ -80,8 +79,7 @@ namespace Projet_Prog_Graph_BDD_A2024.Dialogs
         {
             if (args.Result == ContentDialogResult.Primary)
             {
-                //if (string.IsNullOrWhiteSpace(Nom))
-                //    args.Cancel = true;
+                
             }
             else
                 args.Cancel = false;

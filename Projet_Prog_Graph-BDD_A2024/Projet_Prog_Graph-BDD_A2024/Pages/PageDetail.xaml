@@ -29,7 +29,7 @@
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
 
-            <Image Grid.Row="0" Grid.Column="0" x:Name="imgActivite" Width="300px" Height="300px" Source="{x:Bind activite.Url}" HorizontalAlignment="Left" Margin="0 6 0 0" VerticalAlignment="Center" />
+            <Image Grid.Row="0" Grid.Column="0" x:Name="imgActivite" Width="300px" Height="300px" Source="{x:Bind activite.Url}" HorizontalAlignment="Left" Margin="0 6 0 0" VerticalAlignment="Top" />
             <TextBlock Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" x:Name="descriptionActivite" Text="{ x:Bind activite.Description}" HorizontalAlignment="Stretch" Margin="12 6 0 12" VerticalAlignment="Center" Width="auto" TextWrapping="WrapWholeWords" TextAlignment="Justify"/>
             <TextBlock Grid.Row="1" Grid.Column="1" x:Name="erreur" HorizontalAlignment="Stretch" Margin="12 6 0 12" VerticalAlignment="Center" Width="auto" TextWrapping="WrapWholeWords" TextAlignment="Justify"/>
         </Grid>

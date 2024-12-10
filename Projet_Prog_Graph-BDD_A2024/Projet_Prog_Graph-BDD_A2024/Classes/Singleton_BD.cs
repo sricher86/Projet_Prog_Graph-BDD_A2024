@@ -81,15 +81,15 @@ namespace Projet_Prog_Graph_BDD_A2024.Classes
         {
             try
             {
+                listeSeancesDisponible.Clear();
                 MySqlCommand commande = new MySqlCommand();
                 MySqlDataReader reader;
 
                 con.Open();
                 commande.Connection = con;
-                commande.CommandText = "CALL getSeances('"+adherentConnecte.No_identification+", "+idAct+"');";
-                commande.Parameters.AddWithValue("@no_identification", adherentConnecte.No_identification);
+                commande.CommandText = "Call getSeances('"+adherentConnecte.No_identification+"', "+idAct+");";
+                Debug.WriteLine(commande.CommandText);
                 reader = commande.ExecuteReader();
-                    Debug.WriteLine(commande);
 
                 while (reader.Read())
                 {
@@ -117,7 +117,6 @@ namespace Projet_Prog_Graph_BDD_A2024.Classes
             return listeSeancesDisponible;
         }
 
-
         public void inscriptionAdherent()
         {
             if (adherentConnecte != null && nouvelleInscription != null)
@@ -139,6 +138,8 @@ namespace Projet_Prog_Graph_BDD_A2024.Classes
                     commande.Prepare();
                     commande.ExecuteNonQuery();
                     con.Close();
+
+                    modifierNbrPlaces(nouvelleInscription);
                 }
                 catch (Exception e)
                 {
@@ -148,6 +149,31 @@ namespace Projet_Prog_Graph_BDD_A2024.Classes
             }
         }
 
+        public void modifierNbrPlaces (Seance seance)
+        {
+            if (seance != null)
+            {
+                try
+                {
+                    int idSeance = seance.IdSeance;
+
+                    MySqlCommand commande = new MySqlCommand();
+                    commande.Connection = con;
+                    commande.CommandText = "Update seances set nbrPlaceDisponible = nbrPlaceDisponible -1 where idSeance = "+idSeance+";";
+
+                    con.Open();
+                    commande.Prepare();
+                    commande.ExecuteNonQuery();
+                    con.Close();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    con.Close();
+                }
+            }
+
+        }
         public ObservableCollection<Activite> getListeActivites()
         {
             return listeActivites;

@@ -17,6 +17,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using System.Diagnostics;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -58,6 +59,7 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
             {
                 activite = (Activite)e.Parameter;
                 seancesDisponible = Singleton_BD.getInstance().getListeSeancesDispo(activite.IdActivite);
+                Debug.WriteLine(seancesDisponible.Count);
                 if (seancesDisponible.Count > 0) calDates.ItemsSource = Singleton_BD.getInstance().getListeSeancesDispo(activite.IdActivite);
                 else seanceDisponible = "Aucune séances disponible pour l'instant";
             }
@@ -66,8 +68,8 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
         private async void calDates_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Seance seance = calDates.SelectedItem as Seance;
+            Debug.WriteLine(seance.IdSeance);
             Singleton_BD.getInstance().NouvelleInscription = seance;
-            nbrPlaces = seance.NbrPlaceDisponible;
 
             if (seance != null)
             {
@@ -78,6 +80,8 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
                 dialog.CloseButtonText = "Annuler";
                 dialog.DefaultButton = ContentDialogButton.Close;
                 ContentDialogResult resultat = await dialog.ShowAsync();
+
+
             }
         }
 
