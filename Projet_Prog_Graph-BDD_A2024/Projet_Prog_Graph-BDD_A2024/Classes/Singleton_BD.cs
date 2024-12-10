@@ -627,35 +627,28 @@ namespace Projet_Prog_Graph_BDD_A2024.Classes
             return moyenne;
         }
 
-        public double modifierNotes(int idAct)
+        public void modifierNotes(int idAct, double nouvelleNote)
         {
             double moyenne = 0;
             try
             {
                 MySqlCommand commande = new MySqlCommand();
                 commande.Connection = con;
-                commande.CommandText = "select getMoyenne(" + idAct + ") as moyenne";
+                commande.CommandText = "call modNotes(@idAct, nouvelleNote);";
+
+                commande.Parameters.AddWithValue("@idAct", idAct);
+                commande.Parameters.AddWithValue("@nouvelleNote", nouvelleNote);
 
                 con.Open();
-
-                MySqlDataReader reader = commande.ExecuteReader();
-
-                //read values from SQL command and store in vars, in order to add values to Equipe list
-                while (reader.Read())
-                {
-                    moyenne = reader.GetDouble("moyenne");
-                }
-                reader.Close();
+                commande.Prepare();
+                commande.ExecuteNonQuery();
                 con.Close();
-
-                return moyenne;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
                 con.Close();
             }
-            return moyenne;
         }
     }
 }
