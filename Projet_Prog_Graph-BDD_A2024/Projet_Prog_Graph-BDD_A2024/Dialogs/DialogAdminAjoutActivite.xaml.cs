@@ -26,15 +26,17 @@ namespace Projet_Prog_Graph_BDD_A2024.Dialogs
         Visibility visible = Visibility.Visible;
         Visibility collapse = Visibility.Collapsed;
 
-        int idActivite;
-        string nom;
-        double coutOrganisation;
-        double prixVente;
-        int idCategorie;
+        int idActivite = 0;
+        string nom= "";
+        double coutOrganisation = 0;
+        double prixVente = 0;
+        double noteEvaluation = 0;
+        int idCategorie = 0;
         string idAdmin = "1000";
         string url = "";
-        string description;
-        string type;
+        string description = "";
+        string type = "";
+        int nbrNotes = 1;
 
 
         public DialogAdminAjoutActivite()
@@ -99,6 +101,25 @@ namespace Projet_Prog_Graph_BDD_A2024.Dialogs
                 valide = false;
             }
 
+            if (tbx_noteEvaluation.Text.Trim() != "")
+            {
+                if (Double.TryParse(tbx_noteEvaluation.Text, out double note))
+                {
+                    noteEvaluation = note;
+                    valide = true;
+                }
+                else
+                {
+                    tbx_erreur_note.Text = "La note doit être un nombre";
+                    valide = false;
+                }
+            }
+            else
+            {
+                tbx_erreur_note.Text = "Veuillez inscrire une note d'évaluation";
+                valide = false;
+            }
+
             if (tbx_description.Text.Trim() != "")
             {
                 description = tbx_description.Text;
@@ -126,11 +147,7 @@ namespace Projet_Prog_Graph_BDD_A2024.Dialogs
 
             if(valide == true)
             {
-                Singleton_BD.getInstance().addActivite(
-                    new Activite(
-                        idActivite, nom, coutOrganisation, prixVente, idCategorie, idAdmin, url, description
-                    )
-                );
+                Singleton_BD.getInstance().addActivite(new Activite(idActivite, nom, coutOrganisation, prixVente, noteEvaluation, idCategorie, idAdmin, url, description, nbrNotes));
             }
         }
 

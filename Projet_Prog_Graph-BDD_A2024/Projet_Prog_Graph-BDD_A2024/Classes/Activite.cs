@@ -13,31 +13,37 @@ namespace Projet_Prog_Graph_BDD_A2024.Classes
         string nom;
         double coutOrganisation;
         double prixVente;
+        double noteEvaluation;
         int idCategorie;
         string idAdmin;
         string url;
         string description;
+        int nbrNotes;
 
         public Activite()
         {
             nom = "";
             coutOrganisation = 0;
             prixVente = 0;
+            noteEvaluation = 0;
             idAdmin = "1000";
             url = "";
             description = "";
+            nbrNotes = 0;
         }
 
-        public Activite(int idActivite, string nom, double coutOrganisation, double prixVente, int idCategorie, string idAdmin, string url, string description)
+        public Activite(int idActivite, string nom, double coutOrganisation, double prixVente, double noteEvaluation, int idCategorie, string idAdmin, string url, string description, int nbrNotes)
         {
             this.idActivite = idActivite;
             this.nom = nom;
             this.coutOrganisation = coutOrganisation;
             this.prixVente = prixVente;
+            this.noteEvaluation = noteEvaluation;
             this.idCategorie = idCategorie;
             this.idAdmin = idAdmin;
             this.url = url;
             this.description = description;
+            this.nbrNotes = nbrNotes;
         }
 
         public int IdActivite
@@ -64,6 +70,12 @@ namespace Projet_Prog_Graph_BDD_A2024.Classes
             set { prixVente = value; }
         }
 
+        public double NoteEvaluation
+        {
+            get { return noteEvaluation; }
+            set { noteEvaluation = value; }
+        }
+
         public int IdCategorie
         {
             get { return idCategorie; }
@@ -80,10 +92,17 @@ namespace Projet_Prog_Graph_BDD_A2024.Classes
             get { return url; }
             set { url = value; }
         }
+
         public string Description
         {
             get { return description; }
             set { description = value; }
+        }
+
+        public int NbrNotes
+        {
+            get { return nbrNotes; }
+            set { nbrNotes = value; }
         }
 
         public int CompareTo(Activite other)

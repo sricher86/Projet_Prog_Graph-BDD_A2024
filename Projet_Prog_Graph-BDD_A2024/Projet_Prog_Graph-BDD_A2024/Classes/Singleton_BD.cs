@@ -235,10 +235,12 @@ namespace Projet_Prog_Graph_BDD_A2024.Classes
                 string nom = "";
                 double coutOrganisation = 0.00;
                 double prixVente = 0.00;
+                double noteEvaluation = 0;
                 int idCategorie = 0;
                 string idAdmin = "";
                 string url = "";
                 string description = "";
+                int nbrEvaluations = 0;
 
                 MySqlCommand commande = new MySqlCommand();
                 MySqlDataReader reader;
@@ -254,11 +256,12 @@ namespace Projet_Prog_Graph_BDD_A2024.Classes
                     nom = reader.GetString("nom").ToString();
                     coutOrganisation = reader.GetDouble("coutOrganisation");
                     prixVente = reader.GetDouble("prixVente");
+                    noteEvaluation = reader.GetDouble("noteEvaluation");
                     idCategorie = reader.GetInt32("idCategorie");
                     idAdmin = reader.GetString("idAdmin").ToString();
                     description = reader.GetString("description").ToString();
-
-                    Activite activite = new Activite(idActivite, nom, coutOrganisation, prixVente, idCategorie, idAdmin, url, description);
+                    nbrEvaluations = reader.GetInt32("nbrEvaluations");
+                    Activite activite = new Activite(idActivite, nom, coutOrganisation, prixVente, noteEvaluation, idCategorie, idAdmin, url, description, nbrEvaluations);
                     listeActivites.Add(activite);
 
                     listeNomsActivites.Add(nom);

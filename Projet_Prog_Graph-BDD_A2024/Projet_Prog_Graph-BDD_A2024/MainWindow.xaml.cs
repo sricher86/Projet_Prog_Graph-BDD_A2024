@@ -27,7 +27,7 @@ namespace Projet_Prog_Graph_BDD_A2024
         {
             this.InitializeComponent();
 
-            mainFrame.Navigate(typeof(PagePublique));
+            mainFrame.Navigate(typeof(PageConnexion));
         }
 
         //private async void mainFrame_Loaded(object sender, RoutedEventArgs e)

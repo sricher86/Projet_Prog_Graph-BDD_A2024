@@ -64,6 +64,23 @@
         />
 
         <TextBox 
+            x:Name="tbx_noteEvaluation"
+            VerticalAlignment="Center"
+            Margin="5"
+            PlaceholderText="Note d'évaluation de l'activité"
+            Header="Note"
+            Width="auto"
+        />
+
+        <TextBlock 
+            x:Name="tbx_erreur_note"
+            VerticalAlignment="Center"
+            Margin="5"
+            Width="auto"
+            Foreground="Red"
+        />
+
+        <TextBox 
             x:Name="tbx_description"
             VerticalAlignment="Center"
             Margin="5"

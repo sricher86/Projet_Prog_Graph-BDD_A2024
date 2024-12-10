@@ -17,7 +17,26 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" x:Name="titreAccueil" FontSize="36" FontWeight="Medium" Foreground="Black" HorizontalAlignment="Center" Margin="20">Activités</TextBlock>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="1" x:Name="titreAccueil" FontSize="36" FontWeight="Medium" Foreground="Black" Margin="80 20 0 20">Activités</TextBlock>
+            <Button Grid.Column="2" x:Name="btnConnexion" Click="btnConnexion_Click" Width="auto" Margin="15" Padding="10" CornerRadius="15" Background="Black" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Stretch" HorizontalContentAlignment="Left" VerticalContentAlignment="Center">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <SymbolIcon Symbol="Switch" Grid.Column="0" Margin="0 0 15 0"/>
+                    <TextBlock Text="Connexion" x:Name="iConnexion" Grid.Column="1"/>
+                </Grid>
+            </Button>
+        </Grid>
         <TextBlock Grid.Row="1" x:Name="err" FontSize="36" FontWeight="Medium" Foreground="Red  " HorizontalAlignment="Center" Margin="20"></TextBlock>
 
         <GridView Grid.Row="2" SelectionMode="Single" x:Name="activites" HorizontalAlignment="Center" Background="White" Width="800" Padding="10 20" SelectionChanged="activites_SelectionChanged">
