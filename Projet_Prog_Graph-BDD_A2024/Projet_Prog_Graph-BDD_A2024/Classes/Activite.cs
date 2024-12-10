@@ -138,5 +138,13 @@ namespace Projet_Prog_Graph_BDD_A2024.Classes
                 return Singleton_BD.getInstance().getNoteMoyenne(idActivite);
             }
         }
+
+        public int nbrAdhAct
+        {
+            get
+            {
+                return Singleton_BD.getInstance().getNbrAdhAct(idActivite);
+            }
+        }
     }
 }

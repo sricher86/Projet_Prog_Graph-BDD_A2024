@@ -653,5 +653,65 @@ namespace Projet_Prog_Graph_BDD_A2024.Classes
                 con.Close();
             }
         }
+
+        public int getNbrAdhAct(int idAct)
+        {
+            int nbrParticipants = 0;
+            try
+            {
+                MySqlCommand commande = new MySqlCommand();
+                commande.Connection = con;
+                commande.CommandText = "SELECT nbrParticipants FROM nbrAdhAct JOIN activites act on nbrAdhAct.activite = act.nom WHERE idActivite = " + idAct;
+
+                con.Open();
+
+                MySqlDataReader reader = commande.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    nbrParticipants = reader.GetInt32("nbrParticipants");
+                }
+                reader.Close();
+                con.Close();
+
+                return nbrParticipants;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                con.Close();
+            }
+            return nbrParticipants;
+        }
+
+        public string getPartPlusActif()
+        {
+            string partPlusActif = "";
+            try
+            {
+                MySqlCommand commande = new MySqlCommand();
+                commande.Connection = con;
+                commande.CommandText = "SELECT CONCAT(prenom, ' ', nom, ' (', a.no_identification, ')') AS partPlusActif FROM partPlusActif JOIN adherents a on partPlusActif.no_identification = a.no_identification";
+
+                con.Open();
+
+                MySqlDataReader reader = commande.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    partPlusActif = reader.GetString("partPlusActif");
+                }
+                reader.Close();
+                con.Close();
+
+                return partPlusActif;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                con.Close();
+            }
+            return partPlusActif;
+        }
     }
 }

@@ -5,6 +5,7 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
+using Projet_Prog_Graph_BDD_A2024.Classes;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -24,6 +25,18 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
         public PageAdminStat()
         {
             this.InitializeComponent();
+            Singleton_BD.getInstance().getAdherents();
+            Singleton_BD.getInstance().getActivites();
+
+            stat1.Text = "Nombre total d’adhérents : " + Singleton_BD.getInstance().getListeAdherents().Count.ToString();
+
+            stat2.Text = "Nombre total d’activités : " + Singleton_BD.getInstance().getListeActivites().Count.ToString();
+
+            stat3.ItemsSource = Singleton_BD.getInstance().getListeActivites();
+
+            stat4.ItemsSource = Singleton_BD.getInstance().getListeActivites();
+
+            stat5.Text = "Participant plus actif : " + Singleton_BD.getInstance().getPartPlusActif();
         }
     }
 }
