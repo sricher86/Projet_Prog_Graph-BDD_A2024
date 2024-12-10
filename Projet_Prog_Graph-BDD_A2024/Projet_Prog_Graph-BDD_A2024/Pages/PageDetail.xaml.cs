@@ -68,11 +68,11 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
         private async void calDates_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Seance seance = calDates.SelectedItem as Seance;
-            Debug.WriteLine(seance.IdSeance);
-            Singleton_BD.getInstance().NouvelleInscription = seance;
 
             if (seance != null)
             {
+                Debug.WriteLine(seance.IdSeance);
+                Singleton_BD.getInstance().SeanceInscription = seance;
                 DialogInscription dialog = new DialogInscription(nbrPlaces);
                 dialog.XamlRoot = this.XamlRoot;
                 dialog.Title = "Inscription";
@@ -80,9 +80,9 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
                 dialog.CloseButtonText = "Annuler";
                 dialog.DefaultButton = ContentDialogButton.Close;
                 ContentDialogResult resultat = await dialog.ShowAsync();
-
-
             }
+
+            Frame.Navigate(typeof(PagePublique));
         }
 
         private void buttonRetourner_Click(object sender, RoutedEventArgs e)

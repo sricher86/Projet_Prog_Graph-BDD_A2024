@@ -23,8 +23,6 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
 {
     public sealed partial class PagePublique : Page
     {
-        Activite activiteChoisi;
-
         public PagePublique()
         {
             this.InitializeComponent();
@@ -37,34 +35,10 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
         {
             if (activites.SelectedItem != null)
             {
-                activiteChoisi = (Activite) activites.SelectedItem;
-                //err.Text = activiteChoisi.Nom;
+                Activite activiteChoisi = (Activite) activites.SelectedItem;
                 Frame.Navigate(typeof(PageDetail), activiteChoisi);
             }
         }
-
-
-        //private void navView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
-        //{
-        //    if (args.SelectedItem != null)
-        //    {
-        //        var item = args.SelectedItem as NavigationViewItem;
-
-        //        switch (item.Name)
-        //        {
-        //            case ("iActivites"):
-        //                PubliqueFrame.Navigate(typeof (PagePubliqueAccueil));
-        //                break;
-        //            case ("iSeances"):
-        //                PubliqueFrame.Navigate(typeof(PagePubliqueAccueil));
-        //                break;
-        //            case ("iInscription"):
-        //                PubliqueFrame.Navigate(typeof(PagePubliqueAccueil));
-        //                break;
-        //        }
-        //    }
-
-        //}
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {

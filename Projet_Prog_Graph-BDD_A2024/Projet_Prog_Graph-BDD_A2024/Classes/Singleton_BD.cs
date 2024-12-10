@@ -28,7 +28,8 @@ namespace Projet_Prog_Graph_BDD_A2024.Classes
         static Singleton_BD instance = null;
         Adherents adherentConnecte;
         Adherents adherentInscription;
-        Seance nouvelleInscription;
+        Seance seanceInscription;
+        Activite activiteSelectionne;
         MySqlConnection con;
 
         public Singleton_BD()
@@ -71,10 +72,10 @@ namespace Projet_Prog_Graph_BDD_A2024.Classes
             set { this.adherentConnecte = value; }
         }
 
-        public Seance NouvelleInscription
+        public Seance SeanceInscription
         {
-            get { return nouvelleInscription; }
-            set { this.nouvelleInscription = value; }
+            get { return seanceInscription; }
+            set { this.seanceInscription = value; }
         }
 
         public ObservableCollection<Seance> getListeSeancesDispo(int idAct)
@@ -119,13 +120,13 @@ namespace Projet_Prog_Graph_BDD_A2024.Classes
 
         public void inscriptionAdherent()
         {
-            if (adherentConnecte != null && nouvelleInscription != null)
+            if (adherentConnecte != null && seanceInscription != null)
             {
                 try
                 {
                     string no_identification = adherentConnecte.No_identification;
-                    int idSeance = nouvelleInscription.IdSeance;
-                    int idActivite = nouvelleInscription.IdActivite;
+                    int idSeance = seanceInscription.IdSeance;
+                    int idActivite = seanceInscription.IdActivite;
 
                     MySqlCommand commande = new MySqlCommand();
                     commande.Connection = con;
@@ -139,7 +140,7 @@ namespace Projet_Prog_Graph_BDD_A2024.Classes
                     commande.ExecuteNonQuery();
                     con.Close();
 
-                    modifierNbrPlaces(nouvelleInscription);
+                    modifierNbrPlaces(seanceInscription);
                 }
                 catch (Exception e)
                 {
@@ -584,6 +585,14 @@ namespace Projet_Prog_Graph_BDD_A2024.Classes
         {
             ObservableCollection<Seance> seanceActivite = new ObservableCollection<Seance>();
             listeSeances.Where(idActivite => listeSeances.Contains(idActivite)).ToList().ForEach(seanceActivite.Add);
+
+            return seanceActivite;
+        }
+
+        public ObservableCollection<Seance> getSeanceId(int idSeance)
+        {
+            ObservableCollection<Seance> seanceActivite = new ObservableCollection<Seance>();
+            listeSeances.Where(idSeance => listeSeances.Contains(idSeance)).ToList().ForEach(seanceActivite.Add);
 
             return seanceActivite;
         }

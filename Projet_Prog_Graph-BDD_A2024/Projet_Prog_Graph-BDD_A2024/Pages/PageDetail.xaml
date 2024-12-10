@@ -15,6 +15,7 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
         <TextBlock Grid.Row="0" x:Name="nomActivite" Text="{ x:Bind activite.Nom }" FontSize="36" FontWeight="Medium" Foreground="Black" HorizontalAlignment="Center" Margin="20">Activités</TextBlock>
@@ -31,7 +32,15 @@
 
             <Image Grid.Row="0" Grid.Column="0" x:Name="imgActivite" Width="300px" Height="300px" Source="{x:Bind activite.Url}" HorizontalAlignment="Left" Margin="0 6 0 0" VerticalAlignment="Top" />
             <TextBlock Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" x:Name="descriptionActivite" Text="{ x:Bind activite.Description}" HorizontalAlignment="Stretch" Margin="12 6 0 12" VerticalAlignment="Center" Width="auto" TextWrapping="WrapWholeWords" TextAlignment="Justify"/>
-            <TextBlock Grid.Row="1" Grid.Column="1" x:Name="erreur" HorizontalAlignment="Stretch" Margin="12 6 0 12" VerticalAlignment="Center" Width="auto" TextWrapping="WrapWholeWords" TextAlignment="Justify"/>
+            <TextBlock Grid.Row="1" Grid.Column="0" x:Name="descriptionActivite" Text="{ x:Bind activite.Description}" HorizontalAlignment="Stretch" Margin="12 6 0 12" VerticalAlignment="Left" Width="auto" TextWrapping="WrapWholeWords" TextAlignment="Justify" Visibility="Collapsed">Note d'évaluation:</TextBlock>
+            <ComboBox Grid.Row="1" Grid.Column="1" x:Name="noteUtil" Visibility="Collapsed">
+                <x:String>0</x:String>
+                <x:String>1</x:String>
+                <x:String>2</x:String>
+                <x:String>3</x:String>
+                <x:String>4</x:String>
+                <x:String>5</x:String>
+            </ComboBox>
         </Grid>
 
         <Grid Grid.Row="2" Margin="10 5 20 15">
@@ -42,13 +51,12 @@
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
 
-            <Grid.ColumnDefinitions>
+            <!--<Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto"/>
-            </Grid.ColumnDefinitions>
+            </Grid.ColumnDefinitions>-->
 
-            <TextBlock Grid.Row="0" Grid.Column="0" x:Name="seanceTitre" Margin="12 6 0 0" VerticalAlignment="Center" FontSize="30">Séances disponible</TextBlock>
+            <TextBlock Grid.Row="0" x:Name="seanceTitre" Margin="12 6 0 0" VerticalAlignment="Center" FontSize="30">Séances disponible</TextBlock>
 
             <TextBlock Grid.Row="1" x:Name="errSeances" Text="{x:Bind seanceDisponible}" Foreground="red" FontSize="14" Margin="20 12 0 0"></TextBlock>
 
