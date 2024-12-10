@@ -28,8 +28,6 @@ namespace Projet_Prog_Graph_BDD_A2024
         public MainWindow()
         {
             this.InitializeComponent();
-
-            mainFrame.Navigate(typeof(PagePubliqueAccueil));
         }
 
         private async void mainFrame_Loaded(object sender, RoutedEventArgs e)
