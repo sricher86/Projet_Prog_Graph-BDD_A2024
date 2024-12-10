@@ -23,33 +23,33 @@ namespace Projet_Prog_Graph_BDD_A2024
 {
     public partial class MainWindow : Window
     {
-        DialogAuthentification dialog;
-
         public MainWindow()
         {
             this.InitializeComponent();
+
+            mainFrame.Navigate(typeof(PagePubliqueAccueil));
         }
 
-        private async void mainFrame_Loaded(object sender, RoutedEventArgs e)
-        {
-            DialogAuthentification dialog = new DialogAuthentification();
-            dialog.XamlRoot = this.Content.XamlRoot;
-            dialog.PrimaryButtonText = "Connexion";
-            dialog.CloseButtonText = "Annuler";
-            dialog.DefaultButton = ContentDialogButton.Primary;
+        //private async void mainFrame_Loaded(object sender, RoutedEventArgs e)
+        //{
+        //    DialogAuthentification dialog = new DialogAuthentification();
+        //    dialog.XamlRoot = this.Content.XamlRoot;
+        //    dialog.PrimaryButtonText = "Connexion";
+        //    dialog.CloseButtonText = "Annuler";
+        //    dialog.DefaultButton = ContentDialogButton.Primary;
 
-            ContentDialogResult resultat = await dialog.ShowAsync();
+        //    ContentDialogResult resultat = await dialog.ShowAsync();
 
-            if (resultat == ContentDialogResult.Primary)
-            {
-                if (dialog.Result == SignInResult.SignInAdherent)
-                    mainFrame.Navigate(typeof(PageConnexion));
+        //    if (resultat == ContentDialogResult.Primary)
+        //    {
+        //        if (dialog.Result == SignInResult.SignInAdherent)
+        //            mainFrame.Navigate(typeof(PageConnexion));
 
-                if (dialog.Result == SignInResult.SignInAdmin)
-                    mainFrame.Navigate(typeof(PageAdministrateur));
-            }
-            else
-                mainFrame.Navigate(typeof(PagePubliqueAccueil));
-        }
+        //        if (dialog.Result == SignInResult.SignInAdmin)
+        //            mainFrame.Navigate(typeof(PageAdministrateur));
+        //    }
+        //    else
+        //        mainFrame.Navigate(typeof(PagePubliqueAccueil));
+        //}
     }
 }

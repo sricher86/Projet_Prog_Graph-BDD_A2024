@@ -10,80 +10,77 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <ScrollViewer>
-        <Grid Padding="20" HorizontalAlignment="Center">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-            </Grid.RowDefinitions>
+    <Grid Padding="20" HorizontalAlignment="Center">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
 
-            <Button 
-                x:Name="btnConnexion" 
-                Click="btnConnexion_Click" 
-                Width="auto" 
-                Margin="15"
-                Padding="10"
-                CornerRadius="15"
-                Background="Black"
-                Foreground="White"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Stretch"
-                HorizontalContentAlignment="Left"
-                VerticalContentAlignment="Center"
-            >
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto"/>
-                        <ColumnDefinition Width="auto"/>
-                    </Grid.ColumnDefinitions>
+        <Button 
+            x:Name="btnConnexion" 
+            Click="btnConnexion_Click" 
+            Width="auto" 
+            Margin="15"
+            Padding="10"
+            CornerRadius="15"
+            Background="Black"
+            Foreground="White"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Stretch"
+            HorizontalContentAlignment="Left"
+            VerticalContentAlignment="Center"
+        >
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
 
-                    <SymbolIcon Symbol="Switch" Grid.Column="0" Margin="0 0 15 0"/>
-                    <TextBlock Text="Connexion" x:Name="iConnexion" Grid.Column="1"/>
-                </Grid>
-            </Button>
+                <SymbolIcon Symbol="Switch" Grid.Column="0" Margin="0 0 15 0"/>
+                <TextBlock Text="Connexion" x:Name="iConnexion" Grid.Column="1"/>
+            </Grid>
+        </Button>
 
-            <TextBlock Grid.Row="1" x:Name="titreAccueil" FontSize="36" FontWeight="Medium" Foreground="Black" HorizontalAlignment="Center" Margin="20">Activités</TextBlock>
+        <TextBlock Grid.Row="1" x:Name="titreAccueil" FontSize="36" FontWeight="Medium" Foreground="Black" HorizontalAlignment="Center" Margin="20">Activités</TextBlock>
 
-            <ListView Height="500" BorderThickness="1" BorderBrush="{ThemeResource ControlStrongStrokeColorDefaultBrush}" 
-                Grid.Row="2" SelectionMode="None" x:Name="activites" HorizontalAlignment="Center" Background="White" MinWidth="800" MaxWidth="1000">
-                <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="local1:Activite">
-                        <Grid Margin="0,12,0,12" AutomationProperties.Name="{x:Bind Nom}" Padding="15"
-                            BorderThickness="1" BorderBrush="{ThemeResource ControlStrongStrokeColorDefaultBrush}">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" MinWidth="150"/>
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <Image Source="{x:Bind Url}" MaxHeight="100" Stretch="Fill"/>
+        <ListView Height="500" BorderThickness="1" BorderBrush="{ThemeResource ControlStrongStrokeColorDefaultBrush}" 
+            Grid.Row="2" SelectionMode="None" x:Name="activites" HorizontalAlignment="Center" Background="White" MinWidth="800" MaxWidth="1000">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="local1:Activite">
+                    <Grid Margin="0,12,0,12" AutomationProperties.Name="{x:Bind Nom}" Padding="15"
+                        BorderThickness="1" BorderBrush="{ThemeResource ControlStrongStrokeColorDefaultBrush}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" MinWidth="150"/>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Image Source="{x:Bind Url}" MaxHeight="100" Stretch="Fill"/>
 
-                            <StackPanel Margin="12,0,0,0" Grid.Column="1" >
-                                <StackPanel Orientation="Horizontal" Margin="0 0 0 0" HorizontalAlignment="Right">
-                                    <TextBlock Text="{x:Bind noteEvaluationMoyenne}" FontFamily="Segoe UI" FontWeight="Normal" FontSize="14" 
-                                        HorizontalAlignment="Left" Style="{ThemeResource CaptionTextBlockStyle}" Margin="10,0,0,0"/>
-                                    <Viewbox MaxHeight="15" MaxWidth="15">
-                                        <SymbolIcon Symbol="SolidStar" Margin="5,0,0,0" HorizontalAlignment="Left" Style="{ThemeResource CaptionTextBlockStyle}"/>
-                                    </Viewbox>
-                                </StackPanel>
-                                <TextBlock Text="{x:Bind Nom}" FontSize="16" FontWeight="SemiBold" Style="{ThemeResource BaseTextBlockStyle}"
-                                    HorizontalAlignment="Left" Margin="5,0,0,6" LineHeight="20"/>
-                                <TextBlock Text="{x:Bind Description}" FontSize="14" FontFamily="Segoe UI" FontWeight="Normal" Style="{ThemeResource BodyTextBlockStyle}"
-                                    TextTrimming="CharacterEllipsis" Width="auto" MaxLines="1" Margin="5,0,0,0"/>
-                                <StackPanel Orientation="Horizontal" Margin="0 10 0 25">
-                                    <TextBlock Text="Prix : " FontFamily="Segoe UI" FontWeight="Normal" FontSize="14" 
-                                        HorizontalAlignment="Left" Style="{ThemeResource CaptionTextBlockStyle}" Margin="5,0,0,0"/>
-                                    <TextBlock Text="{x:Bind PrixVente}" FontSize="14" HorizontalAlignment="Left" FontFamily="Segoe UI" FontWeight="Normal" 
-                                        Style="{ThemeResource CaptionTextBlockStyle}" Margin="5,0,0,0"/>
-                                    <TextBlock Text="$" FontFamily="Segoe UI" FontWeight="Normal" FontSize="14" 
-                                        HorizontalAlignment="Left" Style="{ThemeResource CaptionTextBlockStyle}" Margin="5,0,0,0"/>
-                                </StackPanel>
-
+                        <StackPanel Margin="12,0,0,0" Grid.Column="1" >
+                            <StackPanel Orientation="Horizontal" Margin="0 0 0 0" HorizontalAlignment="Right">
+                                <TextBlock Text="{x:Bind noteEvaluationMoyenne}" FontFamily="Segoe UI" FontWeight="Normal" FontSize="14" 
+                                    HorizontalAlignment="Left" Style="{ThemeResource CaptionTextBlockStyle}" Margin="10,0,0,0"/>
+                                <Viewbox MaxHeight="15" MaxWidth="15">
+                                    <SymbolIcon Symbol="SolidStar" Margin="5,0,0,0" HorizontalAlignment="Left" Style="{ThemeResource CaptionTextBlockStyle}"/>
+                                </Viewbox>
                             </StackPanel>
-                        </Grid>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </Grid>
-    </ScrollViewer>
-    
+                            <TextBlock Text="{x:Bind Nom}" FontSize="16" FontWeight="SemiBold" Style="{ThemeResource BaseTextBlockStyle}"
+                                HorizontalAlignment="Left" Margin="5,0,0,6" LineHeight="20"/>
+                            <TextBlock Text="{x:Bind Description}" FontSize="14" FontFamily="Segoe UI" FontWeight="Normal" Style="{ThemeResource BodyTextBlockStyle}"
+                                TextTrimming="CharacterEllipsis" Width="auto" MaxLines="1" Margin="5,0,0,0"/>
+                            <StackPanel Orientation="Horizontal" Margin="0 10 0 25">
+                                <TextBlock Text="Prix : " FontFamily="Segoe UI" FontWeight="Normal" FontSize="14" 
+                                    HorizontalAlignment="Left" Style="{ThemeResource CaptionTextBlockStyle}" Margin="5,0,0,0"/>
+                                <TextBlock Text="{x:Bind PrixVente}" FontSize="14" HorizontalAlignment="Left" FontFamily="Segoe UI" FontWeight="Normal" 
+                                    Style="{ThemeResource CaptionTextBlockStyle}" Margin="5,0,0,0"/>
+                                <TextBlock Text="$" FontFamily="Segoe UI" FontWeight="Normal" FontSize="14" 
+                                    HorizontalAlignment="Left" Style="{ThemeResource CaptionTextBlockStyle}" Margin="5,0,0,0"/>
+                            </StackPanel>
+
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
 </Page>

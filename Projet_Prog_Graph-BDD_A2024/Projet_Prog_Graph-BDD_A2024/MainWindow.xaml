@@ -10,8 +10,8 @@
     Title="Projet_Prog_Graph-BDD_A2024">
 
     <Grid Background="LightGray">
-        <!--<Frame x:Name="mainFrame" />-->
+        <Frame x:Name="mainFrame" />
 
-        <Frame x:Name="mainFrame" Loaded="mainFrame_Loaded"/>
+        <!--<Frame x:Name="mainFrame" Loaded="mainFrame_Loaded"/>-->
     </Grid>
 </Window>
