@@ -111,5 +111,13 @@ namespace Projet_Prog_Graph_BDD_A2024.Classes
                 return $"{IdActivite};{Nom};{CoutOrganisation};{PrixVente};{IdCategorie};{IdAdmin};{Url};{Description}";
             }
         }
+
+        public double noteEvaluationMoyenne
+        {
+            get 
+            {
+                return Singleton_BD.getInstance().getNoteMoyenne(idActivite);
+            }
+        }
     }
 }
