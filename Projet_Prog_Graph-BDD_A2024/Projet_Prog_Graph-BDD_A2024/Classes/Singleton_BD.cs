@@ -578,7 +578,6 @@ namespace Projet_Prog_Graph_BDD_A2024.Classes
                 Console.WriteLine(e.Message);
                 con.Close();
             }
-
         }
 
         public ObservableCollection<Seance> getSeanceActivites(int idActivite)
@@ -589,12 +588,43 @@ namespace Projet_Prog_Graph_BDD_A2024.Classes
             return seanceActivite;
         }
 
-        public ObservableCollection<Seance> getSeanceId(int idSeance)
+        public ObservableCollection<Adherents_Seance> getAdherentSeanceParActivite(int idActivite)
         {
-            ObservableCollection<Seance> seanceActivite = new ObservableCollection<Seance>();
-            listeSeances.Where(idSeance => listeSeances.Contains(idSeance)).ToList().ForEach(seanceActivite.Add);
+            ObservableCollection<Adherents_Seance> adherentSeanceActivite = new ObservableCollection<Adherents_Seance>();
+            listeAdherentsSeances.Where(idActivite=> listeAdherentsSeances.Contains(idActivite)).ToList().ForEach(adherentSeanceActivite.Add);
 
-            return seanceActivite;
+            return adherentSeanceActivite;
+        }
+
+        public double getNoteMoyenne (int idAct)
+        {
+            double moyenne = 0;
+            try
+            {
+                MySqlCommand commande = new MySqlCommand();
+                commande.Connection = con;
+                commande.CommandText = "select getMoyenne("+idAct+") as moyenne";
+
+                con.Open();
+
+                MySqlDataReader reader = commande.ExecuteReader();
+
+                //read values from SQL command and store in vars, in order to add values to Equipe list
+                while (reader.Read())
+                {
+                    moyenne = reader.GetDouble("moyenne");
+                }
+                reader.Close();
+                con.Close();
+
+                return moyenne;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                con.Close();
+            }
+            return moyenne;
         }
     }
 }

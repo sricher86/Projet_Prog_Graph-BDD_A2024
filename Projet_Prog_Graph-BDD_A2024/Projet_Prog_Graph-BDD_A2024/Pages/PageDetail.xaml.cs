@@ -59,10 +59,21 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
             {
                 activite = (Activite)e.Parameter;
                 seancesDisponible = Singleton_BD.getInstance().getListeSeancesDispo(activite.IdActivite);
+                ObservableCollection<Adherents_Seance> adherentsSeanceParActivite = Singleton_BD.getInstance().getAdherentSeanceParActivite(activite.IdActivite);
+                foreach (Adherents_Seance ads in adherentsSeanceParActivite)
+                {
+                    if(ads.No_identification == adherent.No_identification)
+                    {
+                        noteLabel.Visibility = Visibility.Visible;
+                        note.Visibility = Visibility.Visible;
+                    }
+                }
                 Debug.WriteLine(seancesDisponible.Count);
                 if (seancesDisponible.Count > 0) calDates.ItemsSource = Singleton_BD.getInstance().getListeSeancesDispo(activite.IdActivite);
                 else seanceDisponible = "Aucune séances disponible pour l'instant";
             }
+
+            noteMoyenne.Text = Singleton_BD.getInstance().getNoteMoyenne(activite.IdActivite).ToString();
         }
 
         private async void calDates_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -88,6 +99,14 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
         private void buttonRetourner_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(PagePublique));
+        }
+
+        private void note_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (note.SelectedItem != null)
+            {
+
+            }
         }
     }
 }
