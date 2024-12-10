@@ -48,6 +48,8 @@ namespace Projet_Prog_Graph_BDD_A2024
                 if (dialog.Result == SignInResult.SignInAdmin)
                     mainFrame.Navigate(typeof(PageAdministrateur));
             }
+            else
+                mainFrame.Navigate(typeof(PagePubliqueAccueil));
         }
     }
 }

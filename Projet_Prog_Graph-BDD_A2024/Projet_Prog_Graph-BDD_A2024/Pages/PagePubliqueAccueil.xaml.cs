@@ -31,10 +31,6 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
             activites.ItemsSource = Singleton_BD.getInstance().getListeActivites();
         }
 
-        private void boutonSupprimer_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         private async void btnConnexion_Click(object sender, RoutedEventArgs e)
         {
