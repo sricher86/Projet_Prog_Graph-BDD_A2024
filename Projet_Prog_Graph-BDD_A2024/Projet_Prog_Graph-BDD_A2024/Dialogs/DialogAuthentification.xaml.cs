@@ -36,7 +36,6 @@ namespace Projet_Prog_Graph_BDD_A2024.Dialogs
 
         static ObservableCollection<Administrateur> adminList;
         static ObservableCollection<Adherents> adherentList;
-        Adherents adherent;
         bool valide = true;
 
         public DialogAuthentification()
@@ -48,7 +47,6 @@ namespace Projet_Prog_Graph_BDD_A2024.Dialogs
             adherentList = new ObservableCollection<Adherents>();
             adminList = Singleton_BD.getInstance().getListeAdministrateur();
             adherentList = Singleton_BD.getInstance().getListeAdherents();
-            adherent = new Adherents();
         }
 
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
@@ -64,7 +62,8 @@ namespace Projet_Prog_Graph_BDD_A2024.Dialogs
                     if (tbx_id_adherent.Text.Equals(adh.No_identification))
                     {
                         user = true;
-                        Singleton_BD.getInstance().AdherentConnecte = adh;
+                        Singleton_BD.getInstance().adherentConn(adh);
+                        Singleton_BD.getInstance().UserConnected = true;
                     }
                 }
 
@@ -190,11 +189,6 @@ namespace Projet_Prog_Graph_BDD_A2024.Dialogs
                 stkpnl_adherent.Visibility = Visibility.Collapsed;
                 stkpnl_admin.Visibility = Visibility.Visible;
             }
-        }
-
-        public Object getAdherent ()
-        {
-            return adherent;
         }
     }
 }

@@ -15,6 +15,7 @@ using Projet_Prog_Graph_BDD_A2024.Pages;
 using Projet_Prog_Graph_BDD_A2024.Classes;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using System.Diagnostics;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -27,9 +28,46 @@ namespace Projet_Prog_Graph_BDD_A2024
         {
             this.InitializeComponent();
 
-            mainFrame.Navigate(typeof(PageConnexion));
+            if (Singleton_BD.getInstance().UserConnected) iDeconnexion.Visibility = Visibility.Visible;
+            else iConnexion.Visibility = Visibility.Visible;
+
+            mainFrame.Navigate(typeof(PagePublique));
         }
 
+        private async void navView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
+        {
+            var item = args.SelectedItem as NavigationViewItem;
+
+            if (item != null)
+            {
+                switch (item.Name)
+                {
+                    case "iActivites":
+                        mainFrame.Navigate(typeof(PagePublique));
+                        break;
+                    case "iConnexion":
+                        DialogAuthentification dialog = new DialogAuthentification();
+                        dialog.XamlRoot = this.Content.XamlRoot;
+                        dialog.PrimaryButtonText = "Connexion";
+                        dialog.CloseButtonText = "Annuler";
+                        dialog.DefaultButton = ContentDialogButton.Primary;
+
+                        ContentDialogResult resultat = await dialog.ShowAsync();
+
+                        if (resultat == ContentDialogResult.Primary)
+                        {
+                            if (Singleton_BD.getInstance().UserConnected)
+                                iDeconnexion.Visibility = Visibility.Visible;
+                            iConnexion.Visibility = Visibility.Collapsed;
+                            this.InitializeComponent();
+                        }
+                        //else 
+                        //if (resultat == ContentDialogResult.Secondary)
+                        //Frame.Navigate(typeof(PagePubliqueAccueil));
+                        break;
+                }
+            }
+        }
         //private async void mainFrame_Loaded(object sender, RoutedEventArgs e)
         //{
         //    DialogAuthentification dialog = new DialogAuthentification();

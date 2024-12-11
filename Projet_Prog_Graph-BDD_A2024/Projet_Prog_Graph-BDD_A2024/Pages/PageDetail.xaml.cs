@@ -51,6 +51,8 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
             seancesDisponible = new ObservableCollection<Seance>();
             seances = Singleton_BD.getInstance().getListeSeance();
             adherents_Seances = Singleton_BD.getInstance().getListeAdherentsSeance();
+            if (Singleton_BD.getInstance().UserConnected) noteEval.IsEnabled = true;
+            else noteEval.IsEnabled = false;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -72,20 +74,33 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
         {
             Seance seance = calDates.SelectedItem as Seance;
 
-            if (seance != null)
-            {
-                Debug.WriteLine(seance.IdSeance);
-                Singleton_BD.getInstance().SeanceInscription = seance;
-                DialogInscription dialog = new DialogInscription();
-                dialog.XamlRoot = this.XamlRoot;
-                dialog.Title = "Inscription";
-                dialog.PrimaryButtonText = "Envoyer l'inscription";
-                dialog.CloseButtonText = "Annuler";
-                dialog.DefaultButton = ContentDialogButton.Close;
-                ContentDialogResult resultat = await dialog.ShowAsync();
-            }
 
-            Frame.Navigate(typeof(PagePublique));
+                Debug.WriteLine(Singleton_BD.getInstance().UserConnected);
+            if (Singleton_BD.getInstance().UserConnected)
+            {
+                if(seance != null)
+                {
+                    Singleton_BD.getInstance().SeanceInscription = seance;
+                    DialogInscription dialog = new DialogInscription();
+                    dialog.XamlRoot = this.XamlRoot;
+                    dialog.Title = "Inscription";
+                    dialog.PrimaryButtonText = "Envoyer l'inscription";
+                    dialog.CloseButtonText = "Annuler";
+                    dialog.DefaultButton = ContentDialogButton.Close;
+                    ContentDialogResult resultat = await dialog.ShowAsync();
+                    Frame.Navigate(typeof(PagePublique));
+                }
+            }
+            else
+            {
+                DialogErreur erreur = new DialogErreur();
+                erreur.XamlRoot = this.XamlRoot;
+                erreur.Title = "Mode visiteur";
+                erreur.CloseButtonText = "Ok";
+                erreur.DefaultButton = ContentDialogButton.Close;
+                ContentDialogResult resultat = await erreur.ShowAsync();
+                //erreur.Content = "mon contenu";
+            }
         }
 
         private void buttonRetourner_Click(object sender, RoutedEventArgs e)

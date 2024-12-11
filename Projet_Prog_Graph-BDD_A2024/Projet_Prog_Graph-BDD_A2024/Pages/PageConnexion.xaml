@@ -24,11 +24,10 @@
             >
                 <NavigationView.MenuItems>
                     <NavigationViewItem Content="Activites" x:Name="iActivites" Icon="Calendar"/>
-                    <!--<NavigationViewItem Content="Agenda" x:Name="iAgenda" Icon="Calendar"/>-->
                 </NavigationView.MenuItems>
 
                 <NavigationView.FooterMenuItems>
-                    <Button 
+                    <!--<Button 
                         x:Name="btnConnexion" 
                         Click="btnConnexion_Click" 
                         Width="auto" 
@@ -46,11 +45,12 @@
                                 <ColumnDefinition Width="auto"/>
                             </Grid.ColumnDefinitions>
 
-                            <SymbolIcon Symbol="Switch" Grid.Column="0" Margin="0 0 15 0"/>
-                            <TextBlock Text="Deconnexion" x:Name="iDeconnexion" Grid.Column="1"/>
+                            <SymbolIcon Symbol="Switch" Grid.Column="0" Margin="0 0 15 0" Visibility="Collapsed"/>
+                            <TextBlock Text="Deconnexion" x:Name="iDeconnexion" Grid.Column="1" Visibility="Collapsed"/>
                         </Grid>
-                    </Button>
-                    <!--<NavigationViewItem Content="Connexion" x:Name="iConnexion" Icon="Switch"/>-->
+                    </Button>-->
+                    <NavigationViewItem Content="Connexion" x:Name="iConnexion" Icon="People" Visibility="Collapsed" Margin="0 0 0 150"/>
+                    <NavigationViewItem Content="Deconnexion" x:Name="iDeconnexion" Icon="Switch" Visibility="Collapsed" Margin="0 0 0 150"/>
                 </NavigationView.FooterMenuItems>
 
                 <Frame x:Name="connexionFrame"/>

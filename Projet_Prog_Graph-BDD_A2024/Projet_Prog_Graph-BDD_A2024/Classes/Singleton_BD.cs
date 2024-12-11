@@ -31,6 +31,8 @@ namespace Projet_Prog_Graph_BDD_A2024.Classes
         Seance seanceInscription;
         Activite activiteSelectionne;
         MySqlConnection con;
+        bool userConnected;
+        bool adminConnected;
 
         public Singleton_BD()
         {
@@ -47,7 +49,8 @@ namespace Projet_Prog_Graph_BDD_A2024.Classes
             listeNomsActivites = new List<String>();
             listeDateSeances = new List<DateTime>();
 
-            AdherentConnecte = new Adherents();
+            adherentConnecte = new Adherents();
+            userConnected = false;
 
             getActivites();
             getAdherents();
@@ -58,24 +61,10 @@ namespace Projet_Prog_Graph_BDD_A2024.Classes
             getStatistiques();
         }
 
-        public static Singleton_BD getInstance()
+        public void adherentConn(Adherents adh)
         {
-            if (instance == null)
-                instance = new Singleton_BD();
-
-            return instance;
-        }
-
-        public Adherents AdherentConnecte
-        {
-            get { return adherentConnecte; }
-            set { this.adherentConnecte = value; }
-        }
-
-        public Seance SeanceInscription
-        {
-            get { return seanceInscription; }
-            set { this.seanceInscription = value; }
+            adherentConnecte = adh;
+            userConnected = true;
         }
 
         public ObservableCollection<Seance> getListeSeancesDispo(int idAct)
@@ -88,7 +77,7 @@ namespace Projet_Prog_Graph_BDD_A2024.Classes
 
                 con.Open();
                 commande.Connection = con;
-                commande.CommandText = "Call getSeances('"+adherentConnecte.No_identification+"', "+idAct+");";
+                commande.CommandText = "Call getSeances('" + adherentConnecte.No_identification + "', " + idAct + ");";
                 Debug.WriteLine(commande.CommandText);
                 reader = commande.ExecuteReader();
 
@@ -150,7 +139,7 @@ namespace Projet_Prog_Graph_BDD_A2024.Classes
             }
         }
 
-        public void modifierNbrPlaces (Seance seance)
+        public void modifierNbrPlaces(Seance seance)
         {
             if (seance != null)
             {
@@ -160,7 +149,7 @@ namespace Projet_Prog_Graph_BDD_A2024.Classes
 
                     MySqlCommand commande = new MySqlCommand();
                     commande.Connection = con;
-                    commande.CommandText = "Update seances set nbrPlaceDisponible = nbrPlaceDisponible -1 where idSeance = "+idSeance+";";
+                    commande.CommandText = "Update seances set nbrPlaceDisponible = nbrPlaceDisponible -1 where idSeance = " + idSeance + ";";
 
                     con.Open();
                     commande.Prepare();
@@ -173,56 +162,6 @@ namespace Projet_Prog_Graph_BDD_A2024.Classes
                     con.Close();
                 }
             }
-
-        }
-        public ObservableCollection<Activite> getListeActivites()
-        {
-            return listeActivites;
-        }
-
-        public ObservableCollection<Adherents> getListeAdherents()
-        {
-            return listeAdherents;
-        }
-
-        public ObservableCollection<Adherents_Seance> getListeAdherentsSeance()
-        {
-            return listeAdherentsSeances;
-        }
-
-        public ObservableCollection<Administrateur> getListeAdministrateur()
-        {
-            return listeAdministrateurs;
-        }
-
-        public ObservableCollection<Categorie> getListeCategorie()
-        {
-            return listeCategories;
-        }
-
-        public ObservableCollection<Seance> getListeSeance()
-        {
-            return listeSeances;
-        }
-
-        public ObservableCollection<Statistiques> getListeStatistiques()
-        {
-            return listeStatistiques;
-        }
-
-        public List<String> getListeTypeCategories()
-        {
-            return listeTypeCategories;
-        }
-
-        public List<String> getListeNomsActivites()
-        {
-            return listeNomsActivites;
-        }
-
-        public List<DateTime> getListeDateSeances()
-        {
-            return listeDateSeances;
         }
 
         public void getActivites()
@@ -632,7 +571,6 @@ namespace Projet_Prog_Graph_BDD_A2024.Classes
 
         public void modifierNotes(int idAct, double nouvelleNote)
         {
-            double moyenne = 0;
             try
             {
                 MySqlCommand commande = new MySqlCommand();
@@ -653,5 +591,81 @@ namespace Projet_Prog_Graph_BDD_A2024.Classes
                 con.Close();
             }
         }
+
+        public static Singleton_BD getInstance()
+        {
+            if (instance == null)
+                instance = new Singleton_BD();
+
+            return instance;
+        }
+
+        public bool UserConnected { 
+            get { return userConnected; }
+            set { this.userConnected = value; }
+        }
+
+        public Adherents AdherentConnecte
+        {
+            get { return adherentConnecte; }
+            set { this.adherentConnecte = value; }
+        }
+
+        public Seance SeanceInscription
+        {
+            get { return seanceInscription; }
+            set { this.seanceInscription = value; }
+        }
+
+        public ObservableCollection<Activite> getListeActivites()
+        {
+            return listeActivites;
+        }
+
+        public ObservableCollection<Adherents> getListeAdherents()
+        {
+            return listeAdherents;
+        }
+
+        public ObservableCollection<Adherents_Seance> getListeAdherentsSeance()
+        {
+            return listeAdherentsSeances;
+        }
+
+        public ObservableCollection<Administrateur> getListeAdministrateur()
+        {
+            return listeAdministrateurs;
+        }
+
+        public ObservableCollection<Categorie> getListeCategorie()
+        {
+            return listeCategories;
+        }
+
+        public ObservableCollection<Seance> getListeSeance()
+        {
+            return listeSeances;
+        }
+
+        public ObservableCollection<Statistiques> getListeStatistiques()
+        {
+            return listeStatistiques;
+        }
+
+        public List<String> getListeTypeCategories()
+        {
+            return listeTypeCategories;
+        }
+
+        public List<String> getListeNomsActivites()
+        {
+            return listeNomsActivites;
+        }
+
+        public List<DateTime> getListeDateSeances()
+        {
+            return listeDateSeances;
+        }
+
     }
 }

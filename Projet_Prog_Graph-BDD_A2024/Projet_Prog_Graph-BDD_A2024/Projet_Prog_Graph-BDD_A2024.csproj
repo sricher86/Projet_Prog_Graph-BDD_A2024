@@ -16,7 +16,9 @@
     <None Remove="DialogAdminAjoutActivite.xaml" />
     <None Remove="DialogAdminAjoutAdherent.xaml" />
     <None Remove="Dialogs\DialogAdminAjoutActivite.xaml" />
+    <None Remove="Dialogs\DialogErreur.xaml" />
     <None Remove="Dialogs\DialogInscription.xaml" />
+    <None Remove="Dialogs\erreurSeance.xaml" />
     <None Remove="PageAdminActivites.xaml" />
     <None Remove="PageAdminAdherents.xaml" />
     <None Remove="PageAdminAjoutActivite.xaml" />
@@ -60,6 +62,16 @@
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.756" />
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.5.240802000" />
     <PackageReference Include="MySql.Data" Version="9.1.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Dialogs\DialogErreur.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Dialogs\erreurSeance.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Dialogs\DialogInscription.xaml">

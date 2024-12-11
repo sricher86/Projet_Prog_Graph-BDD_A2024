@@ -9,9 +9,51 @@
     mc:Ignorable="d"
     Title="Projet_Prog_Graph-BDD_A2024">
 
-    <Grid Background="LightGray">
-        <Frame x:Name="mainFrame" />
+    <Grid Background="AliceBlue">
+        <ScrollViewer>
+            <NavigationView 
+                x:Name="navView" 
+                PaneDisplayMode="Left" 
+                PaneTitle="Centre SportsPlus" 
+                IsSettingsVisible="False" 
+                IsBackButtonVisible="Collapsed"
+                IsPaneOpen="False"
+                SelectionChanged="navView_SelectionChanged"
+                CompactModeThresholdWidth="100" 
+            >
+                <NavigationView.MenuItems>
+                    <NavigationViewItem Content="Activites" x:Name="iActivites" Icon="Calendar"/>
+                </NavigationView.MenuItems>
 
-        <!--<Frame x:Name="mainFrame" Loaded="mainFrame_Loaded"/>-->
+                <NavigationView.FooterMenuItems>
+                    <!--<Button 
+                        x:Name="btnConnexion" 
+                        Click="btnConnexion_Click" 
+                        Width="auto" 
+                        Padding="0"
+                        Background="AliceBlue"
+                        BorderThickness="0"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        HorizontalContentAlignment="Left"
+                        VerticalContentAlignment="Center"
+                    >
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <SymbolIcon Symbol="Switch" Grid.Column="0" Margin="0 0 15 0" Visibility="Collapsed"/>
+                            <TextBlock Text="Deconnexion" x:Name="iDeconnexion" Grid.Column="1" Visibility="Collapsed"/>
+                        </Grid>
+                    </Button>-->
+                    <NavigationViewItem Content="Connexion" x:Name="iConnexion" Icon="People" Visibility="Collapsed" Margin="0 0 0 150"/>
+                    <NavigationViewItem Content="Deconnexion" x:Name="iDeconnexion" Icon="Switch" Visibility="Collapsed" Margin="0 0 0 150"/>
+                </NavigationView.FooterMenuItems>
+
+                <Frame x:Name="mainFrame"/>
+            </NavigationView>
+        </ScrollViewer>
     </Grid>
 </Window>

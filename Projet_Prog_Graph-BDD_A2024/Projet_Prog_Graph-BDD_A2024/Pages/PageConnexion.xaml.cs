@@ -29,6 +29,8 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
         public PageConnexion()
         {
             this.InitializeComponent();
+            if (Singleton_BD.getInstance().UserConnected) iDeconnexion.Visibility = Visibility.Visible;
+            else iConnexion.Visibility = Visibility.Visible;
             connexionFrame.Navigate(typeof(PagePublique));
         }
 
@@ -38,7 +40,7 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
             set { connexionFrame = value; }
         }
 
-        private void navView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
+        private async void navView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
         {
             var item = args.SelectedItem as NavigationViewItem;
 
@@ -49,9 +51,26 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
                     case "iActivites":
                         connexionFrame.Navigate(typeof(PagePublique));
                         break;
-                    //case "iConnexion":
-                    //    connexionFrame.Navigate(typeof(Connexion), mainFrame);
-                    //    break;
+                    case "iConnexion":
+                        DialogAuthentification dialog = new DialogAuthentification();
+                        dialog.XamlRoot = this.Content.XamlRoot;
+                        dialog.PrimaryButtonText = "Connexion";
+                        dialog.CloseButtonText = "Annuler";
+                        dialog.DefaultButton = ContentDialogButton.Primary;
+
+                        ContentDialogResult resultat = await dialog.ShowAsync();
+
+                        if (resultat == ContentDialogResult.Primary)
+                        {
+                            if (Singleton_BD.getInstance().UserConnected) 
+                                iDeconnexion.Visibility = Visibility.Visible;
+                            iConnexion.Visibility = Visibility.Collapsed;
+                            this.InitializeComponent();
+                        }
+                        //else 
+                        //if (resultat == ContentDialogResult.Secondary)
+                        //Frame.Navigate(typeof(PagePubliqueAccueil));
+                        break;
                 }
             }
         }

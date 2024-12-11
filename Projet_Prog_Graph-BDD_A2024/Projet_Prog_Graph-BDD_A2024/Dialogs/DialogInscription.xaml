@@ -10,6 +10,7 @@
     PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
     Closing="ContentDialog_Closing"
     Title="Inscription" >
+    
     <ScrollViewer>
     <Grid>
         <StackPanel>
