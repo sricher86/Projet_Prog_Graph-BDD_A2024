@@ -29,8 +29,8 @@
                 </NavigationView.MenuItems>
 
                 <NavigationView.FooterMenuItems>
-                    <NavigationViewItem Content="Connexion" x:Name="iConnexion" Icon="People" Visibility="Collapsed" Margin="0 0 0 150"/>
-                    <NavigationViewItem Content="Deconnexion" x:Name="iDeconnexion" Icon="Switch" Visibility="Collapsed" Margin="0 0 0 150"/>
+                    <NavigationViewItem Content="Connexion" x:Name="iConnexion" Icon="People" Visibility="Collapsed" Margin="0 0 0 200"/>
+                    <NavigationViewItem Content="Deconnexion" x:Name="iDeconnexion" Icon="Switch" Visibility="Collapsed" Margin="0 0 0 200"/>
                 </NavigationView.FooterMenuItems>
 
                 <Frame x:Name="mainFrame"/>
