@@ -43,5 +43,15 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
 
             ContentDialogResult resultat = await dialog.ShowAsync();
         }
+
+        private void Modify_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Delete_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

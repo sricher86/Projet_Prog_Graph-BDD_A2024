@@ -64,5 +64,34 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
             if (monFichier != null)
                 await Windows.Storage.FileIO.WriteLinesAsync(monFichier, liste.ConvertAll(x => x.StringCSV), Windows.Storage.Streams.UnicodeEncoding.Utf8);
         }
+        
+        private void Modify_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private async void Delete_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+
+            Activite activite = button.DataContext as Activite;
+
+            ContentDialog dialog = new ContentDialog();
+            dialog.XamlRoot = this.XamlRoot;
+            dialog.Title = "Suppression d'activité";
+            dialog.PrimaryButtonText = "Supprimer";
+            dialog.CloseButtonText = "Annuler";
+            dialog.DefaultButton = ContentDialogButton.Primary;
+            dialog.Content = $"Voulez vous supprimer l'activité : {activite.Nom} ?";
+
+            ContentDialogResult resultat = await dialog.ShowAsync();
+
+            if (resultat == ContentDialogResult.Primary)
+            {
+                Singleton_BD.getInstance().supprimerActivite(activite);
+                Singleton_BD.getInstance().getActivites();
+            }
+        }
+
     }
 }

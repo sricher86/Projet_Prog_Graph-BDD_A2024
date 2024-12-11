@@ -60,6 +60,7 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
                             </Grid.RowDefinitions>
                             
                             <Grid.ColumnDefinitions>
@@ -101,11 +102,22 @@
                                     HorizontalAlignment="Left" Style="{ThemeResource CaptionTextBlockStyle}" Margin="5,0,0,0"/>
                             </StackPanel>
 
-                            <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Horizontal" Margin="0 10 0 25" HorizontalAlignment="Center">
+                            <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Horizontal" Margin="0 10 0 0" HorizontalAlignment="Center">
                                 <TextBlock Text="Nombre de places disponibles : " FontFamily="Segoe UI" FontWeight="Normal" FontSize="14" 
                                     HorizontalAlignment="Left" Style="{ThemeResource CaptionTextBlockStyle}" Margin="5,0,0,0"/>
                                 <TextBlock Text="{x:Bind NbrPlaceDisponible}" FontFamily="Segoe UI" FontWeight="Normal" FontSize="14" 
                                     HorizontalAlignment="Left" Style="{ThemeResource CaptionTextBlockStyle}" Margin="5,0,0,0"/>
+                            </StackPanel>
+
+                            <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalAlignment="Right">
+                                <Button x:Name="Modify" Click="Modify_Click" HorizontalAlignment="Center" 
+                                    BorderBrush="Transparent" Margin="10" Style="{ThemeResource CaptionTextBlockStyle}">
+                                    <SymbolIcon Symbol="Edit" Foreground="Green"/>
+                                </Button>
+                                <Button x:Name="Delete" Click="Delete_Click" HorizontalAlignment="Center" 
+                                    BorderBrush="Transparent" Margin="10" Style="{ThemeResource CaptionTextBlockStyle}">
+                                    <SymbolIcon Symbol="Delete" Foreground="Red"/>
+                                </Button>
                             </StackPanel>
                         </Grid>
                     </DataTemplate>

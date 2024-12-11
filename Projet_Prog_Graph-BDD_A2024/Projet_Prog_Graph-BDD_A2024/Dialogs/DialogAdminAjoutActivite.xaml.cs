@@ -226,6 +226,7 @@ namespace Projet_Prog_Graph_BDD_A2024.Dialogs
             tbx_erreur_description.Text = String.Empty;
             tbx_erreur_categorie.Text = String.Empty;
             tbx_erreur_url.Text = String.Empty;
+            tbx_erreur_note.Text = String.Empty;
         }
     }
 }

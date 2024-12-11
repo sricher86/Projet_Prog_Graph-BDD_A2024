@@ -453,7 +453,7 @@ namespace Projet_Prog_Graph_BDD_A2024.Classes
                 MySqlCommand commande = new MySqlCommand();
 
                 commande.Connection = con;
-                commande.CommandText = "INSERT INTO activites(idActivite, nom, coutOrganisation, prixVente, idCategorie, idAdmin, description) VALUES(@idActivite, @nom, @coutOrganisation, @prixVente, @idCategorie, @idAdmin, @description)";
+                commande.CommandText = "INSERT INTO activites VALUES(@idActivite, @nom, @coutOrganisation, @prixVente, @idCategorie, @idAdmin, @description, @noteEvaluation, @nbrNotes)";
                 commande.Parameters.AddWithValue("@idActivite", activite.IdActivite);
                 commande.Parameters.AddWithValue("@nom", activite.Nom);
                 commande.Parameters.AddWithValue("@coutOrganisation", activite.CoutOrganisation);
@@ -461,6 +461,8 @@ namespace Projet_Prog_Graph_BDD_A2024.Classes
                 commande.Parameters.AddWithValue("@idCategorie", activite.IdCategorie);
                 commande.Parameters.AddWithValue("@idAdmin", activite.IdAdmin);
                 commande.Parameters.AddWithValue("@description", activite.Description);
+                commande.Parameters.AddWithValue("@noteEvaluation", activite.NoteEvaluation);
+                commande.Parameters.AddWithValue("@nbrNotes", activite.NbrNotes);
 
                 con.Open();
                 commande.Prepare();
@@ -468,6 +470,27 @@ namespace Projet_Prog_Graph_BDD_A2024.Classes
 
                 con.Close();
 
+                getActivites();
+            }
+            catch (Exception ex)
+            {
+                if (con.State == System.Data.ConnectionState.Open)
+                    con.Close();
+            }
+        }
+
+        public void supprimerActivite(Activite activite)
+        {
+            try
+            {
+                MySqlCommand commande = new MySqlCommand();
+                commande.Connection = con;
+                commande.CommandText = $"DELETE FROM activites WHERE idActivite = '{activite.IdActivite}'";
+
+                con.Open();
+                int i = commande.ExecuteNonQuery();
+
+                con.Close();
                 getActivites();
             }
             catch (Exception ex)
@@ -504,6 +527,57 @@ namespace Projet_Prog_Graph_BDD_A2024.Classes
                     con.Close();
             }
         }
+
+        public void addAdherent(Adherents adherent)
+        {
+            try
+            {
+                MySqlCommand commande = new MySqlCommand();
+
+                commande.Connection = con;
+                commande.CommandText = "INSERT INTO Adherents (nom, prenom, adresse, dateDeNaissance, idAdmin) VALUES (@nom, @prenom, @adresse, @dateDeNaissance, @idAdmin)";
+                commande.Parameters.AddWithValue("@nom", adherent.Nom);
+                commande.Parameters.AddWithValue("@prenom", adherent.Prenom);
+                commande.Parameters.AddWithValue("@adresse", adherent.Adresse);
+                commande.Parameters.AddWithValue("@dateDeNaissance", adherent.DateDeNaissance);
+                commande.Parameters.AddWithValue("@idAdmin", adherent.IdAdmin);
+
+                con.Open();
+                commande.Prepare();
+                commande.ExecuteNonQuery();
+
+                con.Close();
+
+                getAdherents();
+            }
+            catch (Exception ex)
+            {
+                if (con.State == System.Data.ConnectionState.Open)
+                    con.Close();
+            }
+        }
+
+        public void supprimerAdherents(Adherents adherent)
+        {
+            try
+            {
+                MySqlCommand commande = new MySqlCommand();
+                commande.Connection = con;
+                commande.CommandText = $"DELETE FROM Adherents WHERE no_identification = '{adherent.No_identification}'";
+
+                con.Open();
+                int i = commande.ExecuteNonQuery();
+
+                con.Close();
+                getActivites();
+            }
+            catch (Exception ex)
+            {
+                if (con.State == System.Data.ConnectionState.Open)
+                    con.Close();
+            }
+        }
+
         public void getSeances()
         {
             try
