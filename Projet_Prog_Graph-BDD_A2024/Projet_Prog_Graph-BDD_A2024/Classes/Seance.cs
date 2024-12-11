@@ -1,6 +1,7 @@
 ﻿using MySqlX.XDevAPI;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -90,6 +91,20 @@ namespace Projet_Prog_Graph_BDD_A2024.Classes
                 return false;
         }
 
+        public string StringDOrg
+        {
+            get
+            {
+                return dateOrganisation.ToString("yyyy-MM-dd", CultureInfo.CreateSpecificCulture("fr-FR"));
+            }
+        }
 
+        public string StringAct
+        {
+            get
+            {
+                return Singleton_BD.getInstance().getActById(idActivite);
+            }
+        }
     }
 }

@@ -103,7 +103,7 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
                     Frame.Navigate(typeof(PageAdministrateur));
             }
             if (resultat == ContentDialogResult.Secondary)
-                Frame.Navigate(typeof(PagePubliqueAccueil));
+                Frame.Navigate(typeof(PagePublique));
         }
     }
 }

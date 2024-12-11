@@ -14,6 +14,7 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Projet_Prog_Graph_BDD_A2024.Dialogs;
 using Projet_Prog_Graph_BDD_A2024.Classes;
+using System.Diagnostics;
 
 
 // To learn more about WinUI, the WinUI project structure,
@@ -60,6 +61,34 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
 
             if (monFichier != null)
                 await Windows.Storage.FileIO.WriteLinesAsync(monFichier, liste.ConvertAll(x => x.StringCSV), Windows.Storage.Streams.UnicodeEncoding.Utf8);
+        }
+
+        private void Modify_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private async void Delete_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+
+            Adherents adherent = button.DataContext as Adherents;
+
+            ContentDialog dialog = new ContentDialog();
+            dialog.XamlRoot = this.XamlRoot;
+            dialog.Title = "Suppression d'adhérent";
+            dialog.PrimaryButtonText = "Supprimer";
+            dialog.CloseButtonText = "Annuler";
+            dialog.DefaultButton = ContentDialogButton.Primary;
+            dialog.Content = $"Voulez vous supprimer l'adhérent : {adherent.No_identification} ?";
+
+            ContentDialogResult resultat = await dialog.ShowAsync();
+
+            if (resultat == ContentDialogResult.Primary)
+            {
+                Singleton_BD.getInstance().supprimerAdherents(adherent);
+                Singleton_BD.getInstance().getAdherents();
+            }
         }
     }
 }

@@ -52,9 +52,6 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
                     case "iStat":
                         adminFrame.Navigate(typeof(PageAdminStat));
                         break;
-                    case "iCompte":
-                        adminFrame.Navigate(typeof(PageAdminCompte));
-                        break;
                     default:
                         break;
                 }
@@ -89,7 +86,7 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
                     adminFrame.Navigate(typeof(PageAdminActivites));
             }
             if (resultat == ContentDialogResult.Secondary)
-                Frame.Navigate(typeof(PagePubliqueAccueil));
+                Frame.Navigate(typeof(PagePublique));
         }
     }
 }

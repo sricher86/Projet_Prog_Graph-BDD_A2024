@@ -127,7 +127,7 @@ namespace Projet_Prog_Graph_BDD_A2024.Classes
         {
             get
             {
-                return $"{IdActivite};{Nom};{CoutOrganisation};{PrixVente};{IdCategorie};{IdAdmin};{Url};{Description}";
+                return $"{IdActivite};{Nom};{CoutOrganisation};{PrixVente};{IdCategorie};{IdAdmin};{Description};{noteEvaluation};{nbrNotes};{url}";
             }
         }
 
@@ -136,6 +136,14 @@ namespace Projet_Prog_Graph_BDD_A2024.Classes
             get 
             {
                 return Singleton_BD.getInstance().getNoteMoyenne(idActivite);
+            }
+        }
+
+        public int nbrAdhAct
+        {
+            get
+            {
+                return Singleton_BD.getInstance().getNbrAdhAct(idActivite);
             }
         }
     }

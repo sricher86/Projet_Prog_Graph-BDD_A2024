@@ -4,12 +4,105 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Projet_Prog_Graph_BDD_A2024.Pages"
+    xmlns:local1="using:Projet_Prog_Graph_BDD_A2024.Classes"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
-        <TextBlock Text="PAGE ADMIN STATISTIQUES"/>
-    </Grid>
+    <ScrollViewer>
+        <Grid Padding="20" HorizontalAlignment="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" x:Name="titre" FontSize="36" FontWeight="Medium" 
+            Foreground="Black" HorizontalAlignment="Center" Margin="30" Text="Statistiques"/>
+
+            <Grid Grid.Row="1" x:Name="stat" HorizontalAlignment="Center" Background="White" Width="1000" 
+                BorderThickness="1" BorderBrush="Black" Padding="25 0 25 0" Height="auto">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Width="auto" x:Name="stat1" Margin="20"
+                    TextAlignment="Center" VerticalAlignment="Top" FontSize="16"/>
+
+                <Rectangle Grid.Row="0" Margin="0 15 0 0" HorizontalAlignment="Stretch"  VerticalAlignment="Bottom" Fill="Black" Height="0.5"/>
+
+                <TextBlock Grid.Row="1" Width="auto" x:Name="stat2" Margin="20"
+                    TextAlignment="Center" VerticalAlignment="Top" FontSize="16"/>
+
+                <Rectangle Grid.Row="1" Margin="0 15 0 0" HorizontalAlignment="Stretch"  VerticalAlignment="Bottom" Fill="Black" Height="0.5"/>
+
+                <TextBlock Grid.Row="2" Text="Nombre d’adhérents pour chacune des activités : " Width="auto"
+                    TextAlignment="Center" VerticalAlignment="Top" FontSize="16" Margin="15"/>
+
+                <GridView Grid.Row="3" SelectionMode="None" BorderThickness="0.5" BorderBrush="Black" Margin="0 15 0 20" 
+                    x:Name="stat3" HorizontalAlignment="Center" Background="White" Width="auto" Height="200">
+                    <GridView.ItemTemplate>
+                        <DataTemplate x:DataType="local1:Activite">
+                            <Grid Width="Auto" MinWidth="250" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0">
+                                <StackPanel Orientation="Horizontal" Margin="10" HorizontalAlignment="Center">
+                                    <TextBlock Text="{x:Bind Nom}" FontFamily="Segoe UI" FontWeight="Normal" FontSize="14" 
+                                    HorizontalAlignment="Left" Style="{ThemeResource CaptionTextBlockStyle}" Margin="5,0,0,0"/>
+                                    <TextBlock Text=" - " FontSize="14" HorizontalAlignment="Left" FontFamily="Segoe UI" FontWeight="Normal" 
+                                    Style="{ThemeResource CaptionTextBlockStyle}" Margin="5,0,0,0"/>
+                                    <TextBlock Text="{x:Bind nbrAdhAct}" FontFamily="Segoe UI" FontWeight="Normal" FontSize="14" 
+                                    HorizontalAlignment="Left" Style="{ThemeResource CaptionTextBlockStyle}" Margin="5,0,0,0"/>
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </GridView.ItemTemplate>
+                </GridView>
+
+                <Rectangle Grid.Row="3" Margin="0 15 0 0" HorizontalAlignment="Stretch"  VerticalAlignment="Bottom" Fill="Black" Height="0.5"/>
+
+                <TextBlock Grid.Row="4" Text="Moyenne des notes d’appréciation pour chacune des activités : " Width="auto"
+                    TextAlignment="Center" VerticalAlignment="Top" FontSize="16" Margin="15"/>
+
+                <GridView Grid.Row="5" SelectionMode="None" BorderThickness="0.5" BorderBrush="Black" Margin="0 15 0 20"
+                    x:Name="stat4" HorizontalAlignment="Center" Background="White" Width="auto" Height="200">
+                    <GridView.ItemTemplate>
+                        <DataTemplate x:DataType="local1:Activite">
+                            <Grid Width="Auto" MinWidth="250" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0">
+                                <StackPanel Orientation="Horizontal" Margin="10" HorizontalAlignment="Center">
+                                    <TextBlock Text="{x:Bind Nom}" FontFamily="Segoe UI" FontWeight="Normal" FontSize="14" 
+                                    HorizontalAlignment="Left" Style="{ThemeResource CaptionTextBlockStyle}" Margin="5,0,0,0"/>
+                                    <TextBlock Text=" - " FontSize="14" HorizontalAlignment="Left" FontFamily="Segoe UI" FontWeight="Normal" 
+                                    Style="{ThemeResource CaptionTextBlockStyle}" Margin="5,0,0,0"/>
+                                    <TextBlock Text="{x:Bind noteEvaluationMoyenne}" FontFamily="Segoe UI" FontWeight="Normal" FontSize="14" 
+                                    HorizontalAlignment="Left" Style="{ThemeResource CaptionTextBlockStyle}" Margin="5,0,0,0"/>
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </GridView.ItemTemplate>
+                </GridView>
+
+                <Rectangle Grid.Row="5" Margin="0 15 0 0" HorizontalAlignment="Stretch"  VerticalAlignment="Bottom" Fill="Black" Height="0.5"/>
+
+                <TextBlock Grid.Row="6" Text="" Width="auto" x:Name="stat5" Margin="20"
+                    TextAlignment="Center" VerticalAlignment="Top" FontSize="16"/>
+
+                <Rectangle Grid.Row="6" Margin="0 15 0 0" HorizontalAlignment="Stretch"  VerticalAlignment="Bottom" Fill="Black" Height="0.5"/>
+
+                <TextBlock Grid.Row="7" Text="" Width="auto" x:Name="stat6" Margin="20"
+                    TextAlignment="Center" VerticalAlignment="Top" FontSize="16"/>
+
+                <Rectangle Grid.Row="7" Margin="0 15 0 0" HorizontalAlignment="Stretch"  VerticalAlignment="Bottom" Fill="Black" Height="0.5"/>
+
+                <TextBlock Grid.Row="8" Text="" Width="auto" x:Name="stat7" Margin="20"
+                    TextAlignment="Center" VerticalAlignment="Top" FontSize="16"/>
+            </Grid>
+        </Grid>
+    </ScrollViewer>
 </Page>
