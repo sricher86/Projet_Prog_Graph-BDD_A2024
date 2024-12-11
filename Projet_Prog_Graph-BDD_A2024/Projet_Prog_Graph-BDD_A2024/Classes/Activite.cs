@@ -139,12 +139,12 @@ namespace Projet_Prog_Graph_BDD_A2024.Classes
             }
         }
 
-        public int nbrAdhAct
-        {
-            get
-            {
-                return Singleton_BD.getInstance().getNbrAdhAct(idActivite);
-            }
-        }
+        //public int nbrAdhAct
+        //{
+        //    get
+        //    {
+        //        //return Singleton_BD.getInstance().getNbrAdhAct(idActivite);
+        //    }
+        //}
     }
 }

@@ -1,4 +1,3 @@
-    
 <Page
     x:Class="Projet_Prog_Graph_BDD_A2024.Pages.PagePublique"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -25,17 +24,6 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Grid.Column="1" x:Name="titreAccueil" FontSize="36" FontWeight="Medium" Foreground="Black" Margin="80 20 0 20">Activités</TextBlock>
-            <Button Grid.Column="2" x:Name="btnConnexion" Click="btnConnexion_Click" Width="auto" Margin="15" Padding="10" CornerRadius="15" Background="Black" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Stretch" HorizontalContentAlignment="Left" VerticalContentAlignment="Center">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto"/>
-                        <ColumnDefinition Width="auto"/>
-                    </Grid.ColumnDefinitions>
-
-                    <SymbolIcon Symbol="Switch" Grid.Column="0" Margin="0 0 15 0"/>
-                    <TextBlock Text="Connexion" x:Name="iConnexion" Grid.Column="1"/>
-                </Grid>
-            </Button>
         </Grid>
         <TextBlock Grid.Row="1" x:Name="err" FontSize="36" FontWeight="Medium" Foreground="Red  " HorizontalAlignment="Center" Margin="20"></TextBlock>
 
@@ -58,26 +46,4 @@
             </GridView.ItemTemplate>
         </GridView>
     </Grid>
-    <!--<Grid Background="LightGray">
-        <NavigationView 
-            PaneDisplayMode="Left" 
-            PaneTitle="Centre D'activités ProSport"
-            x:Name="navView"
-            IsSettingsVisible="False" 
-            IsBackButtonVisible="Collapsed"
-            IsPaneOpen="False"
-            SelectionChanged="navView_SelectionChanged">
-            <NavigationView.MenuItems>
-                    <NavigationViewItem Content="Activités" x:Name="iActivites" Icon="AllApps"/>
-                    <NavigationViewItem Content="Inscription" x:Name="iInscription" Icon="Library"/>
-            </NavigationView.MenuItems>
-
-                <NavigationView.FooterMenuItems>
-                    <NavigationViewItem Content="Compte" x:Name="iCompte" Icon="Contact"/>
-                    <NavigationViewItem Content="Se déconnecter" x:Name="iDeconnexion" Icon="Switch"/>
-                </NavigationView.FooterMenuItems>
-
-                <Frame x:Name="PubliqueFrame"/>
-            </NavigationView>
-        </Grid>-->
 </Page>

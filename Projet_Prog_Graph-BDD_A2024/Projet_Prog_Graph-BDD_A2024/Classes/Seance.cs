@@ -99,12 +99,12 @@ namespace Projet_Prog_Graph_BDD_A2024.Classes
             }
         }
 
-        public string StringAct
-        {
-            get
-            {
-                return Singleton_BD.getInstance().getActById(idActivite);
-            }
-        }
+        //public string StringAct
+        //{
+        //    get
+        //    {
+        //        return Singleton_BD.getInstance().getActById(idActivite);
+        //    }
+        //}
     }
 }
