@@ -23,11 +23,18 @@ namespace Projet_Prog_Graph_BDD_A2024.Dialogs
     {
         bool valide = true;
 
-        Seance newSeance = new Seance();
+        int idSeance;
+        DateTime dateOrganisation;
+        int heureOrganisation;
+        int nbrPlaceDisponible;
+        double noteAppreciation;
+        string idAdmin = "1000";
+        int idActivite;
 
         public DialogAdminAjoutSeance()
         {
             this.InitializeComponent();
+            Singleton_BD.getInstance().getActivites();
             cbx_listeActivites.ItemsSource = Singleton_BD.getInstance().getListeNomsActivites();
         }
 
@@ -35,8 +42,10 @@ namespace Projet_Prog_Graph_BDD_A2024.Dialogs
         {
             resetErreurs();
 
+            idSeance = (Singleton_BD.getInstance().getListeSeance().Count() + 1);
+
             if (tbx_date.SelectedDate.HasValue == true)
-                newSeance.DateOrganisation = new DateTime(tbx_date.Date.Year, tbx_date.Date.Month, tbx_date.Date.Day);
+                dateOrganisation = new DateTime(tbx_date.Date.Year, tbx_date.Date.Month, tbx_date.Date.Day);
             else
             {
                 tbx_erreur_date.Text = "La date d'organisation ne peut pas être vide";
@@ -48,7 +57,7 @@ namespace Projet_Prog_Graph_BDD_A2024.Dialogs
                 if (Int32.TryParse(tbx_heure.Text, out int heure))
                 {
                     if ((heure >= 1) && (heure <= 24))
-                        newSeance.HeureOrganisation = heure;
+                        heureOrganisation = heure;
                     else
                     {
                         tbx_erreur_heure.Text = "L'heure d'organisation doit être un nombre entier entre 1 et 24";
@@ -70,7 +79,7 @@ namespace Projet_Prog_Graph_BDD_A2024.Dialogs
             if (tbx_places.Text.Trim() != "")
             {
                 if (Int32.TryParse(tbx_places.Text, out int places))
-                    newSeance.NbrPlaceDisponible = places;
+                    nbrPlaceDisponible = places;
                 else
                 {
                     tbx_erreur_places.Text = "Le nombre de places disponible doit être un nombre entier";
@@ -88,7 +97,7 @@ namespace Projet_Prog_Graph_BDD_A2024.Dialogs
             //    if (Double.TryParse(tbx_note.Text, out double note))
             //    {
             //        if ((note >= 1) && (note <= 5))
-            //            newSeance.NoteAppreciation = note;
+            //            noteAppreciation = note;
             //        else
             //        {
             //            tbx_erreur_note.Text = "La note d'appréciation doit être un nombre entre 1 et 5";
@@ -108,11 +117,19 @@ namespace Projet_Prog_Graph_BDD_A2024.Dialogs
             //}
 
             if (cbx_listeActivites.SelectedIndex != -1)
-                newSeance.IdActivite = (cbx_listeActivites.SelectedIndex + 1);
+            {
+                idActivite = (cbx_listeActivites.SelectedIndex + 1);
+                System.Diagnostics.Debug.WriteLine(idActivite);
+            }
             else
             {
                 tbx_erreur_activite.Text = "Veuillez choisir une activité";
                 valide = false;
+            }
+
+            if (valide == true)
+            {
+                Singleton_BD.getInstance().addSeance(new Seance(idSeance, dateOrganisation, heureOrganisation, nbrPlaceDisponible, noteAppreciation, idAdmin, idActivite));
             }
         }
 

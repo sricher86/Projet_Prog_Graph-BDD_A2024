@@ -162,6 +162,7 @@ namespace Projet_Prog_Graph_BDD_A2024.Classes
             try
             {
                 listeActivites.Clear();
+                listeNomsActivites.Clear();
 
                 int idActivite = 0;
                 string nom = "";
@@ -345,6 +346,7 @@ namespace Projet_Prog_Graph_BDD_A2024.Classes
             try
             {
                 listeCategories.Clear();
+                listeTypeCategories.Clear();
 
                 MySqlCommand commande = new MySqlCommand();
                 commande.Connection = con;
@@ -375,139 +377,6 @@ namespace Projet_Prog_Graph_BDD_A2024.Classes
             {
                 Console.WriteLine(e.Message);
                 con.Close();
-            }
-        }
-
-
-        public void addActivite(Activite activite)
-        {
-            try
-            {
-                MySqlCommand commande = new MySqlCommand();
-
-                commande.Connection = con;
-                commande.CommandText = "INSERT INTO activites VALUES(@idActivite, @nom, @coutOrganisation, @prixVente, @idCategorie, @idAdmin, @description, @noteEvaluation, @nbrNotes)";
-                commande.Parameters.AddWithValue("@idActivite", activite.IdActivite);
-                commande.Parameters.AddWithValue("@nom", activite.Nom);
-                commande.Parameters.AddWithValue("@coutOrganisation", activite.CoutOrganisation);
-                commande.Parameters.AddWithValue("@prixVente", activite.PrixVente);
-                commande.Parameters.AddWithValue("@idCategorie", activite.IdCategorie);
-                commande.Parameters.AddWithValue("@idAdmin", activite.IdAdmin);
-                commande.Parameters.AddWithValue("@description", activite.Description);
-                commande.Parameters.AddWithValue("@noteEvaluation", activite.NoteEvaluation);
-                commande.Parameters.AddWithValue("@nbrNotes", activite.NbrNotes);
-
-                con.Open();
-                commande.Prepare();
-                commande.ExecuteNonQuery();
-
-                con.Close();
-
-                getActivites();
-            }
-            catch (Exception ex)
-            {
-                if (con.State == System.Data.ConnectionState.Open)
-                    con.Close();
-            }
-        }
-
-        public void supprimerActivite(Activite activite)
-        {
-            try
-            {
-                MySqlCommand commande = new MySqlCommand();
-                commande.Connection = con;
-                commande.CommandText = $"DELETE FROM activites WHERE idActivite = '{activite.IdActivite}'";
-
-                con.Open();
-                int i = commande.ExecuteNonQuery();
-
-                con.Close();
-                getActivites();
-            }
-            catch (Exception ex)
-            {
-                if (con.State == System.Data.ConnectionState.Open)
-                    con.Close();
-            }
-        }
-
-        public void addCategorie(Categorie categorie)
-        {
-            try
-            {
-                MySqlCommand commande = new MySqlCommand();
-
-                commande.Connection = con;
-                commande.CommandText = "INSERT INTO categories (idCategorie, type, idAdmin, url) VALUES(@idCategorie, @type, @idAdmin, @url)";
-                commande.Parameters.AddWithValue("@idCategorie", categorie.IdCategorie);
-                commande.Parameters.AddWithValue("@type", categorie.Type);
-                commande.Parameters.AddWithValue("@idAdmin", categorie.IdAdmin);
-                commande.Parameters.AddWithValue("@url", categorie.Url);
-
-                con.Open();
-                commande.Prepare();
-                commande.ExecuteNonQuery();
-
-                con.Close();
-
-                getCategories();
-            }
-            catch (Exception ex)
-            {
-                if (con.State == System.Data.ConnectionState.Open)
-                    con.Close();
-            }
-        }
-
-        public void addAdherent(Adherents adherent)
-        {
-            try
-            {
-                MySqlCommand commande = new MySqlCommand();
-
-                commande.Connection = con;
-                commande.CommandText = "INSERT INTO Adherents (nom, prenom, adresse, dateDeNaissance, idAdmin) VALUES (@nom, @prenom, @adresse, @dateDeNaissance, @idAdmin)";
-                commande.Parameters.AddWithValue("@nom", adherent.Nom);
-                commande.Parameters.AddWithValue("@prenom", adherent.Prenom);
-                commande.Parameters.AddWithValue("@adresse", adherent.Adresse);
-                commande.Parameters.AddWithValue("@dateDeNaissance", adherent.DateDeNaissance);
-                commande.Parameters.AddWithValue("@idAdmin", adherent.IdAdmin);
-
-                con.Open();
-                commande.Prepare();
-                commande.ExecuteNonQuery();
-
-                con.Close();
-
-                getAdherents();
-            }
-            catch (Exception ex)
-            {
-                if (con.State == System.Data.ConnectionState.Open)
-                    con.Close();
-            }
-        }
-
-        public void supprimerAdherents(Adherents adherent)
-        {
-            try
-            {
-                MySqlCommand commande = new MySqlCommand();
-                commande.Connection = con;
-                commande.CommandText = $"DELETE FROM Adherents WHERE no_identification = '{adherent.No_identification}'";
-
-                con.Open();
-                int i = commande.ExecuteNonQuery();
-
-                con.Close();
-                getActivites();
-            }
-            catch (Exception ex)
-            {
-                if (con.State == System.Data.ConnectionState.Open)
-                    con.Close();
             }
         }
 
@@ -659,6 +528,310 @@ namespace Projet_Prog_Graph_BDD_A2024.Classes
             {
                 Console.WriteLine(e.Message);
                 con.Close();
+            }
+        }
+
+        public int getNbrAdhAct(int idAct)
+        {
+            int nbrParticipants = 0;
+            try
+            {
+                MySqlCommand commande = new MySqlCommand();
+                commande.Connection = con;
+                commande.CommandText = "SELECT nbrParticipants FROM nbrAdhAct JOIN activites act on nbrAdhAct.activite = act.nom WHERE idActivite = " + idAct;
+                con.Open();
+                MySqlDataReader reader = commande.ExecuteReader();
+                while (reader.Read())
+                {
+                    nbrParticipants = reader.GetInt32("nbrParticipants");
+                }
+                reader.Close();
+                con.Close();
+                return nbrParticipants;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                con.Close();
+            }
+            return nbrParticipants;
+        }
+        public string getAdhPlusActif()
+        {
+            string partPlusActif = "";
+            try
+            {
+                MySqlCommand commande = new MySqlCommand();
+                commande.Connection = con;
+                commande.CommandText = "SELECT CONCAT(prenom, ' ', nom, ' (', a.no_identification, ') -> ', nbrSeances, ' séances') AS partPlusActif " +
+                    "FROM partPlusActif JOIN adherents a on partPlusActif.no_identification = a.no_identification";
+
+                con.Open();
+                MySqlDataReader reader = commande.ExecuteReader();
+                while (reader.Read())
+                {
+                    partPlusActif = reader.GetString("partPlusActif");
+                }
+                reader.Close();
+                con.Close();
+                return partPlusActif;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                con.Close();
+            }
+            return partPlusActif;
+        }
+
+        public double getNoteMoyenneActs()
+        {
+            double moyenne = 0;
+            try
+            {
+                MySqlCommand commande = new MySqlCommand();
+                commande.Connection = con;
+                commande.CommandText = "SELECT * FROM moyenneNotesAppAct";
+                con.Open();
+                MySqlDataReader reader = commande.ExecuteReader();
+                //read values from SQL command and store in vars, in order to add values to Equipe list
+                while (reader.Read())
+                {
+                    moyenne = reader.GetDouble("moyenneNotesApp");
+                }
+                reader.Close();
+                con.Close();
+                return moyenne;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                con.Close();
+            }
+            return moyenne;
+        }
+        public string getAdhPlusAge()
+        {
+            string adherentPlusAge = "";
+            try
+            {
+                MySqlCommand commande = new MySqlCommand();
+                commande.Connection = con;
+                commande.CommandText = "SELECT CONCAT(adherentPlusAge(), ' (', no_identification, ') -> ', age, ' ans') AS adherentPlusAge " +
+                    "FROM adherents WHERE CONCAT(prenom, ' ', nom) = adherentPlusAge()";
+                con.Open();
+                MySqlDataReader reader = commande.ExecuteReader();
+                while (reader.Read())
+                {
+                    adherentPlusAge = reader.GetString("adherentPlusAge");
+                }
+                reader.Close();
+                con.Close();
+                return adherentPlusAge;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                con.Close();
+            }
+            return adherentPlusAge;
+        }
+
+        public void addActivite(Activite activite)
+        {
+            try
+            {
+                MySqlCommand commande = new MySqlCommand();
+
+                commande.Connection = con;
+                commande.CommandText = "INSERT INTO activites VALUES(@idActivite, @nom, @coutOrganisation, @prixVente, @idCategorie, @idAdmin, @description, @noteEvaluation, @nbrNotes)";
+                commande.Parameters.AddWithValue("@idActivite", activite.IdActivite);
+                commande.Parameters.AddWithValue("@nom", activite.Nom);
+                commande.Parameters.AddWithValue("@coutOrganisation", activite.CoutOrganisation);
+                commande.Parameters.AddWithValue("@prixVente", activite.PrixVente);
+                commande.Parameters.AddWithValue("@idCategorie", activite.IdCategorie);
+                commande.Parameters.AddWithValue("@idAdmin", activite.IdAdmin);
+                commande.Parameters.AddWithValue("@description", activite.Description);
+                commande.Parameters.AddWithValue("@noteEvaluation", activite.NoteEvaluation);
+                commande.Parameters.AddWithValue("@nbrNotes", activite.NbrNotes);
+
+                con.Open();
+                System.Diagnostics.Debug.WriteLine("Open");
+                commande.Prepare();
+                System.Diagnostics.Debug.WriteLine("Prepare");
+                commande.ExecuteNonQuery();
+                System.Diagnostics.Debug.WriteLine("ExecuteNonQuery");
+
+                con.Close();
+                System.Diagnostics.Debug.WriteLine("Close");
+
+                getActivites();
+            }
+            catch (Exception ex)
+            {
+                if (con.State == System.Data.ConnectionState.Open)
+                {
+                    con.Close();
+                    System.Diagnostics.Debug.WriteLine("Close EX");
+                }
+            }
+        }
+
+        public void supprimerActivite(Activite activite)
+        {
+            try
+            {
+                MySqlCommand commande = new MySqlCommand();
+                commande.Connection = con;
+                commande.CommandText = $"DELETE FROM activites WHERE idActivite = '{activite.IdActivite}'";
+
+                con.Open();
+                int i = commande.ExecuteNonQuery();
+
+                con.Close();
+
+                getActivites();
+            }
+            catch (Exception ex)
+            {
+                if (con.State == System.Data.ConnectionState.Open)
+                    con.Close();
+            }
+        }
+
+        public void addCategorie(Categorie categorie)
+        {
+            try
+            {
+                MySqlCommand commande = new MySqlCommand();
+
+                commande.Connection = con;
+                commande.CommandText = "INSERT INTO categories (idCategorie, type, idAdmin, url) VALUES(@idCategorie, @type, @idAdmin, @url)";
+                commande.Parameters.AddWithValue("@idCategorie", categorie.IdCategorie);
+                commande.Parameters.AddWithValue("@type", categorie.Type);
+                commande.Parameters.AddWithValue("@idAdmin", categorie.IdAdmin);
+                commande.Parameters.AddWithValue("@url", categorie.Url);
+
+                con.Open();
+                commande.Prepare();
+                commande.ExecuteNonQuery();
+
+                con.Close();
+
+                getCategories();
+            }
+            catch (Exception ex)
+            {
+                if (con.State == System.Data.ConnectionState.Open)
+                    con.Close();
+            }
+        }
+
+        public void addAdherent(Adherents adherent)
+        {
+            try
+            {
+                MySqlCommand commande = new MySqlCommand();
+
+                commande.Connection = con;
+                commande.CommandText = "INSERT INTO Adherents (nom, prenom, adresse, dateDeNaissance, idAdmin) VALUES (@nom, @prenom, @adresse, @dateDeNaissance, @idAdmin)";
+                commande.Parameters.AddWithValue("@nom", adherent.Nom);
+                commande.Parameters.AddWithValue("@prenom", adherent.Prenom);
+                commande.Parameters.AddWithValue("@adresse", adherent.Adresse);
+                commande.Parameters.AddWithValue("@dateDeNaissance", adherent.DateDeNaissance);
+                commande.Parameters.AddWithValue("@idAdmin", adherent.IdAdmin);
+
+                con.Open();
+                commande.Prepare();
+                commande.ExecuteNonQuery();
+
+                con.Close();
+
+                getAdherents();
+            }
+            catch (Exception ex)
+            {
+                if (con.State == System.Data.ConnectionState.Open)
+                    con.Close();
+            }
+        }
+
+        public void supprimerAdherents(Adherents adherent)
+        {
+            try
+            {
+                MySqlCommand commande = new MySqlCommand();
+                commande.Connection = con;
+                commande.CommandText = $"DELETE FROM Adherents WHERE no_identification = '{adherent.No_identification}'";
+
+                con.Open();
+                int i = commande.ExecuteNonQuery();
+
+                con.Close();
+
+                getAdherents();
+            }
+            catch (Exception ex)
+            {
+                if (con.State == System.Data.ConnectionState.Open)
+                    con.Close();
+            }
+        }
+
+        public void addSeance(Seance seance)
+        {
+            try
+            {
+                MySqlCommand commande = new MySqlCommand();
+
+                commande.Connection = con;
+                commande.CommandText = "CALL newSeance(@dateOrganisation, @heureOrganisation, @nbrPlaceDisponible, @noteAppreciation, @idAdmin, @idActivite)";
+                commande.Parameters.AddWithValue("@dateOrganisation", seance.DateOrganisation);
+                commande.Parameters.AddWithValue("@heureOrganisation", seance.HeureOrganisation);
+                commande.Parameters.AddWithValue("@nbrPlaceDisponible", seance.NbrPlaceDisponible);
+                commande.Parameters.AddWithValue("@noteAppreciation", seance.NoteAppreciation);
+                commande.Parameters.AddWithValue("@idAdmin", seance.IdAdmin);
+                commande.Parameters.AddWithValue("@idActivite", seance.IdActivite);
+
+                con.Open();
+                commande.Prepare();
+                commande.ExecuteNonQuery();
+
+                con.Close();
+
+                getSeances();
+            }
+            catch (Exception ex)
+            {
+                if (con.State == System.Data.ConnectionState.Open)
+                {
+
+                    con.Close();
+                    System.Diagnostics.Debug.WriteLine("con Close EX");
+
+                }
+            }
+        }
+
+        public void supprimerSeances(Seance seance)
+        {
+            try
+            {
+                MySqlCommand commande = new MySqlCommand();
+                commande.Connection = con;
+                commande.CommandText = $"DELETE FROM seances WHERE idSeance = '{seance.IdSeance}'";
+
+                con.Open();
+                int i = commande.ExecuteNonQuery();
+
+                con.Close();
+
+                getSeances();
+            }
+            catch (Exception ex)
+            {
+                if (con.State == System.Data.ConnectionState.Open)
+                    con.Close();
             }
         }
 

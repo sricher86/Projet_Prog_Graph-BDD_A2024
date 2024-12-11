@@ -36,11 +36,11 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
 
             stat4.ItemsSource = Singleton_BD.getInstance().getListeActivites();
 
-            //stat5.Text = "Moyenne des notes d’appréciations pour toutes les activités : " + Singleton_BD.getInstance().getNoteMoyenneActs();
+            stat5.Text = "Moyenne des notes d’appréciations pour toutes les activités : " + Singleton_BD.getInstance().getNoteMoyenneActs();
 
-            //stat6.Text = "Adhérent plus actif : " + Singleton_BD.getInstance().getAdhPlusActif();
+            stat6.Text = "Adhérent plus actif : " + Singleton_BD.getInstance().getAdhPlusActif();
 
-            //stat7.Text = "Adhérent plus âgé : " + Singleton_BD.getInstance().getAdhPlusAge();
+            stat7.Text = "Adhérent plus âgé : " + Singleton_BD.getInstance().getAdhPlusAge();
         }
     }
 }

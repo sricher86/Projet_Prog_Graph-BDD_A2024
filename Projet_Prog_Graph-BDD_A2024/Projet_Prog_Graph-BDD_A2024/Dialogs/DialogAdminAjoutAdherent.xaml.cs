@@ -23,7 +23,13 @@ namespace Projet_Prog_Graph_BDD_A2024.Dialogs
     {
         bool valide = true;
 
-        Adherents newAdherent = new Adherents();
+        string no_identification = "";
+        string nom;
+        string prenom;
+        string adresse;
+        int age = 0;
+        DateTime dateDeNaissance;
+        string idAdmin = "1000";
 
         public DialogAdminAjoutAdherent()
         {
@@ -35,7 +41,7 @@ namespace Projet_Prog_Graph_BDD_A2024.Dialogs
             resetErreurs();
 
             if (tbx_nom.Text.Trim() != "")
-                newAdherent.Nom = tbx_nom.Text;
+                nom = tbx_nom.Text;
             else
             {
                 tbx_erreur_nom.Text = "Le nom ne peut pas être vide";
@@ -43,15 +49,15 @@ namespace Projet_Prog_Graph_BDD_A2024.Dialogs
             }
 
             if (tbx_prenom.Text.Trim() != "")
-                newAdherent.Prenom = tbx_prenom.Text;
+                prenom = tbx_prenom.Text;
             else
             {
                 tbx_erreur_prenom.Text = "Le prénom ne peut pas être vide";
                 valide = false;
             }
-                
+
             if (tbx_adresse.Text.Trim() != "")
-                newAdherent.Adresse = tbx_adresse.Text;
+                adresse = tbx_adresse.Text;
             else
             {
                 tbx_erreur_adresse.Text = "L'adresse ne peut pas être vide";
@@ -59,11 +65,16 @@ namespace Projet_Prog_Graph_BDD_A2024.Dialogs
             }
 
             if (tbx_date.SelectedDate.HasValue == true)
-                newAdherent.DateDeNaissance = new DateTime(tbx_date.Date.Year, tbx_date.Date.Month, tbx_date.Date.Day);
+                dateDeNaissance = new DateTime(tbx_date.Date.Year, tbx_date.Date.Month, tbx_date.Date.Day);
             else
             {
                 tbx_erreur_date.Text = "La date de naissance ne peut pas être vide";
                 valide = false;
+            }
+
+            if (valide == true)
+            {
+                Singleton_BD.getInstance().addAdherent(new Adherents(no_identification, nom, prenom, adresse, dateDeNaissance, age, idAdmin));
             }
         }
 

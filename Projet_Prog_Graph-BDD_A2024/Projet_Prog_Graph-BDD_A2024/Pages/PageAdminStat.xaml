@@ -57,8 +57,8 @@
                                     HorizontalAlignment="Left" Style="{ThemeResource CaptionTextBlockStyle}" Margin="5,0,0,0"/>
                                     <TextBlock Text=" - " FontSize="14" HorizontalAlignment="Left" FontFamily="Segoe UI" FontWeight="Normal" 
                                     Style="{ThemeResource CaptionTextBlockStyle}" Margin="5,0,0,0"/>
-                                    <!--<TextBlock Text="{x:Bind nbrAdhAct}" FontFamily="Segoe UI" FontWeight="Normal" FontSize="14" 
-                                    HorizontalAlignment="Left" Style="{ThemeResource CaptionTextBlockStyle}" Margin="5,0,0,0"/>-->
+                                    <TextBlock Text="{x:Bind nbrAdhAct}" FontFamily="Segoe UI" FontWeight="Normal" FontSize="14" 
+                                    HorizontalAlignment="Left" Style="{ThemeResource CaptionTextBlockStyle}" Margin="5,0,0,0"/>
                                 </StackPanel>
                             </Grid>
                         </DataTemplate>

@@ -24,17 +24,17 @@
             </Grid.ColumnDefinitions>
 
             <Button
-                Grid.Column="0"
-                x:Name="btn_ajouter" 
-                Click="btn_ajouter_Click" 
-                Width="auto" 
-                Margin="15"
-                Padding="10"
-                CornerRadius="15"
-                Background="Black"
-                Foreground="White"
-                HorizontalAlignment="Center"
-            >
+            Grid.Column="0"
+            x:Name="btn_ajouter" 
+            Click="btn_ajouter_Click" 
+            Width="auto" 
+            Margin="15"
+            Padding="10"
+            CornerRadius="15"
+            Background="Black"
+            Foreground="White"
+            HorizontalAlignment="Center"
+        >
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto"/>
@@ -47,17 +47,17 @@
             </Button>
 
             <Button 
-                Grid.Column="1"
-                x:Name="btn_exporter" 
-                Click="btn_exporter_Click" 
-                Width="auto" 
-                Margin="15"
-                Padding="10"
-                CornerRadius="15"
-                Background="Black"
-                Foreground="White"
-                HorizontalAlignment="Center"
-            >
+            Grid.Column="1"
+            x:Name="btn_exporter" 
+            Click="btn_exporter_Click" 
+            Width="auto" 
+            Margin="15"
+            Padding="10"
+            CornerRadius="15"
+            Background="Black"
+            Foreground="White"
+            HorizontalAlignment="Center"
+        >
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto"/>
@@ -70,14 +70,14 @@
             </Button>
 
             <TextBlock Grid.Row="1" Grid.ColumnSpan="2" x:Name="titreAccueil" FontSize="36" 
-                FontWeight="Medium" Foreground="Black" HorizontalAlignment="Center" Margin="20" Text="Adhérents"/>
+            FontWeight="Medium" Foreground="Black" HorizontalAlignment="Center" Margin="20" Text="Adhérents"/>
 
             <GridView Grid.Row="2" Grid.ColumnSpan="2" SelectionMode="None"  BorderThickness="1" BorderBrush="Black" 
-                x:Name="adherents" HorizontalAlignment="Center" Background="White" MinWidth="800" MaxWidth="1000">
+            x:Name="adherents" HorizontalAlignment="Center" Background="White" MinWidth="800" MaxWidth="1000">
                 <GridView.ItemTemplate>
                     <DataTemplate x:DataType="local1:Adherents">
                         <Grid Margin="25 15 25 15" Background="AliceBlue" Width="400" 
-                            HorizontalAlignment="Left" VerticalAlignment="Center" Padding="10 10 0 10">
+                        HorizontalAlignment="Left" VerticalAlignment="Center" Padding="10 10 0 10">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition Height="auto"/>
@@ -94,49 +94,49 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Row="0" Grid.Column="0" Text="No_identification : "
-                                Margin="12,6,0,0"/>
+                            Margin="12,6,0,0"/>
 
                             <TextBlock Grid.Row="0" Grid.Column="1" Text="{x:Bind No_identification}"
-                                Margin="12,6,0,0"/>
+                            Margin="12,6,0,0"/>
 
                             <TextBlock Grid.Row="1" Grid.Column="0" Text="Nom : "
-                                Margin="12,6,0,0"/>
+                            Margin="12,6,0,0"/>
 
                             <TextBlock Grid.Row="1" Grid.Column="1" Text="{x:Bind Nom}"
-                                Margin="12,6,0,0"/>
+                            Margin="12,6,0,0"/>
 
                             <TextBlock Grid.Row="2" Grid.Column="0" Text="Prénom : "
-                                Margin="12,6,0,0"/>
+                            Margin="12,6,0,0"/>
 
                             <TextBlock Grid.Row="2" Grid.Column="1" Text="{x:Bind Prenom}"
-                                Margin="12,6,0,0"/>
+                            Margin="12,6,0,0"/>
 
                             <TextBlock Grid.Row="3" Grid.Column="0" Text="Adresse : "
-                                Margin="12,6,0,0"/>
+                            Margin="12,6,0,0"/>
 
                             <TextBlock Grid.Row="3" Grid.Column="1" Text="{x:Bind Adresse}"
-                                Margin="12,6,0,0"/>
+                            Margin="12,6,0,0"/>
 
                             <TextBlock Grid.Row="4" Grid.Column="0" Text="Date de naissance : "
-                                Margin="12,6,0,0"/>
+                            Margin="12,6,0,0"/>
 
                             <TextBlock Grid.Row="4" Grid.Column="1" Text="{x:Bind StringDDN}"
-                                Margin="12,6,0,0"/>
+                            Margin="12,6,0,0"/>
 
                             <TextBlock Grid.Row="5" Grid.Column="0" Text="Âge : "
-                                Margin="12,6,0,0"/>
+                            Margin="12,6,0,0"/>
 
                             <TextBlock Grid.Row="5" Grid.Column="1" Text="{x:Bind Age}"
-                                Margin="12,6,0,0"/>
+                            Margin="12,6,0,0"/>
 
                             <StackPanel Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" 
-                                HorizontalAlignment="Right" Margin="0 10 0 0">
+                            HorizontalAlignment="Right" Margin="0 10 0 0">
                                 <Button x:Name="Modify" Click="Modify_Click" HorizontalAlignment="Center" 
-                                    BorderBrush="Transparent" Margin="10" Style="{ThemeResource CaptionTextBlockStyle}">
+                                BorderBrush="Transparent" Margin="10" Style="{ThemeResource CaptionTextBlockStyle}">
                                     <SymbolIcon Symbol="Edit" Foreground="Green"/>
                                 </Button>
                                 <Button x:Name="Delete" Click="Delete_Click" HorizontalAlignment="Center" 
-                                    BorderBrush="Transparent" Margin="10" Style="{ThemeResource CaptionTextBlockStyle}">
+                                BorderBrush="Transparent" Margin="10" Style="{ThemeResource CaptionTextBlockStyle}">
                                     <SymbolIcon Symbol="Delete" Foreground="Red"/>
                                 </Button>
                             </StackPanel>
