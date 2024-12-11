@@ -778,5 +778,35 @@ namespace Projet_Prog_Graph_BDD_A2024.Classes
             }
             return adherentPlusAge;
         }
+
+        public string getActById(int idAct)
+        {
+            string activite = "";
+            try
+            {
+                MySqlCommand commande = new MySqlCommand();
+                commande.Connection = con;
+                commande.CommandText = "SELECT nom FROM activites WHERE idActivite = "+ idAct;
+
+                con.Open();
+
+                MySqlDataReader reader = commande.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    activite = reader.GetString("nom");
+                }
+                reader.Close();
+                con.Close();
+
+                return activite;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                con.Close();
+            }
+            return activite;
+        }
     }
 }

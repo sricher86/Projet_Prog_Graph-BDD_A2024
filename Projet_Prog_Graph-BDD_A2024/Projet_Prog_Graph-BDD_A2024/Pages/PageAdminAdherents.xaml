@@ -19,8 +19,8 @@
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
             <Button
@@ -72,7 +72,7 @@
             <TextBlock Grid.Row="1" Grid.ColumnSpan="2" x:Name="titreAccueil" FontSize="36" 
                 FontWeight="Medium" Foreground="Black" HorizontalAlignment="Center" Margin="20" Text="Adhérents"/>
 
-            <GridView Grid.Row="2" Grid.ColumnSpan="2" SelectionMode="Single"  BorderThickness="1" BorderBrush="Black" 
+            <GridView Grid.Row="2" Grid.ColumnSpan="2" SelectionMode="None"  BorderThickness="1" BorderBrush="Black" 
                 x:Name="adherents" HorizontalAlignment="Center" Background="White" MinWidth="800" MaxWidth="1000">
                 <GridView.ItemTemplate>
                     <DataTemplate x:DataType="local1:Adherents">

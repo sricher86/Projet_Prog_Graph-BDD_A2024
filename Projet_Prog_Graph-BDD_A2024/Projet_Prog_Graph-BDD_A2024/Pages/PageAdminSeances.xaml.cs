@@ -13,6 +13,8 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Projet_Prog_Graph_BDD_A2024.Dialogs;
+using Projet_Prog_Graph_BDD_A2024.Classes;
+using System.Diagnostics;
 
 
 // To learn more about WinUI, the WinUI project structure,
@@ -25,6 +27,9 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
         public PageAdminSeances()
         {
             this.InitializeComponent();
+            Singleton_BD.getInstance().getSeances();
+
+            seances.ItemsSource = Singleton_BD.getInstance().getListeSeance();
         }
 
         private async void btn_ajouter_Click(object sender, RoutedEventArgs e)
