@@ -11,130 +11,188 @@
     Closing="ContentDialog_Closing"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <StackPanel>
-        <TextBox 
-            x:Name="tbx_nom"
-            VerticalAlignment="Center"
-            Margin="5"
-            PlaceholderText="Nom de l'activité"
-            Header="Nom"
-            Width="auto"
-        />
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
 
-        <TextBlock 
-            x:Name="tbx_erreur_nom"
-            VerticalAlignment="Center"
-            Margin="5"
-            Width="auto"
-            Foreground="Red"
-        />
-
-        <TextBox 
-            x:Name="tbx_cout"
-            VerticalAlignment="Center"
-            Margin="5"
-            PlaceholderText="Coût de l'activité"
-            Header="Coût"
-            Width="auto"
-        />
-
-        <TextBlock 
-            x:Name="tbx_erreur_cout"
-            VerticalAlignment="Center"
-            Margin="5"
-            Width="auto"
-            Foreground="Red"
-        />
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
         <TextBox 
-            x:Name="tbx_prix"
-            VerticalAlignment="Center"
-            Margin="5"
-            PlaceholderText="Prix de l'activité"
-            Header="Prix"
-            Width="auto"
-        />
+        Grid.Row="0"
+        Grid.Column="0"
+        Grid.ColumnSpan="2"
+        x:Name="tbx_nom"
+        VerticalAlignment="Center"
+        Margin="5"
+        PlaceholderText="Nom de l'activité"
+        Header="Nom"
+        Width="auto"
+    />
 
         <TextBlock 
-            x:Name="tbx_erreur_prix"
-            VerticalAlignment="Center"
-            Margin="5"
-            Width="auto"
-            Foreground="Red"
-        />
+        Grid.Row="1"
+        Grid.Column="0"
+        Grid.ColumnSpan="2"
+        x:Name="tbx_erreur_nom"
+        VerticalAlignment="Center"
+        Margin="5"
+        Width="auto"
+        Foreground="Red"
+    />
 
         <TextBox 
-            x:Name="tbx_noteEvaluation"
-            VerticalAlignment="Center"
-            Margin="5"
-            PlaceholderText="Note d'évaluation de l'activité"
-            Header="Note"
-            Width="auto"
-        />
+        Grid.Row="2"
+        Grid.Column="0"
+        x:Name="tbx_cout"
+        VerticalAlignment="Center"
+        Margin="5"
+        PlaceholderText="Coût de l'activité"
+        Header="Coût"
+        Width="auto"
+    />
 
         <TextBlock 
-            x:Name="tbx_erreur_note"
-            VerticalAlignment="Center"
-            Margin="5"
-            Width="auto"
-            Foreground="Red"
-        />
+        Grid.Row="3"
+        Grid.Column="0"
+        x:Name="tbx_erreur_cout"
+        VerticalAlignment="Center"
+        Margin="5"
+        Width="auto"
+        Foreground="Red"
+    />
 
         <TextBox 
-            x:Name="tbx_description"
-            VerticalAlignment="Center"
-            Margin="5"
-            PlaceholderText="Description de l'activité"
-            Header="Description"
-            Width="auto"
-        />
+        Grid.Row="2"
+        Grid.Column="1"
+        x:Name="tbx_prix"
+        VerticalAlignment="Center"
+        Margin="5"
+        PlaceholderText="Prix de l'activité"
+        Header="Prix"
+        Width="auto"
+    />
 
         <TextBlock 
-            x:Name="tbx_erreur_description"
-            VerticalAlignment="Center"
-            Margin="5"
-            Width="auto"
-            Foreground="Red"
-        />
+        Grid.Row="3"
+        Grid.Column="1"
+        x:Name="tbx_erreur_prix"
+        VerticalAlignment="Center"
+        Margin="5"
+        Width="auto"
+        Foreground="Red"
+    />
+
+        <!--<TextBox 
+        Grid.Row="4"
+        Grid.Column="0"
+        Grid.ColumnSpan="2"
+        x:Name="tbx_noteEvaluation"
+        VerticalAlignment="Center"
+        Margin="5"
+        PlaceholderText="Note d'évaluation de l'activité"
+        Header="Note"
+        Width="auto"
+    />
+
+    <TextBlock 
+        Grid.Row="5"
+        Grid.Column="0"
+        Grid.ColumnSpan="2"
+        x:Name="tbx_erreur_note"
+        VerticalAlignment="Center"
+        Margin="5"
+        Width="auto"
+        Foreground="Red"
+    />-->
+
+        <TextBox 
+        Grid.Row="4"
+        Grid.Column="0"
+        Grid.ColumnSpan="2"
+        x:Name="tbx_description"
+        VerticalAlignment="Center"
+        Margin="5"
+        PlaceholderText="Description de l'activité"
+        Header="Description"
+        Width="auto"
+    />
+
+        <TextBlock 
+        Grid.Row="5"
+        Grid.Column="0"
+        Grid.ColumnSpan="2"
+        x:Name="tbx_erreur_description"
+        VerticalAlignment="Center"
+        Margin="5"
+        Width="auto"
+        Foreground="Red"
+    />
 
         <ComboBox 
-            x:Name="cbx_listeCategorie"
-            VerticalAlignment="Center"
-            PlaceholderText="Nom de la catégorie"
-            Margin="5"
-            Width="auto"
-            Header="Catégorie"
-            IsEditable="True"
-            TextSubmitted="tbx_listeCategorie_TextSubmitted"
-            SelectedIndex="-1"
-        />
+        Grid.Row="6"
+        Grid.Column="0"
+        Grid.ColumnSpan="2"
+        x:Name="cbx_listeCategorie"
+        VerticalAlignment="Center"
+        PlaceholderText="Nom de la catégorie"
+        Margin="5"
+        Width="auto"
+        Header="Catégorie"
+        IsEditable="True"
+        TextSubmitted="tbx_listeCategorie_TextSubmitted"
+        SelectedIndex="-1"
+    />
 
         <TextBlock 
-            x:Name="tbx_erreur_categorie"
-            VerticalAlignment="Center"
-            Margin="5"
-            Width="auto"
-            Foreground="Red"
-        />
+        Grid.Row="7"
+        Grid.Column="0"
+        Grid.ColumnSpan="2"
+        x:Name="tbx_erreur_categorie"
+        VerticalAlignment="Center"
+        Margin="5"
+        Width="auto"
+        Foreground="Red"
+    />
 
         <TextBox 
-            x:Name="tbx_url"
-            VerticalAlignment="Center"
-            Margin="5"
-            PlaceholderText="Lien de l'image de la catégorie"
-            Header="Lien de l'image"
-            Width="auto"
-            Visibility="Collapsed"
-        />
+        Grid.Row="8"
+        Grid.Column="0"
+        Grid.ColumnSpan="2"
+        x:Name="tbx_url"
+        VerticalAlignment="Center"
+        Margin="5"
+        PlaceholderText="Lien de l'image de la catégorie"
+        Header="Lien de l'image"
+        Width="auto"
+        Visibility="Collapsed"
+    />
 
         <TextBlock 
-            x:Name="tbx_erreur_url"
-            VerticalAlignment="Center"
-            Margin="5"
-            Width="auto"
-            Foreground="Red"
-        />
-    </StackPanel>
-
+        Grid.Row="9"
+        Grid.Column="0"
+        Grid.ColumnSpan="2"
+        x:Name="tbx_erreur_url"
+        VerticalAlignment="Center"
+        Margin="5"
+        Width="auto"
+        Foreground="Red"
+    />
+    </Grid>
+    
 </ContentDialog>
 

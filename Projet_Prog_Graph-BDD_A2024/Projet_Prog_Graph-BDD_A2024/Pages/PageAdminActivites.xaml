@@ -24,17 +24,17 @@
             </Grid.ColumnDefinitions>
 
             <Button
-                Grid.Column="0"
-                x:Name="btn_ajouter" 
-                Click="btn_ajouter_Click" 
-                Width="auto" 
-                Margin="15"
-                Padding="10"
-                CornerRadius="15"
-                Background="Black"
-                Foreground="White"
-                HorizontalAlignment="Center"
-            >
+            Grid.Column="0"
+            x:Name="btn_ajouter" 
+            Click="btn_ajouter_Click" 
+            Width="auto" 
+            Margin="15"
+            Padding="10"
+            CornerRadius="15"
+            Background="Black"
+            Foreground="White"
+            HorizontalAlignment="Center"
+        >
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto"/>
@@ -47,17 +47,17 @@
             </Button>
 
             <Button 
-                Grid.Column="1"
-                x:Name="btn_exporter" 
-                Click="btn_exporter_Click" 
-                Width="auto" 
-                Margin="15"
-                Padding="10"
-                CornerRadius="15"
-                Background="Black"
-                Foreground="White"
-                HorizontalAlignment="Center"
-            >
+            Grid.Column="1"
+            x:Name="btn_exporter" 
+            Click="btn_exporter_Click" 
+            Width="auto" 
+            Margin="15"
+            Padding="10"
+            CornerRadius="15"
+            Background="Black"
+            Foreground="White"
+            HorizontalAlignment="Center"
+        >
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto"/>
@@ -70,48 +70,48 @@
             </Button>
 
             <TextBlock Grid.Row="1" Grid.ColumnSpan="2" x:Name="titre" FontSize="36" FontWeight="Medium" 
-                Foreground="Black" HorizontalAlignment="Center" Margin="20" Text="Activités"/>
+            Foreground="Black" HorizontalAlignment="Center" Margin="20" Text="Activités"/>
 
             <ListView Height="500" BorderThickness="1" BorderBrush="{ThemeResource ControlStrongStrokeColorDefaultBrush}" 
-                Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" SelectionMode="None" x:Name="activites" HorizontalAlignment="Center" Background="White" Width="800">
+            Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" SelectionMode="None" x:Name="activites" HorizontalAlignment="Center" Background="White" Width="800">
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="local1:Activite">
                         <Grid Margin="0,12,0,12" AutomationProperties.Name="{x:Bind Nom}" Padding="15"
-                            BorderThickness="1" BorderBrush="{ThemeResource ControlStrongStrokeColorDefaultBrush}">
+                        BorderThickness="1" BorderBrush="{ThemeResource ControlStrongStrokeColorDefaultBrush}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" MinWidth="150"/>
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-                            
+
                             <Image Source="{x:Bind Url}" MaxHeight="100" Stretch="Fill"/>
 
                             <StackPanel Margin="12,0,0,0" Grid.Column="1">
                                 <StackPanel Orientation="Horizontal" Margin="0 0 0 0" HorizontalAlignment="Right">
                                     <TextBlock Text="{x:Bind noteEvaluationMoyenne}" FontFamily="Segoe UI" FontWeight="Normal" FontSize="14" 
-                                        HorizontalAlignment="Left" Style="{ThemeResource CaptionTextBlockStyle}" Margin="10,0,0,0"/>
+                                    HorizontalAlignment="Left" Style="{ThemeResource CaptionTextBlockStyle}" Margin="10,0,0,0"/>
                                     <Viewbox MaxHeight="15" MaxWidth="15">
                                         <SymbolIcon Symbol="SolidStar" Margin="5,0,0,0" HorizontalAlignment="Left" Style="{ThemeResource CaptionTextBlockStyle}"/>
                                     </Viewbox>
                                 </StackPanel>
                                 <TextBlock Text="{x:Bind Nom}" FontSize="16" FontWeight="SemiBold" Style="{ThemeResource BaseTextBlockStyle}"
-                                    HorizontalAlignment="Left" Margin="5,0,0,6" LineHeight="20"/>
+                                HorizontalAlignment="Left" Margin="5,0,0,6" LineHeight="20"/>
                                 <TextBlock Text="{x:Bind Description}" FontSize="14" FontFamily="Segoe UI" FontWeight="Normal" Style="{ThemeResource BodyTextBlockStyle}"
-                                    TextTrimming="CharacterEllipsis" Width="auto" MaxLines="1" Margin="5,0,0,0"/>
+                                TextTrimming="CharacterEllipsis" Width="auto" MaxLines="1" Margin="5,0,0,0"/>
                                 <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
                                     <TextBlock Text="Prix : " FontFamily="Segoe UI" FontWeight="Normal" FontSize="14" 
-                                        HorizontalAlignment="Left" Style="{ThemeResource CaptionTextBlockStyle}" Margin="5,0,0,0"/>
+                                    HorizontalAlignment="Left" Style="{ThemeResource CaptionTextBlockStyle}" Margin="5,0,0,0"/>
                                     <TextBlock Text="{x:Bind PrixVente}" FontSize="14" HorizontalAlignment="Left" FontFamily="Segoe UI" FontWeight="Normal" 
-                                        Style="{ThemeResource CaptionTextBlockStyle}" Margin="5,0,0,0"/>
+                                    Style="{ThemeResource CaptionTextBlockStyle}" Margin="5,0,0,0"/>
                                     <TextBlock Text="$" FontFamily="Segoe UI" FontWeight="Normal" FontSize="14" 
-                                        HorizontalAlignment="Left" Style="{ThemeResource CaptionTextBlockStyle}" Margin="5,0,0,0"/>
+                                    HorizontalAlignment="Left" Style="{ThemeResource CaptionTextBlockStyle}" Margin="5,0,0,0"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 10 0 0">
                                     <Button x:Name="Modify" Click="Modify_Click" HorizontalAlignment="Center" 
-                                        BorderBrush="Transparent" Margin="10" Style="{ThemeResource CaptionTextBlockStyle}">
+                                    BorderBrush="Transparent" Margin="10" Style="{ThemeResource CaptionTextBlockStyle}">
                                         <SymbolIcon Symbol="Edit" Foreground="Green"/>
                                     </Button>
                                     <Button x:Name="Delete" Click="Delete_Click" HorizontalAlignment="Center" 
-                                        BorderBrush="Transparent" Margin="10" Style="{ThemeResource CaptionTextBlockStyle}">
+                                    BorderBrush="Transparent" Margin="10" Style="{ThemeResource CaptionTextBlockStyle}">
                                         <SymbolIcon Symbol="Delete" Foreground="Red"/>
                                     </Button>
                                 </StackPanel>

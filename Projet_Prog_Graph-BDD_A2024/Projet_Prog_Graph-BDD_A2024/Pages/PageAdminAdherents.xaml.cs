@@ -57,15 +57,39 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
 
             Windows.Storage.StorageFile monFichier = await picker.PickSaveFileAsync();
 
-            List<Adherents> liste = new List<Adherents> (Singleton_BD.getInstance().getListeAdherents());
+            List<Adherents> liste = new List<Adherents>(Singleton_BD.getInstance().getListeAdherents());
 
             if (monFichier != null)
                 await Windows.Storage.FileIO.WriteLinesAsync(monFichier, liste.ConvertAll(x => x.StringCSV), Windows.Storage.Streams.UnicodeEncoding.Utf8);
         }
 
-        private void Modify_Click(object sender, RoutedEventArgs e)
+        private async void Modify_Click(object sender, RoutedEventArgs e)
         {
+            Button button = sender as Button;
 
+            Adherents adherent = button.DataContext as Adherents;
+
+            ContentDialog dialog = new ContentDialog();
+            dialog.XamlRoot = this.XamlRoot;
+            dialog.Title = "Modification d'adhérent";
+            dialog.PrimaryButtonText = "Modifier";
+            dialog.CloseButtonText = "Annuler";
+            dialog.DefaultButton = ContentDialogButton.Primary;
+            dialog.Content = $"Voulez vous modifier l'adhérent : {adherent.No_identification} ?";
+
+            ContentDialogResult resultat = await dialog.ShowAsync();
+
+            if (resultat == ContentDialogResult.Primary)
+            {
+                DialogAdminAjoutAdherent dialog2 = new DialogAdminAjoutAdherent();
+                dialog2.XamlRoot = this.XamlRoot;
+                dialog2.Title = "Modification d'un adhérent";
+                dialog2.PrimaryButtonText = "Modifier";
+                dialog2.CloseButtonText = "Annuler";
+                dialog2.DefaultButton = ContentDialogButton.Primary;
+
+                ContentDialogResult resultat2 = await dialog.ShowAsync();
+            }
         }
 
         private async void Delete_Click(object sender, RoutedEventArgs e)

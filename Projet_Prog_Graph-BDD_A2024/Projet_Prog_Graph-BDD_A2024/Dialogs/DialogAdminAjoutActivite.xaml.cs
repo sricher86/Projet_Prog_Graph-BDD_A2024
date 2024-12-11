@@ -26,23 +26,24 @@ namespace Projet_Prog_Graph_BDD_A2024.Dialogs
         Visibility visible = Visibility.Visible;
         Visibility collapse = Visibility.Collapsed;
 
-        int idActivite = 0;
-        string nom= "";
-        double coutOrganisation = 0;
-        double prixVente = 0;
-        double noteEvaluation = 0;
-        int idCategorie = 0;
+        int idActivite;
+        string nom;
+        double coutOrganisation;
+        double prixVente;
+        //double noteEvaluation;
+        int idCategorie;
         string idAdmin = "1000";
-        string url = "";
-        string description = "";
-        string type = "";
+        string url;
+        string description;
+        string type;
         int nbrNotes = 1;
 
 
         public DialogAdminAjoutActivite()
         {
             this.InitializeComponent();
-
+            Singleton_BD.getInstance().getActivites();
+            Singleton_BD.getInstance().getCategories();
             cbx_listeCategorie.ItemsSource = Singleton_BD.getInstance().getListeTypeCategories();
         }
 
@@ -101,24 +102,24 @@ namespace Projet_Prog_Graph_BDD_A2024.Dialogs
                 valide = false;
             }
 
-            if (tbx_noteEvaluation.Text.Trim() != "")
-            {
-                if (Double.TryParse(tbx_noteEvaluation.Text, out double note))
-                {
-                    noteEvaluation = note;
-                    valide = true;
-                }
-                else
-                {
-                    tbx_erreur_note.Text = "La note doit être un nombre";
-                    valide = false;
-                }
-            }
-            else
-            {
-                tbx_erreur_note.Text = "Veuillez inscrire une note d'évaluation";
-                valide = false;
-            }
+            //if (tbx_noteEvaluation.Text.Trim() != "")
+            //{
+            //    if (Double.TryParse(tbx_noteEvaluation.Text, out double note))
+            //    {
+            //        noteEvaluation = note;
+            //        valide = true;
+            //    }
+            //    else
+            //    {
+            //        tbx_erreur_note.Text = "La note doit être un nombre";
+            //        valide = false;
+            //    }
+            //}
+            //else
+            //{
+            //    tbx_erreur_note.Text = "Veuillez inscrire une note d'évaluation";
+            //    valide = false;
+            //}
 
             if (tbx_description.Text.Trim() != "")
             {
@@ -145,9 +146,15 @@ namespace Projet_Prog_Graph_BDD_A2024.Dialogs
                 }
             }
 
-            if(valide == true)
+            if (valide == true)
             {
-                Singleton_BD.getInstance().addActivite(new Activite(idActivite, nom, coutOrganisation, prixVente, noteEvaluation, idCategorie, idAdmin, url, description, nbrNotes));
+                if (tbx_url.Visibility == visible)
+                {
+                    Singleton_BD.getInstance().addCategorie(new Categorie(idCategorie, type, idAdmin, url));
+                    Singleton_BD.getInstance().addActivite(new Activite(idActivite, nom, coutOrganisation, prixVente, 0, idCategorie, idAdmin, "", description, 0));
+                }
+                else
+                    Singleton_BD.getInstance().addActivite(new Activite(idActivite, nom, coutOrganisation, prixVente, 0, idCategorie, idAdmin, "", description, 0));
             }
         }
 
@@ -206,15 +213,6 @@ namespace Projet_Prog_Graph_BDD_A2024.Dialogs
                         valide = false;
                     }
                 }
-
-                if(valide == true)
-                {
-                    Singleton_BD.getInstance().addCategorie(
-                        new Categorie(
-                            idCategorie, type, idAdmin, url
-                        )
-                    );
-                }
             }
         }
 
@@ -226,7 +224,7 @@ namespace Projet_Prog_Graph_BDD_A2024.Dialogs
             tbx_erreur_description.Text = String.Empty;
             tbx_erreur_categorie.Text = String.Empty;
             tbx_erreur_url.Text = String.Empty;
-            tbx_erreur_note.Text = String.Empty;
+            //tbx_erreur_note.Text = String.Empty;
         }
     }
 }

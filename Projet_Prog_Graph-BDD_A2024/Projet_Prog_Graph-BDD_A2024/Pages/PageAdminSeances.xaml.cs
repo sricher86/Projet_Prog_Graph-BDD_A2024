@@ -28,7 +28,6 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
         {
             this.InitializeComponent();
             Singleton_BD.getInstance().getSeances();
-
             seances.ItemsSource = Singleton_BD.getInstance().getListeSeance();
         }
 
@@ -36,7 +35,7 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
         {
             DialogAdminAjoutSeance dialog = new DialogAdminAjoutSeance();
             dialog.XamlRoot = this.XamlRoot;
-            dialog.Title = "Ajout d'une séance";    
+            dialog.Title = "Ajout d'une séance";
             dialog.PrimaryButtonText = "Ajouter";
             dialog.CloseButtonText = "Annuler";
             dialog.DefaultButton = ContentDialogButton.Primary;
@@ -49,9 +48,24 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
 
         }
 
-        private void Delete_Click(object sender, RoutedEventArgs e)
+        private async void Delete_Click(object sender, RoutedEventArgs e)
         {
+            Button button = sender as Button;
 
+            Seance seance = button.DataContext as Seance;
+
+            ContentDialog dialog = new ContentDialog();
+            dialog.XamlRoot = this.XamlRoot;
+            dialog.Title = "Suppression de séance";
+            dialog.PrimaryButtonText = "Supprimer";
+            dialog.CloseButtonText = "Annuler";
+            dialog.DefaultButton = ContentDialogButton.Primary;
+            dialog.Content = $"Voulez vous supprimer la séance : #{seance.IdSeance} ?";
+
+            ContentDialogResult resultat = await dialog.ShowAsync();
+
+            if (resultat == ContentDialogResult.Primary)
+                Singleton_BD.getInstance().supprimerSeances(seance);
         }
     }
 }

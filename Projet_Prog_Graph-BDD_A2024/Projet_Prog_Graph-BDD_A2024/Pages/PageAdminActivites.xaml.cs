@@ -59,13 +59,13 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
 
             Windows.Storage.StorageFile monFichier = await picker.PickSaveFileAsync();
 
-            List<Activite> liste = new List<Activite> (Singleton_BD.getInstance().getListeActivites());
+            List<Activite> liste = new List<Activite>(Singleton_BD.getInstance().getListeActivites());
 
             if (monFichier != null)
                 await Windows.Storage.FileIO.WriteLinesAsync(monFichier, liste.ConvertAll(x => x.StringCSV), Windows.Storage.Streams.UnicodeEncoding.Utf8);
         }
-        
-        private void Modify_Click(object sender, RoutedEventArgs e)
+
+        private async void Modify_Click(object sender, RoutedEventArgs e)
         {
 
         }
@@ -87,10 +87,7 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
             ContentDialogResult resultat = await dialog.ShowAsync();
 
             if (resultat == ContentDialogResult.Primary)
-            {
                 Singleton_BD.getInstance().supprimerActivite(activite);
-                Singleton_BD.getInstance().getActivites();
-            }
         }
 
     }
