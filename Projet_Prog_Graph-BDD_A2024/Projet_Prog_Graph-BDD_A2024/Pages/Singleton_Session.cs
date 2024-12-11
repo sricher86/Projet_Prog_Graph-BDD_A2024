@@ -17,6 +17,7 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
         public static Activite activiteCourante;
         public static Adherents adherentConnecte;
         public static Administrateur adminConnecte;
+        public static bool connexion;
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -26,6 +27,7 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
             adherentConnecte = null;
             userConnected = false;
             pageCourante = "";
+            connexion = false;
         }
 
         public static Singleton_Session getInstance()
@@ -41,24 +43,28 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
         {
             adherentConnecte = adh;
             UserConnected = true;
+            connexion = true;
         }
 
         public void adherentDeconn()
         {
             adherentConnecte = null;
             UserConnected = false;
+            connexion = false;
         }
 
         public void adminConn(Administrateur adm)
         {
             adminConnecte = adm;
             admin = true;
+            connexion = true;
         }
 
         public void adminDeconn()
         {
             adminConnecte = null;
             admin = false;
+            connexion = false;
         }
 
         protected void OnPropertyChanged(string propertyName)
@@ -93,6 +99,18 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
         {
             get { return adherentConnecte; }
             set { adherentConnecte = value; }
+        }
+
+        public static bool Admin
+        {
+            get { return admin; }
+            set { admin = value; }
+        }
+
+        public static bool Connexion
+        {
+            get { return connexion; }
+            set { connexion = value; }
         }
     }
 }

@@ -18,6 +18,7 @@ using System.Text;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using WinRT;
+using System.Diagnostics;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -63,6 +64,7 @@ namespace Projet_Prog_Graph_BDD_A2024.Dialogs
                     {
                         user = true;
                         Singleton_Session.getInstance().adherentConn(adh);
+                        this.InitializeComponent();
                     }
                 }
 
@@ -92,56 +94,39 @@ namespace Projet_Prog_Graph_BDD_A2024.Dialogs
                 Boolean user = false;
                 Boolean pass = false;
 
-                string passwordHashed = Hash(pbx_motDePasse.Password).ToLower();
+                string passwordHashed = Hash(pbx_motDePasse.Password).ToLower().Trim();
+
+                if (pbx_motDePasse.Password.Trim() == "")
+                {
+                    tbx_erreur_motDePasse.Text = "Le mot de passe ne peut pas être vide";
+                }
 
                 foreach (Administrateur a in adminList)
                 {
-                    if (tbx_id_admin.Text.Equals(a.IdAdmin))
+                    if (tbx_id_admin.Text.Trim().Equals(a.IdAdmin.Trim()))
                     {
-                        if (passwordHashed.Equals(a.MotDePasse))
+                        user = true;
+                        if (passwordHashed.Equals(a.MotDePasse.Trim()))
                         {
+                            pass = true;
                             Singleton_Session.getInstance().adminConn(a);
-                            valide = true;
+                            Debug.WriteLine(Singleton_Session.Admin);
                             tbx_erreur_authentification.Visibility = Visibility.Collapsed;
                             this.Result = SignInResult.SignInAdmin;
                         }
                     }
                 }
 
-                if (tbx_id_admin.Text.Trim() == "")
+                if (!user)
                 {
-                    tbx_erreur_id_admin.Text = "Le no. d'identification ne peut pas être vide";
-                    valide = false;
-                }
-                else
-                {
-                    if (!user)
-                    {
-                        tbx_erreur_id_admin.Text = "Erreur de no. d'identification";
-                        valide = false;
-                    }
+                    tbx_erreur_id_admin.Text = "Erreur de no. d'identification";
+                    tbx_erreur_authentification.Visibility = Visibility.Visible;
                 }
 
-                if (pbx_motDePasse.Password.Trim() == "")
+                if (!pass)
                 {
-                    tbx_erreur_motDePasse.Text = "Le mot de passe ne peut pas être vide";
-                    valide = false;
-                }
-                else
-                {
-                    if (!pass)
-                    {
-                        tbx_erreur_motDePasse.Text = "Erreur de mot de passe";
-                        valide = false;
-                    }
-                }
-
-                if ((tbx_id_admin.Text.Trim() != "") && (pbx_motDePasse.Password.Trim() != ""))
-                {
-                    if (!pass)
-                    {
-                        tbx_erreur_authentification.Visibility = Visibility.Visible;
-                    }
+                    tbx_erreur_motDePasse.Text = "Erreur de mot de passe";
+                    tbx_erreur_authentification.Visibility = Visibility.Visible;
                 }
             }
         }

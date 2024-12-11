@@ -69,7 +69,8 @@ namespace Projet_Prog_Graph_BDD_A2024.Classes
 
                 con.Open();
                 commande.Connection = con;
-                commande.CommandText = "Call getSeances('" + Singleton_Session.AdherentConnecte.No_identification + "', " + idAct + ");";
+                if (Singleton_Session.userConnected == true) commande.CommandText = "Call getSeances('" + Singleton_Session.AdherentConnecte.No_identification + "', " + idAct + ");";
+                else commande.CommandText = "Select * from seances where id="+idAct+";";
                 Debug.WriteLine(commande.CommandText);
                 reader = commande.ExecuteReader();
 
@@ -192,6 +193,7 @@ namespace Projet_Prog_Graph_BDD_A2024.Classes
                     idAdmin = reader.GetString("idAdmin").ToString();
                     description = reader.GetString("description").ToString();
                     nbrEvaluations = reader.GetInt32("nbrEvaluations");
+                    Debug.WriteLine(nbrEvaluations);
                     Activite activite = new Activite(idActivite, nom, coutOrganisation, prixVente, noteEvaluation, idCategorie, idAdmin, url, description, nbrEvaluations);
                     listeActivites.Add(activite);
 
@@ -206,7 +208,7 @@ namespace Projet_Prog_Graph_BDD_A2024.Classes
                     con.Open();
                     commande.Connection = con;
 
-                    commande.CommandText = "Select getUrl(" + a.IdActivite + ") as url;";
+                    commande.CommandText = "Select getUrl("+a.IdActivite+") as url;";
 
                     reader = commande.ExecuteReader();
 
@@ -214,10 +216,10 @@ namespace Projet_Prog_Graph_BDD_A2024.Classes
                     {
                         url = reader.GetString("url").ToString();
                         a.Url = url;
-                    }
 
-                    con.Close();
-                    reader.Close();
+                    }
+                        con.Close();
+                        reader.Close();
                 }
             }
             catch (Exception e)

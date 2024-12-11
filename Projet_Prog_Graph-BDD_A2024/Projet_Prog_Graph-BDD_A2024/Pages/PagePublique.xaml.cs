@@ -28,8 +28,8 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
         public PagePublique()
         {
             this.InitializeComponent();
-            Singleton_BD.getInstance().getActivites();
             Singleton_BD.getInstance().getCategories();
+            Singleton_BD.getInstance().getActivites();
             activites.ItemsSource = Singleton_BD.getInstance().getListeActivites();
         }
 
@@ -48,26 +48,5 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
         {
             //if (e.Parameter is not null) userType = (string)e.Parameter;
         }
-
-        private async void btnConnexion_Click(object sender, RoutedEventArgs e)
-        {
-            DialogAuthentification dialog = new DialogAuthentification();
-            dialog.XamlRoot = this.Content.XamlRoot;
-            dialog.PrimaryButtonText = "Connexion";
-            dialog.CloseButtonText = "Annuler";
-            dialog.DefaultButton = ContentDialogButton.Primary;
-
-            ContentDialogResult resultat = await dialog.ShowAsync();
-
-            if (resultat == ContentDialogResult.Primary)
-            {
-                if (dialog.Result == SignInResult.SignInAdherent)
-                    Frame.Navigate(typeof(PageConnexion));
-
-                if (dialog.Result == SignInResult.SignInAdmin)
-                    Frame.Navigate(typeof(PageAdministrateur));
-            }
-        }
-
     }
 }

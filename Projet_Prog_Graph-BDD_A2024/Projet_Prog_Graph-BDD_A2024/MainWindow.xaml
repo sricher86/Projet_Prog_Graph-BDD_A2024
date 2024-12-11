@@ -23,9 +23,9 @@
             >
                 <NavigationView.MenuItems>
                     <NavigationViewItem Content="Activites" x:Name="iActivites" Icon="Calendar"/>
-                    <NavigationViewItem Content="Activites" x:Name="iActivites" Icon="Calendar"/>
-                    <NavigationViewItem Content="Activites" x:Name="iActivites" Icon="Calendar"/>
-                    <NavigationViewItem Content="Activites" x:Name="iActivites" Icon="Calendar"/>
+                    <NavigationViewItem Content="Adherents" x:Name="iAdminAdherents" Icon="People"/>
+                    <NavigationViewItem Content="Seances" x:Name="iAdminSeances" Icon="Calendar"/>
+                    <NavigationViewItem Content="Statistiques" x:Name="iAdminStat" Icon="List"/>
                 </NavigationView.MenuItems>
 
                 <NavigationView.FooterMenuItems>
