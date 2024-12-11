@@ -22,7 +22,7 @@ namespace Projet_Prog_Graph_BDD_A2024.Dialogs
 {
     public sealed partial class DialogInscription : ContentDialog
     {
-        Adherents adherentConnecte = Singleton_BD.getInstance().AdherentConnecte;
+        Adherents adherentConnecte = Singleton_Session.AdherentConnecte;
         string no_identification;
         string prenom;
         string nom;

@@ -62,8 +62,7 @@ namespace Projet_Prog_Graph_BDD_A2024.Dialogs
                     if (tbx_id_adherent.Text.Equals(adh.No_identification))
                     {
                         user = true;
-                        Singleton_BD.getInstance().adherentConn(adh);
-                        Singleton_BD.getInstance().UserConnected = true;
+                        Singleton_Session.getInstance().adherentConn(adh);
                     }
                 }
 
@@ -99,9 +98,13 @@ namespace Projet_Prog_Graph_BDD_A2024.Dialogs
                 {
                     if (tbx_id_admin.Text.Equals(a.IdAdmin))
                     {
-                        user = true;
-
-                        if (passwordHashed.Equals(a.MotDePasse)) pass = true;
+                        if (passwordHashed.Equals(a.MotDePasse))
+                        {
+                            Singleton_Session.getInstance().adminConn(a);
+                            valide = true;
+                            tbx_erreur_authentification.Visibility = Visibility.Collapsed;
+                            this.Result = SignInResult.SignInAdmin;
+                        }
                     }
                 }
 
@@ -139,13 +142,6 @@ namespace Projet_Prog_Graph_BDD_A2024.Dialogs
                     {
                         tbx_erreur_authentification.Visibility = Visibility.Visible;
                     }
-                }
-
-                if (user && pass)
-                {
-                    valide = true;
-                    tbx_erreur_authentification.Visibility = Visibility.Collapsed;
-                    this.Result = SignInResult.SignInAdmin;
                 }
             }
         }

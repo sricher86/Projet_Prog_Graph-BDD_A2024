@@ -23,31 +23,12 @@
             >
                 <NavigationView.MenuItems>
                     <NavigationViewItem Content="Activites" x:Name="iActivites" Icon="Calendar"/>
+                    <NavigationViewItem Content="Activites" x:Name="iActivites" Icon="Calendar"/>
+                    <NavigationViewItem Content="Activites" x:Name="iActivites" Icon="Calendar"/>
+                    <NavigationViewItem Content="Activites" x:Name="iActivites" Icon="Calendar"/>
                 </NavigationView.MenuItems>
 
                 <NavigationView.FooterMenuItems>
-                    <!--<Button 
-                        x:Name="btnConnexion" 
-                        Click="btnConnexion_Click" 
-                        Width="auto" 
-                        Padding="0"
-                        Background="AliceBlue"
-                        BorderThickness="0"
-                        HorizontalAlignment="Stretch"
-                        VerticalAlignment="Stretch"
-                        HorizontalContentAlignment="Left"
-                        VerticalContentAlignment="Center"
-                    >
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="auto"/>
-                            </Grid.ColumnDefinitions>
-
-                            <SymbolIcon Symbol="Switch" Grid.Column="0" Margin="0 0 15 0" Visibility="Collapsed"/>
-                            <TextBlock Text="Deconnexion" x:Name="iDeconnexion" Grid.Column="1" Visibility="Collapsed"/>
-                        </Grid>
-                    </Button>-->
                     <NavigationViewItem Content="Connexion" x:Name="iConnexion" Icon="People" Visibility="Collapsed" Margin="0 0 0 150"/>
                     <NavigationViewItem Content="Deconnexion" x:Name="iDeconnexion" Icon="Switch" Visibility="Collapsed" Margin="0 0 0 150"/>
                 </NavigationView.FooterMenuItems>

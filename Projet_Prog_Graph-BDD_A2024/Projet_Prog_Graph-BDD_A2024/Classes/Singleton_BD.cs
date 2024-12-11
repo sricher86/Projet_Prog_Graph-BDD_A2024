@@ -1,16 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
+using Projet_Prog_Graph_BDD_A2024.Pages;
 
 namespace Projet_Prog_Graph_BDD_A2024.Classes
 {
-    internal class Singleton_BD
+    internal class Singleton_BD: INotifyPropertyChanged
     {
         ObservableCollection<Activite> listeActivites;
         ObservableCollection<Adherents> listeAdherents;
@@ -26,13 +28,12 @@ namespace Projet_Prog_Graph_BDD_A2024.Classes
         List<DateTime> listeDateSeances;
 
         static Singleton_BD instance = null;
-        Adherents adherentConnecte;
-        Adherents adherentInscription;
         Seance seanceInscription;
         Activite activiteSelectionne;
+        public static Adherents adherentInscription;
         MySqlConnection con;
-        bool userConnected;
-        bool adminConnected;
+
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         public Singleton_BD()
         {
@@ -49,9 +50,6 @@ namespace Projet_Prog_Graph_BDD_A2024.Classes
             listeNomsActivites = new List<String>();
             listeDateSeances = new List<DateTime>();
 
-            adherentConnecte = new Adherents();
-            userConnected = false;
-
             getActivites();
             getAdherents();
             getAdherentsSeances();
@@ -59,12 +57,6 @@ namespace Projet_Prog_Graph_BDD_A2024.Classes
             getCategories();
             getSeances();
             getStatistiques();
-        }
-
-        public void adherentConn(Adherents adh)
-        {
-            adherentConnecte = adh;
-            userConnected = true;
         }
 
         public ObservableCollection<Seance> getListeSeancesDispo(int idAct)
@@ -77,7 +69,7 @@ namespace Projet_Prog_Graph_BDD_A2024.Classes
 
                 con.Open();
                 commande.Connection = con;
-                commande.CommandText = "Call getSeances('" + adherentConnecte.No_identification + "', " + idAct + ");";
+                commande.CommandText = "Call getSeances('" + Singleton_Session.AdherentConnecte.No_identification + "', " + idAct + ");";
                 Debug.WriteLine(commande.CommandText);
                 reader = commande.ExecuteReader();
 
@@ -109,11 +101,11 @@ namespace Projet_Prog_Graph_BDD_A2024.Classes
 
         public void inscriptionAdherent()
         {
-            if (adherentConnecte != null && seanceInscription != null)
+            if (Singleton_Session.AdherentConnecte != null && seanceInscription != null)
             {
                 try
                 {
-                    string no_identification = adherentConnecte.No_identification;
+                    string no_identification = Singleton_Session.AdherentConnecte.No_identification;
                     int idSeance = seanceInscription.IdSeance;
                     int idActivite = seanceInscription.IdActivite;
 
@@ -668,23 +660,17 @@ namespace Projet_Prog_Graph_BDD_A2024.Classes
             }
         }
 
+        protected void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
         public static Singleton_BD getInstance()
         {
             if (instance == null)
                 instance = new Singleton_BD();
 
             return instance;
-        }
-
-        public bool UserConnected { 
-            get { return userConnected; }
-            set { this.userConnected = value; }
-        }
-
-        public Adherents AdherentConnecte
-        {
-            get { return adherentConnecte; }
-            set { this.adherentConnecte = value; }
         }
 
         public Seance SeanceInscription
@@ -742,6 +728,5 @@ namespace Projet_Prog_Graph_BDD_A2024.Classes
         {
             return listeDateSeances;
         }
-
     }
 }

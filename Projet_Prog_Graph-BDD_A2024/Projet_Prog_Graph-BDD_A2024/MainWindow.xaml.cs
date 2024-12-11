@@ -28,9 +28,10 @@ namespace Projet_Prog_Graph_BDD_A2024
         {
             this.InitializeComponent();
 
-            if (Singleton_BD.getInstance().UserConnected) iDeconnexion.Visibility = Visibility.Visible;
+            if (Singleton_Session.UserConnected) iDeconnexion.Visibility = Visibility.Visible;
             else iConnexion.Visibility = Visibility.Visible;
 
+            Singleton_Session.PageCourante = "PagePublique";
             mainFrame.Navigate(typeof(PagePublique));
         }
 
@@ -43,6 +44,8 @@ namespace Projet_Prog_Graph_BDD_A2024
                 switch (item.Name)
                 {
                     case "iActivites":
+                        //if(Singleton_Session)
+                        Singleton_Session.PageCourante = "PagePublique";
                         mainFrame.Navigate(typeof(PagePublique));
                         break;
                     case "iConnexion":
@@ -56,38 +59,24 @@ namespace Projet_Prog_Graph_BDD_A2024
 
                         if (resultat == ContentDialogResult.Primary)
                         {
-                            if (Singleton_BD.getInstance().UserConnected)
+                            if (Singleton_Session.UserConnected)
+                            {
                                 iDeconnexion.Visibility = Visibility.Visible;
-                            iConnexion.Visibility = Visibility.Collapsed;
-                            this.InitializeComponent();
+                                iConnexion.Visibility = Visibility.Collapsed;
+                                if (Singleton_Session.PageCourante == "PageDetail")
+                                    mainFrame.Navigate(typeof(PageDetail), Singleton_Session.ActiviteCourante);
+                                navView.SelectedItem = null;
+                            }
                         }
-                        //else 
-                        //if (resultat == ContentDialogResult.Secondary)
-                        //Frame.Navigate(typeof(PagePubliqueAccueil));
+                        break;
+                    case "iDeconnexion":
+                        Singleton_Session.getInstance().adherentDeconn();
+                        if (Singleton_Session.PageCourante == "PageDetail")
+                            mainFrame.Navigate(typeof(PageDetail), Singleton_Session.ActiviteCourante);
+                        navView.SelectedItem = null;
                         break;
                 }
             }
         }
-        //private async void mainFrame_Loaded(object sender, RoutedEventArgs e)
-        //{
-        //    DialogAuthentification dialog = new DialogAuthentification();
-        //    dialog.XamlRoot = this.Content.XamlRoot;
-        //    dialog.PrimaryButtonText = "Connexion";
-        //    dialog.CloseButtonText = "Annuler";
-        //    dialog.DefaultButton = ContentDialogButton.Primary;
-
-        //    ContentDialogResult resultat = await dialog.ShowAsync();
-
-        //    if (resultat == ContentDialogResult.Primary)
-        //    {
-        //        if (dialog.Result == SignInResult.SignInAdherent)
-        //            mainFrame.Navigate(typeof(PageConnexion));
-
-        //        if (dialog.Result == SignInResult.SignInAdmin)
-        //            mainFrame.Navigate(typeof(PageAdministrateur));
-        //    }
-        //    else
-        //        mainFrame.Navigate(typeof(PagePubliqueAccueil));
-        //}
     }
 }

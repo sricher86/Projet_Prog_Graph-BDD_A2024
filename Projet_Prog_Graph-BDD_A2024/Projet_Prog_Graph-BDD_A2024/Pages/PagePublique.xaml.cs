@@ -38,6 +38,8 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
             if (activites.SelectedItem != null)
             {
                 Activite activiteChoisi = (Activite) activites.SelectedItem;
+                Singleton_Session.ActiviteCourante = activiteChoisi;
+                Singleton_Session.PageCourante = "PageDetail";
                 Frame.Navigate(typeof(PageDetail), activiteChoisi);
             }
         }

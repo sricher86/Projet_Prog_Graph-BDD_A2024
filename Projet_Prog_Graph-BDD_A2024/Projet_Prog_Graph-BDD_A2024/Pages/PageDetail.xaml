@@ -40,7 +40,7 @@
                         <ColumnDefinition Width="auto"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" x:Name="noteMoyenne" FontWeight="Bold" Margin="12 6 12 12" >Evaluation: </TextBlock>
-                    <RatingControl Grid.Column="1" x:Name="noteEval" ValueChanged="noteEval_ValueChanged" />
+                    <RatingControl Grid.Column="1" x:Name="noteEval" IsEnabled="{x:Bind UserConnected}" ValueChanged="noteEval_ValueChanged" />
                 </Grid>
             </StackPanel>
         </Grid>
@@ -52,11 +52,6 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
-
-            <!--<Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto"/>
-            </Grid.ColumnDefinitions>-->
 
             <TextBlock Grid.Row="0" x:Name="seanceTitre" Margin="12 6 0 0" VerticalAlignment="Center" FontSize="30">Séances disponible</TextBlock>
 

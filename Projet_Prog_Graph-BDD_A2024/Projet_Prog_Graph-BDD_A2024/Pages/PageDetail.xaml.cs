@@ -18,13 +18,14 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using System.Diagnostics;
+using System.ComponentModel;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
 namespace Projet_Prog_Graph_BDD_A2024.Pages
 {
-    public sealed partial class PageDetail : Page
+    public sealed partial class PageDetail : Page, INotifyPropertyChanged
     {
         Activite activite;
         Adherents adherent;
@@ -35,6 +36,9 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
 
         int nbrPlaces;
         string seanceDisponible;
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
         public int NbrPlaces
         {
             get { return nbrPlaces; }
@@ -44,15 +48,20 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
         public PageDetail()
         {
             this.InitializeComponent();
-            adherent = Singleton_BD.getInstance().AdherentConnecte;
+            adherent = Singleton_Session.AdherentConnecte;
             Singleton_BD.getInstance().getActivites();
             Singleton_BD.getInstance().getSeances();
             Singleton_BD.getInstance().getAdherentsSeances();
-            seancesDisponible = new ObservableCollection<Seance>();
+            if (Singleton_Session.UserConnected)
+            {
+                seancesDisponible = new ObservableCollection<Seance>();
+
+            }
             seances = Singleton_BD.getInstance().getListeSeance();
             adherents_Seances = Singleton_BD.getInstance().getListeAdherentsSeance();
-            if (Singleton_BD.getInstance().UserConnected) noteEval.IsEnabled = true;
-            else noteEval.IsEnabled = false;
+
+            //if (Singleton_BD.getInstance().UserConnected) noteEval.IsEnabled = true;
+            //else noteEval.IsEnabled = false;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -62,7 +71,7 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
                 activite = (Activite)e.Parameter;
                 seancesDisponible = Singleton_BD.getInstance().getListeSeancesDispo(activite.IdActivite);
                 ObservableCollection<Adherents_Seance> adherentsSeanceParActivite = Singleton_BD.getInstance().getAdherentSeanceParActivite(activite.IdActivite);
-                
+
                 if (seancesDisponible.Count > 0) calDates.ItemsSource = Singleton_BD.getInstance().getListeSeancesDispo(activite.IdActivite);
                 else seanceDisponible = "Aucune séances disponible pour l'instant";
             }
@@ -72,14 +81,11 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
 
         private async void calDates_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Seance seance = calDates.SelectedItem as Seance;
-
-
-                Debug.WriteLine(Singleton_BD.getInstance().UserConnected);
-            if (Singleton_BD.getInstance().UserConnected)
+            if (calDates.SelectedItem != null)
             {
-                if(seance != null)
+                if (Singleton_Session.UserConnected)
                 {
+                    Seance seance = calDates.SelectedItem as Seance;
                     Singleton_BD.getInstance().SeanceInscription = seance;
                     DialogInscription dialog = new DialogInscription();
                     dialog.XamlRoot = this.XamlRoot;
@@ -90,16 +96,17 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
                     ContentDialogResult resultat = await dialog.ShowAsync();
                     Frame.Navigate(typeof(PagePublique));
                 }
-            }
-            else
-            {
-                DialogErreur erreur = new DialogErreur();
-                erreur.XamlRoot = this.XamlRoot;
-                erreur.Title = "Mode visiteur";
-                erreur.CloseButtonText = "Ok";
-                erreur.DefaultButton = ContentDialogButton.Close;
-                ContentDialogResult resultat = await erreur.ShowAsync();
-                //erreur.Content = "mon contenu";
+                else
+                {
+                    DialogErreur erreur = new DialogErreur();
+                    erreur.XamlRoot = this.XamlRoot;
+                    erreur.Title = "Mode visiteur";
+                    erreur.CloseButtonText = "Ok";
+                    erreur.DefaultButton = ContentDialogButton.Close;
+                    ContentDialogResult resultat = await erreur.ShowAsync();
+                    calDates.SelectedIndex = -1;
+                    //erreur.Content = "mon contenu";
+                }
             }
         }
 
@@ -111,6 +118,16 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
         private void noteEval_ValueChanged(RatingControl sender, object args)
         {
 
+        }
+
+        public bool UserConnected
+        {
+            get { return Singleton_Session.UserConnected; }
+        }
+
+        protected void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

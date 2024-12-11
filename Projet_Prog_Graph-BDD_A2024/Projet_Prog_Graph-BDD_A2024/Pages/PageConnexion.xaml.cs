@@ -29,7 +29,7 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
         public PageConnexion()
         {
             this.InitializeComponent();
-            if (Singleton_BD.getInstance().UserConnected) iDeconnexion.Visibility = Visibility.Visible;
+            if (Singleton_Session.UserConnected) iDeconnexion.Visibility = Visibility.Visible;
             else iConnexion.Visibility = Visibility.Visible;
             connexionFrame.Navigate(typeof(PagePublique));
         }
@@ -62,7 +62,7 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
 
                         if (resultat == ContentDialogResult.Primary)
                         {
-                            if (Singleton_BD.getInstance().UserConnected) 
+                            if (Singleton_Session.UserConnected) 
                                 iDeconnexion.Visibility = Visibility.Visible;
                             iConnexion.Visibility = Visibility.Collapsed;
                             this.InitializeComponent();
