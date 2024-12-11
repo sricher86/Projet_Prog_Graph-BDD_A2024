@@ -52,9 +52,6 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
                     case "iStat":
                         adminFrame.Navigate(typeof(PageAdminStat));
                         break;
-                    case "iCompte":
-                        adminFrame.Navigate(typeof(PageAdminCompte));
-                        break;
                     default:
                         break;
                 }

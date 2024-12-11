@@ -27,7 +27,6 @@
             </NavigationView.MenuItems>
 
             <NavigationView.FooterMenuItems>
-                <NavigationViewItem Content="Compte" x:Name="iCompte" Icon="Contact"/>
                 <Button 
                     x:Name="btnConnexion" 
                     Click="btnConnexion_Click" 
