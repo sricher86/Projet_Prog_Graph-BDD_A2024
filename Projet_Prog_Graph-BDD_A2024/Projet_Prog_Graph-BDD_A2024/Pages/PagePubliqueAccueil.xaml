@@ -17,31 +17,6 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <Button 
-            x:Name="btnConnexion" 
-            Click="btnConnexion_Click" 
-            Width="auto" 
-            Margin="15"
-            Padding="10"
-            CornerRadius="15"
-            Background="Black"
-            Foreground="White"
-            HorizontalAlignment="Right"
-            VerticalAlignment="Stretch"
-            HorizontalContentAlignment="Left"
-            VerticalContentAlignment="Center"
-        >
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="auto"/>
-                </Grid.ColumnDefinitions>
-
-                <SymbolIcon Symbol="Switch" Grid.Column="0" Margin="0 0 15 0"/>
-                <TextBlock Text="Connexion" x:Name="iConnexion" Grid.Column="1"/>
-            </Grid>
-        </Button>
-
         <TextBlock Grid.Row="1" x:Name="titreAccueil" FontSize="36" FontWeight="Medium" Foreground="Black" HorizontalAlignment="Center" Margin="20">Activités</TextBlock>
 
         <ListView Height="500" BorderThickness="1" BorderBrush="{ThemeResource ControlStrongStrokeColorDefaultBrush}" 

@@ -117,7 +117,8 @@ namespace Projet_Prog_Graph_BDD_A2024.Pages
 
         private void noteEval_ValueChanged(RatingControl sender, object args)
         {
-
+            Singleton_BD.getInstance().modifierNote(Singleton_Session.ActiviteCourante.IdActivite, noteEval.Value);
+            noteEval.Value = Singleton_BD.getInstance().getNoteMoyenne(Singleton_Session.ActiviteCourante.IdActivite);
         }
 
         public bool UserConnected

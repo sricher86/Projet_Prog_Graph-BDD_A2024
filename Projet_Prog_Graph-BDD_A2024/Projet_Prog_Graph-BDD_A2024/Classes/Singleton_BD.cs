@@ -637,16 +637,33 @@ namespace Projet_Prog_Graph_BDD_A2024.Classes
             return moyenne;
         }
 
-        public void modifierNotes(int idAct, double nouvelleNote)
+        public void modifierNote(int idAct, double nouvelleNote)
         {
             try
             {
                 MySqlCommand commande = new MySqlCommand();
                 commande.Connection = con;
-                commande.CommandText = "call modNotes(@idAct, nouvelleNote);";
+                commande.CommandText = "call modNotes("+idAct+", "+nouvelleNote+");";
 
-                commande.Parameters.AddWithValue("@idAct", idAct);
-                commande.Parameters.AddWithValue("@nouvelleNote", nouvelleNote);
+                con.Open();
+                commande.Prepare();
+                commande.ExecuteNonQuery();
+                con.Close();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                con.Close();
+            }
+        }
+
+        public void moyenne(int idAct, double nouvelleNote)
+        {
+            try
+            {
+                MySqlCommand commande = new MySqlCommand();
+                commande.Connection = con;
+                commande.CommandText = "call modNotes(" + idAct + ", " + nouvelleNote + ");";
 
                 con.Open();
                 commande.Prepare();
