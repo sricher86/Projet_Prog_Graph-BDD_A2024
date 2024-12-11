@@ -606,7 +606,8 @@ namespace Projet_Prog_Graph_BDD_A2024.Classes
             {
                 MySqlCommand commande = new MySqlCommand();
                 commande.Connection = con;
-                commande.CommandText = "select getMoyenne("+idAct+") as moyenne";
+                //commande.CommandText = "select getMoyenne("+idAct+") as moyenne";
+                commande.CommandText = "SELECT noteAppreciation FROM afficherNote WHERE idActivite = " + idAct;
 
                 con.Open();
 
@@ -615,7 +616,8 @@ namespace Projet_Prog_Graph_BDD_A2024.Classes
                 //read values from SQL command and store in vars, in order to add values to Equipe list
                 while (reader.Read())
                 {
-                    moyenne = reader.GetDouble("moyenne");
+                    //moyenne = reader.GetDouble("moyenne");
+                    moyenne = reader.GetDouble("noteAppreciation");
                 }
                 reader.Close();
                 con.Close();
@@ -684,14 +686,15 @@ namespace Projet_Prog_Graph_BDD_A2024.Classes
             return nbrParticipants;
         }
 
-        public string getPartPlusActif()
+        public string getAdhPlusActif()
         {
             string partPlusActif = "";
             try
             {
                 MySqlCommand commande = new MySqlCommand();
                 commande.Connection = con;
-                commande.CommandText = "SELECT CONCAT(prenom, ' ', nom, ' (', a.no_identification, ')') AS partPlusActif FROM partPlusActif JOIN adherents a on partPlusActif.no_identification = a.no_identification";
+                commande.CommandText = "SELECT CONCAT(prenom, ' ', nom, ' (', a.no_identification, ') -> ', nbrSeances, ' séances') AS partPlusActif " +
+                    "FROM partPlusActif JOIN adherents a on partPlusActif.no_identification = a.no_identification";
 
                 con.Open();
 
@@ -712,6 +715,68 @@ namespace Projet_Prog_Graph_BDD_A2024.Classes
                 con.Close();
             }
             return partPlusActif;
+        }
+
+        public double getNoteMoyenneActs()
+        {
+            double moyenne = 0;
+            try
+            {
+                MySqlCommand commande = new MySqlCommand();
+                commande.Connection = con;
+                commande.CommandText = "SELECT * FROM moyenneNotesAppAct";
+
+                con.Open();
+
+                MySqlDataReader reader = commande.ExecuteReader();
+
+                //read values from SQL command and store in vars, in order to add values to Equipe list
+                while (reader.Read())
+                {
+                    moyenne = reader.GetDouble("moyenneNotesApp");
+                }
+                reader.Close();
+                con.Close();
+
+                return moyenne;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                con.Close();
+            }
+            return moyenne;
+        }
+
+        public string getAdhPlusAge()
+        {
+            string adherentPlusAge = "";
+            try
+            {
+                MySqlCommand commande = new MySqlCommand();
+                commande.Connection = con;
+                commande.CommandText = "SELECT CONCAT(adherentPlusAge(), ' (', no_identification, ') -> ', age, ' ans') AS adherentPlusAge " +
+                    "FROM adherents WHERE CONCAT(prenom, ' ', nom) = adherentPlusAge()";
+
+                con.Open();
+
+                MySqlDataReader reader = commande.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    adherentPlusAge = reader.GetString("adherentPlusAge");
+                }
+                reader.Close();
+                con.Close();
+
+                return adherentPlusAge;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                con.Close();
+            }
+            return adherentPlusAge;
         }
     }
 }

@@ -18,10 +18,12 @@
             </Grid.RowDefinitions>
 
             <TextBlock Grid.Row="0" x:Name="titre" FontSize="36" FontWeight="Medium" 
-            Foreground="Black" HorizontalAlignment="Center" Margin="20" Text="Statistiques"/>
+            Foreground="Black" HorizontalAlignment="Center" Margin="30" Text="Statistiques"/>
 
-            <Grid Grid.Row="1" x:Name="stat" HorizontalAlignment="Center" Background="White" Width="1000" BorderThickness="1" BorderBrush="Black">
+            <Grid Grid.Row="1" x:Name="stat" HorizontalAlignment="Center" Background="White" Width="1000" 
+                BorderThickness="1" BorderBrush="Black" Padding="25 0 25 0" Height="auto">
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
@@ -32,17 +34,21 @@
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Row="0" Width="auto" x:Name="stat1" Margin="10"
-                TextAlignment="Center" FontSize="16"/>
+                <TextBlock Grid.Row="0" Width="auto" x:Name="stat1" Margin="20"
+                    TextAlignment="Center" VerticalAlignment="Top" FontSize="16"/>
 
-                <TextBlock Grid.Row="1" Width="auto" x:Name="stat2" Margin="10"
-                TextAlignment="Center" FontSize="16"/>
+                <Rectangle Grid.Row="0" Margin="0 15 0 0" HorizontalAlignment="Stretch"  VerticalAlignment="Bottom" Fill="Black" Height="0.5"/>
+
+                <TextBlock Grid.Row="1" Width="auto" x:Name="stat2" Margin="20"
+                    TextAlignment="Center" VerticalAlignment="Top" FontSize="16"/>
+
+                <Rectangle Grid.Row="1" Margin="0 15 0 0" HorizontalAlignment="Stretch"  VerticalAlignment="Bottom" Fill="Black" Height="0.5"/>
 
                 <TextBlock Grid.Row="2" Text="Nombre d’adhérents pour chacune des activités : " Width="auto"
-                TextAlignment="Center" FontSize="16" Margin="15"/>
+                    TextAlignment="Center" VerticalAlignment="Top" FontSize="16" Margin="15"/>
 
-                <GridView Grid.Row="3" SelectionMode="None" BorderThickness="0.5" BorderBrush="Black"
-                x:Name="stat3" HorizontalAlignment="Center" Background="White" Width="auto" Height="200">
+                <GridView Grid.Row="3" SelectionMode="None" BorderThickness="0.5" BorderBrush="Black" Margin="0 15 0 20" 
+                    x:Name="stat3" HorizontalAlignment="Center" Background="White" Width="auto" Height="200">
                     <GridView.ItemTemplate>
                         <DataTemplate x:DataType="local1:Activite">
                             <Grid Width="Auto" MinWidth="250" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0">
@@ -59,11 +65,13 @@
                     </GridView.ItemTemplate>
                 </GridView>
 
-                <TextBlock Grid.Row="4" Text="Moyenne des notes d’appréciation pour chacune des activités : " Width="auto"
-                TextAlignment="Center" FontSize="16" Margin="15"/>
+                <Rectangle Grid.Row="3" Margin="0 15 0 0" HorizontalAlignment="Stretch"  VerticalAlignment="Bottom" Fill="Black" Height="0.5"/>
 
-                <GridView Grid.Row="5" SelectionMode="None" BorderThickness="0.5" BorderBrush="Black"
-                x:Name="stat4" HorizontalAlignment="Center" Background="White" Width="auto" Height="200">
+                <TextBlock Grid.Row="4" Text="Moyenne des notes d’appréciation pour chacune des activités : " Width="auto"
+                    TextAlignment="Center" VerticalAlignment="Top" FontSize="16" Margin="15"/>
+
+                <GridView Grid.Row="5" SelectionMode="None" BorderThickness="0.5" BorderBrush="Black" Margin="0 15 0 20"
+                    x:Name="stat4" HorizontalAlignment="Center" Background="White" Width="auto" Height="200">
                     <GridView.ItemTemplate>
                         <DataTemplate x:DataType="local1:Activite">
                             <Grid Width="Auto" MinWidth="250" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0">
@@ -80,14 +88,20 @@
                     </GridView.ItemTemplate>
                 </GridView>
 
-                <TextBlock Grid.Row="6" Text="" Width="auto" x:Name="stat5" Margin="10"
-                TextAlignment="Center" FontSize="16"/>
+                <Rectangle Grid.Row="5" Margin="0 15 0 0" HorizontalAlignment="Stretch"  VerticalAlignment="Bottom" Fill="Black" Height="0.5"/>
 
-                <TextBlock Grid.Row="7" Text="" Width="auto" x:Name="stat6" Margin="10"
-                TextAlignment="Center" FontSize="16"/>
+                <TextBlock Grid.Row="6" Text="" Width="auto" x:Name="stat5" Margin="20"
+                    TextAlignment="Center" VerticalAlignment="Top" FontSize="16"/>
 
-                <TextBlock Grid.Row="8" Text="" Width="auto" x:Name="stat7" Margin="10"
-                TextAlignment="Center" FontSize="16"/>
+                <Rectangle Grid.Row="6" Margin="0 15 0 0" HorizontalAlignment="Stretch"  VerticalAlignment="Bottom" Fill="Black" Height="0.5"/>
+
+                <TextBlock Grid.Row="7" Text="" Width="auto" x:Name="stat6" Margin="20"
+                    TextAlignment="Center" VerticalAlignment="Top" FontSize="16"/>
+
+                <Rectangle Grid.Row="7" Margin="0 15 0 0" HorizontalAlignment="Stretch"  VerticalAlignment="Bottom" Fill="Black" Height="0.5"/>
+
+                <TextBlock Grid.Row="8" Text="" Width="auto" x:Name="stat7" Margin="20"
+                    TextAlignment="Center" VerticalAlignment="Top" FontSize="16"/>
             </Grid>
         </Grid>
     </ScrollViewer>
